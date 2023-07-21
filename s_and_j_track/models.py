@@ -14,6 +14,9 @@ class Student(models.Model):
     class_number = models.IntegerField()
     class_date = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 class Employer(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
@@ -26,6 +29,9 @@ class Employer(models.Model):
     company_size = models.IntegerField()
     speciality = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
 class Application(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
@@ -33,6 +39,9 @@ class Application(models.Model):
     passed_date = models.DateField(null=True, blank=True)
     hired_date = models.DateField(null=True, blank=True)
     salary_or_hourly_rate = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.student.name} -> {self.company.name}'
 
 class Donor(models.Model):
     name = models.CharField(max_length=200)
@@ -44,3 +53,5 @@ class Donor(models.Model):
     instagram = models.URLField()
     tiktok = models.URLField()
 
+    def __str__(self):
+        return self.name

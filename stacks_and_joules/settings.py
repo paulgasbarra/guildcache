@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     's_and_j_track',
+    'faker',
 ]
 
 MIDDLEWARE = [
