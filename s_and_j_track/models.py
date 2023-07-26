@@ -41,7 +41,7 @@ class Application(models.Model):
     salary_or_hourly_rate = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.student.name} -> {self.company.name}'
+        return f'{self.student.name} -> {self.employer.name}'
 
 class Donor(models.Model):
     name = models.CharField(max_length=200)
@@ -55,3 +55,29 @@ class Donor(models.Model):
 
     def __str__(self):
         return self.name
+
+class Instructor(models.Model):
+    name = models.CharField(max_length=200)
+    address = models.CharField(max_length=200)
+    phone = models.CharField(max_length=50)
+    email = models.EmailField()
+    linkedin = models.URLField()
+    website = models.URLField()
+    instagram = models.URLField()
+    tiktok = models.URLField()
+    salary = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+    
+class Cohort(models.Model):
+    end_date = models.DateField()
+    students = models.ManyToManyField(Student)
+    location = models.CharField(max_length=200)
+    donors = models.ManyToManyField(Donor)
+    visitors = models.ManyToManyField(Employer)
+
+    def __str__(self):
+        return self.name
+
+

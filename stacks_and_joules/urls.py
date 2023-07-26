@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 admin.site.site_header = "Stacks & Joules Tracks"  # default: "Django Administration"
-admin.site.index_title = "Welcome S&J Admins!"  # default: "Site administration"
+admin.site.index_title = "S&J Admin"  # default: "Site administration"
 admin.site.site_title = "Stacks & Joules Admin Portal"  # default: "Django site admin"
 
 urlpatterns = [
