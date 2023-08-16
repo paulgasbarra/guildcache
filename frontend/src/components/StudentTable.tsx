@@ -1,6 +1,13 @@
 import React from 'react';
+import { Student } from '../types/Student';
+import { Link } from 'react-router-dom';
 
-const StudentTable: React.FC = (students = [], handleDelete, ) => {
+interface StudentTableProps {
+    students: Student[];
+    handleDelete: (id: string) => void;
+}
+
+const StudentTable: React.FC<StudentTableProps> = ({students, handleDelete}) => {
     return(
         <table>
         <thead>

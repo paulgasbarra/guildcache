@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosInstance, ENDPOINTS } from '../api';
 import { Student } from '../types/Student';
+import StudentTable from '../components/StudentTable';
 
 export const Students: React.FC = () => {
     const [students, setStudents] = useState<Student[]>([]);
@@ -29,27 +30,8 @@ export const Students: React.FC = () => {
     return (
         <div>
             <Link to="/create-student">Create Student</Link>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {students.map(student => (
-                        <tr key={student.id}>
-                            <td>{student.name}</td>
-                            <td>{student.email}</td>
-                            <td>
-                                <Link to={`/edit/${student.id}`}>Edit</Link>
-                                <button onClick={() => handleDelete(student.id)}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {students.length === 0 && <p>No students found</p>}
+            {students.length > 0 && <StudentTable students={students} handleDelete={handleDelete} />}
         </div>
     );
 }
