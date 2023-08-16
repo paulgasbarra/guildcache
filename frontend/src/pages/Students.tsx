@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { axiosInstance, ENDPOINTS } from '../api';
+import { Student } from '../types/Student';
 
 export const Students: React.FC = () => {
-    const [students, setStudents] = useState([]);
+    const [students, setStudents] = useState<Student[]>([]);
 
     useEffect(() => {
         axiosInstance.get(ENDPOINTS.STUDENTS.LIST)
