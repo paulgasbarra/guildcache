@@ -9,6 +9,7 @@ import { Home } from './Home';
 import { Merchandise } from './Merchandise';
 import { Newsletter } from './Newsletter';
 import { Students } from './Students';
+import { CreateStudent } from './CreateStudent';
 
 
 export {
@@ -16,6 +17,7 @@ export {
     Admin, 
     Classes,
     Contact,
+    CreateStudent,
     Donate,
     Employers,
     ErrorPage,

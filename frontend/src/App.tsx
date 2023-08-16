@@ -1,24 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import {Home} from './pages/Home';
-import {Students} from './pages/Students';
-import {Employers} from './pages/Employers';
-// ... import all your pages
+import React from "react";
+import { Header } from "./components/Header";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <>
-    Hello!
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" exact component={Home} />
-        <Route path="/students" component={Students} />
-        <Route path="/employers" component={Employers} />
-      </Routes>
-    </Router>
-    Hello!
+        <Header />
+        <Outlet />
     </>
   );
 }

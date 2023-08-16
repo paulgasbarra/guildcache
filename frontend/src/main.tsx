@@ -5,13 +5,13 @@ import {
   RouterProvider,
 } from 'react-router-dom'
 import './index.css';
-import {Home, Students, Donate, Employers, ErrorPage, Classes, About, Merchandise, Newsletter, Contact, Admin} from './pages';
-import { Body } from './components/Body';
+import {CreateStudent, Home, Students, Donate, Employers, ErrorPage, Classes, About, Merchandise, Newsletter, Contact, Admin} from './pages';
+import App from './App';
 
 
 
 const router = createBrowserRouter([
-  { element: <Body />, children: [
+  { element: <App />, children: [
       { path: '/', element: <Home />, errorElement: <ErrorPage />,  },
       { path: '/students', element: <Students />  },
       { path: '/employers', element:<Employers /> },
@@ -22,6 +22,7 @@ const router = createBrowserRouter([
       { path: '/newsletter', element: <Newsletter />},
       { path: '/contact', element: <Contact />},
       { path: '/admin', element: <Admin />},
+      { path: 'create-student', element: <CreateStudent />},
     ] 
   },
 ])
