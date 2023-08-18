@@ -17,8 +17,9 @@ export const Students: React.FC = () => {
         });
     }, []);
 
-    const handleDelete = (id:string) => {
-        axiosInstance.delete(ENDPOINTS.STUDENTS.DETAILS(id))
+    const handleDelete = async (id:string) => {
+        console.log(ENDPOINTS.STUDENTS.DETAILS(id));
+        await axiosInstance.delete(ENDPOINTS.STUDENTS.DETAILS(id))
             .then(() => {
                 setStudents(students.filter(student => student.id !== id));
             })
@@ -28,7 +29,7 @@ export const Students: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className="space-y-6 m-6">
             <Link to="/create-student">Create Student</Link>
             {students.length === 0 && <p>No students found</p>}
             {students.length > 0 && <StudentTable students={students} handleDelete={handleDelete} />}

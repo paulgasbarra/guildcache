@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Student, Employer, Application, Donor
+from .models import Student, Employer, Application, Donor, Cohort, Instructor
 
 admin.site.register(Student)
 admin.site.register(Employer)
 admin.site.register(Application)
 admin.site.register(Donor)
+admin.site.register(Cohort)
+admin.site.register(Instructor)
 

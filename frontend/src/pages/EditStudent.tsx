@@ -3,7 +3,7 @@ import {axiosInstance, ENDPOINTS} from '../api';
 import {Student} from '../types/Student';
 import StudentForm from '../components/StudentForm';
 
-export function CreateStudent() {
+export function EditStudent(student: Student) {
 
   const handleSubmit = async (formData:Student) => {
     try {
@@ -17,6 +17,6 @@ export function CreateStudent() {
   };
 
   return (
-    <StudentForm onSubmit={handleSubmit} />
+    <StudentForm onSubmit={handleSubmit} initialFormData={(student)}/>
   );
 }
