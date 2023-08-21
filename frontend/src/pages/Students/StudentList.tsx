@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { axiosInstance, ENDPOINTS } from '../api';
-import { Student } from '../types/Student';
-import StudentTable from '../components/StudentTable';
+import { axiosInstance, ENDPOINTS } from '../../api';
+import { Student } from '../../types/Student';
+import StudentTable from '../../components/StudentTable';
 
 export const Students: React.FC = () => {
     const [students, setStudents] = useState<Student[]>([]);

@@ -8,8 +8,9 @@ import { ErrorPage } from './Error';
 import { Home } from './Home';
 import { Merchandise } from './Merchandise';
 import { Newsletter } from './Newsletter';
-import { Students } from './Students';
-import { CreateStudent } from './CreateStudent';
+import { Students } from './Students/Students';
+import { CreateStudent } from './Students/Student-Create';
+import { StudentView } from './Students/Student-View';
 
 
 export {
@@ -24,5 +25,6 @@ export {
     Home,
     Merchandise,
     Newsletter,
-    Students
+    Students,
+    StudentView,
 }

@@ -1,7 +1,7 @@
 import React from 'react';
-import {axiosInstance, ENDPOINTS} from '../api';
-import {Student} from '../types/Student';
-import StudentForm from '../components/StudentForm';
+import {axiosInstance, ENDPOINTS} from '../../api';
+import {Student} from '../../types/Student';
+import StudentForm from '../../components/StudentForm';
 
 export function EditStudent(student: Student) {
 

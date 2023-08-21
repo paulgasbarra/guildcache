@@ -23,6 +23,7 @@ const router = createBrowserRouter([
       { path: '/contact', element: <Contact />},
       { path: '/admin', element: <Admin />},
       { path: 'create-student', element: <CreateStudent />},
+      { path: 'edit-student/{id}', element: <ViewStudent />}
     ] 
   },
 ])
