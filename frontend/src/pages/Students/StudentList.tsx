@@ -4,7 +4,7 @@ import { axiosInstance, ENDPOINTS } from '../../api';
 import { Student } from '../../types/Student';
 import StudentTable from '../../components/StudentTable';
 
-export const Students: React.FC = () => {
+export const StudentList: React.FC = () => {
     const [students, setStudents] = useState<Student[]>([]);
 
     useEffect(() => {

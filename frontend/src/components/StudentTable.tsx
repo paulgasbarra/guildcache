@@ -19,19 +19,27 @@ const StudentTable: React.FC<StudentTableProps> = ({students, handleDelete}) => 
     </thead>
     <tbody className="divide-y divide-gray-300">
         {students.map(student => (
-            <tr key={student.id} className="hover:bg-gray-100">
-                <td className="px-6 py-4 whitespace-nowrap">{student.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{student.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                    <Link to={`/edit/${student.id}`} className="text-indigo-600 hover:text-indigo-900 mr-4">Edit</Link>
-                    <button 
-                        onClick={() => handleDelete(student.id)}
-                        className="text-red-600 hover:text-red-800 transition duration-150 ease-in-out px-2 py-1 rounded border border-red-600"
-                    >
-                        Delete
-                    </button>
-                </td>
-            </tr>
+           <tr key={student.id} className="hover:bg-gray-100">
+           <td className="px-6 py-4 whitespace-nowrap">
+               <Link to={`/student/${student.id}`} className="block hover:underline">
+                   {student.name}
+               </Link>
+           </td>
+           <td className="px-6 py-4 whitespace-nowrap">
+               <Link to={`/student/${student.id}`} className="block hover:underline">
+                   {student.email}
+               </Link>
+           </td>
+           <td className="px-6 py-4 whitespace-nowrap">
+               <button 
+                   onClick={() => handleDelete(student.id)}
+                   className="text-red-600 hover:text-red-800 transition duration-150 ease-in-out px-2 py-1 rounded border border-red-600"
+               >
+                   Delete
+               </button>
+           </td>
+       </tr>
+       
         ))}
     </tbody>
 </table>
