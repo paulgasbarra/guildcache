@@ -9,6 +9,7 @@ import {
   StudentList,
   Donate,
   Employers,
+  Enroll,
   ErrorPage,
   Classes,
   About,
@@ -16,6 +17,7 @@ import {
   Newsletter,
   Contact,
   Admin,
+  Partners,
 } from "./pages";
 import App from "./App";
 
@@ -35,6 +37,9 @@ const router = createBrowserRouter([
       { path: "/admin", element: <Admin /> },
       { path: "create-student", element: <CreateStudent /> },
       { path: "student/:id", element: <StudentView /> },
+      { path: "classes", element: <Classes /> },
+      { path: "partners", element: <Partners /> },
+      { path: "enroll", element: <Enroll /> },
     ],
   },
 ]);

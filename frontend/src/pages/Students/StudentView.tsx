@@ -50,14 +50,15 @@ export const StudentView = () => {
         ENDPOINTS.STUDENTS.DETAILS(studentId),
         formData
       );
-      console.log("Student updated:", response.data);
-      // Handle success - maybe redirect or clear the form
+      alert("Studend Updated");
+      setIsEditing(false);
     } catch (error) {
       console.error("Error updating student:", error);
       // Handle error - maybe display a notification
     }
   };
 
+  // use a map to render the fields, may require a model update to include a field type and a field label
   return isEditing ? (
     <div className="space-y-6 m-6">
       <div className="grid grid-cols-2 gap-4 p-4 bg-white rounded-lg">

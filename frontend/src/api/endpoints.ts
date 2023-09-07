@@ -4,6 +4,7 @@ const ENDPOINTS = {
         DETAILS: (id:string) => `students/${id}/`,
         CREATE: 'students/',
     },
+    LOGIN: 'login/',
     // ... other model or resource endpoints
 };
 
