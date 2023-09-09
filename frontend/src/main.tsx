@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import AuthProvider, { useAuth } from "./components/AuthContext";
 import "./index.css";
 import {
-  CreateStudent,
   Home,
+  StudentCreation,
   StudentView,
   StudentList,
   Donate,
@@ -18,34 +19,59 @@ import {
   Contact,
   Admin,
   Partners,
+  Login,
 } from "./pages";
 import App from "./App";
 
-const router = createBrowserRouter([
-  {
-    element: <App />,
-    children: [
-      { path: "/", element: <Home />, errorElement: <ErrorPage /> },
-      { path: "/students", element: <StudentList /> },
-      { path: "/employers", element: <Employers /> },
-      { path: "/donate", element: <Donate /> },
-      { path: "/classes", element: <Classes /> },
-      { path: "/about", element: <About /> },
-      { path: "/merchandise", element: <Merchandise /> },
-      { path: "/newsletter", element: <Newsletter /> },
-      { path: "/contact", element: <Contact /> },
-      { path: "/admin", element: <Admin /> },
-      { path: "create-student", element: <CreateStudent /> },
-      { path: "student/:id", element: <StudentView /> },
-      { path: "classes", element: <Classes /> },
-      { path: "partners", element: <Partners /> },
-      { path: "enroll", element: <Enroll /> },
-    ],
-  },
-]);
+const router = (isAuthenticated = false) => {
+  return createBrowserRouter([
+    {
+      element: <App />,
+      children: [
+        { path: "/", element: <Home />, errorElement: <ErrorPage /> },
+        { path: "/employers", element: <Employers /> },
+        { path: "/donate", element: <Donate /> },
+        { path: "/classes", element: <Classes /> },
+        { path: "/about", element: <About /> },
+        { path: "/merchandise", element: <Merchandise /> },
+        { path: "/newsletter", element: <Newsletter /> },
+        { path: "/contact", element: <Contact /> },
+        { path: "/enroll", element: <Enroll /> },
+        { path: "/login", element: <Login /> },
+        // Protected Routes
+        { path: "/admin", element: isAuthenticated ? <Admin /> : <Login /> },
+        {
+          path: "/create-student",
+          element: isAuthenticated ? <StudentCreation /> : <Login />,
+        },
+        {
+          path: "/students",
+          element: isAuthenticated ? <StudentList /> : <Login />,
+        },
+        {
+          path: "/student/:id",
+          element: isAuthenticated ? <StudentView /> : <Login />,
+        },
+        {
+          path: "/partners",
+          element: isAuthenticated ? <Partners /> : <Login />,
+        },
+      ],
+    },
+  ]);
+};
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+const Router: React.FC = () => {
+  const { isAuthenticated } = useAuth();
+  return <RouterProvider router={router(isAuthenticated)} />;
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root")!);
+
+root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <Router />
+    </AuthProvider>
   </React.StrictMode>
 );

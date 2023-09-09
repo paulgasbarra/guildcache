@@ -7,10 +7,11 @@ import { Employers } from "./Employers";
 import { Enroll } from "./Enroll";
 import { ErrorPage } from "./Error";
 import { Home } from "./Home";
+import { Login } from "./Admin/Login";
 import { Merchandise } from "./Merchandise";
 import { Newsletter } from "./Newsletter";
 import { StudentList } from "./Students/StudentList";
-import { CreateStudent } from "./Students/StudentCreate";
+import { StudentCreation } from "./Students/StudentCreate";
 import { StudentView } from "./Students/StudentView";
 import { Partners } from "./Partners";
 
@@ -19,15 +20,16 @@ export {
   Admin,
   Classes,
   Contact,
-  CreateStudent,
   Donate,
   Employers,
   Enroll,
   ErrorPage,
   Home,
+  Login,
   Merchandise,
   Newsletter,
   Partners,
+  StudentCreation,
   StudentView,
   StudentList,
 };

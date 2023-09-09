@@ -1,8 +1,13 @@
 import React from "react";
-import Login from "./Login";
+import { Link } from "react-router-dom";
 
-export const Admin: React.FC = () => (
-  <>
-    <Login />
-  </>
-);
+export const Admin: React.FC = () => {
+  return (
+    <>
+      <div className="min-h-full flex items-center justify-center mt-16">
+        Admin Dashboard
+        <Link to="/students">Students</Link>
+      </div>
+    </>
+  );
+};
