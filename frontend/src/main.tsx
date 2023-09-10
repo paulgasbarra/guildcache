@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import AuthProvider, { useAuth } from "./components/AuthContext";
 import "./index.css";
 import {
@@ -42,15 +46,19 @@ const router = (isAuthenticated = false) => {
         { path: "/admin", element: isAuthenticated ? <Admin /> : <Login /> },
         {
           path: "/create-student",
-          element: isAuthenticated ? <StudentCreation /> : <Login />,
+          element: isAuthenticated ? (
+            <StudentCreation />
+          ) : (
+            <Navigate to="/admin" />
+          ),
         },
         {
           path: "/students",
-          element: isAuthenticated ? <StudentList /> : <Login />,
+          element: isAuthenticated ? <StudentList /> : <Navigate to="/admin" />,
         },
         {
           path: "/student/:id",
-          element: isAuthenticated ? <StudentView /> : <Login />,
+          element: isAuthenticated ? <StudentView /> : <Navigate to="/admin" />,
         },
         {
           path: "/partners",

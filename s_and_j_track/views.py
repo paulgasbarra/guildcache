@@ -4,9 +4,10 @@ from .models import Student, Employer, Application, Donor
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
+@permission_classes([IsAuthenticated])
 class StudentViewSet(viewsets.ModelViewSet): 
     queryset = Student.objects.all()
     serializer_class = StudentSerializer

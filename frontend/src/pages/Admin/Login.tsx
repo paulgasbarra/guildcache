@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { axiosInstance, ENDPOINTS } from "../../api";
 import { useAuth } from "../../components/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
   const { login, logout, isAuthenticated } = useAuth();
 
   const authenticate_login = async (username: string, password: string) => {
@@ -15,6 +17,7 @@ export const Login = () => {
         password: password,
       });
       login(response.data.token);
+      navigate("/admin");
     } catch (error) {
       console.error("Error logging in:", error);
     }
@@ -30,7 +33,7 @@ export const Login = () => {
       <div className="min-h-full flex items-center justify-center mt-16">
         <div className="bg-white p-8 rounded-lg border shadow-md w-96">
           <h2 className="text-2xl mb-6 text-center font-bold">
-            You are already logged in!
+            Would you like to log out?
           </h2>
           <button
             type="submit"
