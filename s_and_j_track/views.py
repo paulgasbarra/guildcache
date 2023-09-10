@@ -12,10 +12,12 @@ class StudentViewSet(viewsets.ModelViewSet):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
+@permission_classes([IsAuthenticated])
 class StudentListCreateView(generics.ListCreateAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
+@permission_classes([IsAuthenticated])
 class StudentDeleteView(generics.DestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
