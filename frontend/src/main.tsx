@@ -62,7 +62,7 @@ const router = (isAuthenticated = false) => {
         },
         {
           path: "/partners",
-          element: isAuthenticated ? <Partners /> : <Login />,
+          element: <Partners />,
         },
       ],
     },
