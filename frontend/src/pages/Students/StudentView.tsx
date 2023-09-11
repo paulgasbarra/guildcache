@@ -46,10 +46,7 @@ export const StudentView = () => {
 
   const submitEdit = async () => {
     try {
-      const response = await axiosInstance.put(
-        ENDPOINTS.STUDENTS.DETAILS(studentId),
-        formData
-      );
+      await axiosInstance.put(ENDPOINTS.STUDENTS.DETAILS(studentId), formData);
       alert("Studend Updated");
       setIsEditing(false);
     } catch (error) {
