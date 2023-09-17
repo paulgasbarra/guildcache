@@ -137,6 +137,8 @@ REST_FRAMEWORK = {
     ],
 }
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+
 SESSION_COOKIE_SAMESITE = 'None'
 SESSION_COOKIE_SECURE = True
 
