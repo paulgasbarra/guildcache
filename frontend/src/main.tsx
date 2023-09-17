@@ -60,10 +60,8 @@ const router = (isAuthenticated = false) => {
           path: "/student/:id",
           element: isAuthenticated ? <StudentView /> : <Navigate to="/admin" />,
         },
-        {
-          path: "/partners",
-          element: <Partners />,
-        },
+        { path: "/partners", element: <Partners />,
+},
       ],
     },
   ]);
