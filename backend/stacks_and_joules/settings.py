@@ -115,6 +115,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication', 
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
@@ -125,7 +126,6 @@ REST_FRAMEWORK = {
 # Add the following lines from the Google settings to configure session and cookies
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = True
 
 # You can also add any other application-specific settings below this point
