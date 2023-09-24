@@ -3,7 +3,7 @@ name: Deploy to Multiple Google Cloud Projects
 on:
   push:
     branches:
-      - maingit
+      - main
 
 jobs:
   deploy:
@@ -28,7 +28,7 @@ jobs:
 
       # Deploy backend to Project B
       - name: Set up Cloud SDK for Backend
-        uses: google-github-actions/setup-gcloud
+        uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: stacks-and-joules
           service_account_key: ${{ secrets.GCP_SA_KEY }}
