@@ -1,13 +1,40 @@
-name: learn-github-actions
-run-name: ${{ github.actor }} is learning GitHub Actions
-on: [push]
+name: Deploy to Multiple Google Cloud Projects
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  check-bats-version:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Deploy frontend to Project A
+      - name: Set up Cloud SDK for Frontend
+        uses: google-github-actions/setup-gcloud@v0.2.1
         with:
-          node-version: "14"
-      - run: npm install -g bats
-      - run: bats -v
+          project_id: stacks
+          service_account_key: ${{ secrets.GCP_SA_KEY_FRONTEND }}
+          export_default_credentials: true
+
+      - name: Deploy frontend to GAE in Project A
+        run: |
+          cd frontend
+          gcloud app deploy
+
+      # Deploy backend to Project B
+      - name: Set up Cloud SDK for Backend
+        uses: google-github-actions/setup-gcloud@v0.2.1
+        with:
+          project_id: PROJECT_B_ID
+          service_account_key: ${{ secrets.GCP_SA_KEY_BACKEND }}
+          export_default_credentials: true
+
+      - name: Deploy backend to GAE in Project B
+        run: |
+          cd backend
+          gcloud app deploy
