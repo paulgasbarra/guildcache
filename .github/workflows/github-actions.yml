@@ -8,8 +8,8 @@ on:
 handlers:
   # This configures Google App Engine to serve the files in the app's static
   # directory.
-  url: /backend
-  static_dir: backend/
+  - url: /backend
+    static_dir: /backend
 
 jobs:
   deploy:
