@@ -18,8 +18,7 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: stacks-and-joules
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
+          version: latest
 
       - name: Activate Service Account
         run: gcloud auth activate-service-account --key-file=- <<<"${{ secrets.GCP_SA_KEY }}"
