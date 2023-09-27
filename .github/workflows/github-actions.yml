@@ -13,26 +13,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Deploy backend
-      - name: Authenticate with gcloud
-        uses: actions-hub/gcloud@master
+      - name: Set up GCP authentication
+        run: echo "${{ secrets.GCP_SA_KEY }}" > service-account.json
         env:
-          PROJECT_ID: stacks-and-joules-dev
-          APPLICATION_CREDENTIALS: ${{ secrets.GCP_SA_KEY }}
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
 
-      - name: Set up Cloud SDK for Backend
-        uses: google-github-actions/setup-gcloud@v1
-        with:
-          project_id: stacks-and-joules
-          version: latest
+      - name: Authenticate with GCP
+        run: gcloud auth activate-service-account --key-file=service-account.json
 
-      - name: Activate Service Account
-        run: gcloud auth activate-service-account --key-file=- <<<"${{ secrets.GCP_SA_KEY }}"
+      # - name: Set up Cloud SDK for Backend
+      #   uses: google-github-actions/setup-gcloud@v1
+      #   with:
+      #     project_id: stacks-and-joules
+      #     version: latest
 
-      - name: Get gcloud config
-        run: gcloud config list
+      # - name: Activate Service Account
+      #   run: gcloud auth activate-service-account --key-file=- <<<"${{ secrets.GCP_SA_KEY }}"
 
-      - name: Deploy backend to GAE in Project B
-        run: |
-          cd backend
-          gcloud app deploy
+      # - name: Get gcloud config
+      #   run: gcloud config list
+
+      # - name: Deploy backend to GAE in Project B
+      #   run: |
+      #     cd backend
+      #     gcloud app deploy
