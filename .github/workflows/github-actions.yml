@@ -22,8 +22,7 @@ jobs:
         with:
           workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
           service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
-    - with:
-      args: app deploy app.yaml
+          args: app deploy app.yaml
 
     # - name: Set up Cloud SDK for Backend
     #   uses: google-github-actions/setup-gcloud@v1
