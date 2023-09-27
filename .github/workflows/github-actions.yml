@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
-      - id: "auth"
-        name: "Authenticate to Google Cloud"
+      - name: "Authenticate to Google Cloud"
+        id: "auth"
         uses: "google-github-actions/auth@v1"
         with:
           workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
