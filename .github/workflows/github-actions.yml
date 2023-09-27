@@ -5,35 +5,35 @@ on:
     branches:
       - main
 
-    # Add "id-token" with the intended permissions.
-    permissions:
-      contents: "read"
-      id-token: "write"
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
 
     steps:
-      # actions/checkout MUST come before auth
-      - uses: "actions/checkout@v3"
+      - name: Checkout code
+        uses: actions/checkout@v2
 
+      - name: Set up GCP authentication
       - id: "auth"
         name: "Authenticate to Google Cloud"
         uses: "google-github-actions/auth@v1"
         with:
-          workload_identity_provider: "projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
-          service_account: "my-service-account@my-project.iam.gserviceaccount.com"
+          workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
+          service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
 
-        # - name: Set up Cloud SDK for Backend
-        #   uses: google-github-actions/setup-gcloud@v1
-        #   with:
-        #     project_id: stacks-and-joules
-        #     version: latest
+      # - name: Set up Cloud SDK for Backend
+      #   uses: google-github-actions/setup-gcloud@v1
+      #   with:
+      #     project_id: stacks-and-joules
+      #     version: latest
 
-        # - name: Activate Service Account
-        #   run: gcloud auth activate-service-account --key-file=- <<<"${{ secrets.GCP_SA_KEY }}"
+      # - name: Activate Service Account
+      #   run: gcloud auth activate-service-account --key-file=- <<<"${{ secrets.GCP_SA_KEY }}"
 
-        # - name: Get gcloud config
-        #   run: gcloud config list
+      # - name: Get gcloud config
+      #   run: gcloud config list
 
-        # - name: Deploy backend to GAE in Project B
-        #   run: |
-        #     cd backend
-        #     gcloud app deploy
+      # - name: Deploy backend to GAE in Project B
+      #   run: |
+      #     cd backend
+      #     gcloud app deploy
