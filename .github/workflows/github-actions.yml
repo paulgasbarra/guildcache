@@ -13,13 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Display service-account.json
-        run: cat service-account.json
-
       - name: Set up GCP authentication
         run: echo "${{ secrets.GCP_SA_KEY }}" > service-account.json
         env:
           GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Display service-account.json
+        run: cat service-account.json
 
       - name: Authenticate with GCP
         run: gcloud auth activate-service-account --key-file=service-account.json
