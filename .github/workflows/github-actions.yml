@@ -46,4 +46,6 @@ jobs:
 
       - name: Deploy backend to GAE in Project B
         run: |
-          gcloud app deploy backend/app.yaml --quiet
+          cd backend
+          cd ls -al
+          gcloud app deploy app.yaml --quiet
