@@ -41,6 +41,9 @@ jobs:
           project_id: stacks-and-joules-dev
           version: latest
 
+      - name: List directory contents
+        run: ls -al
+
       - name: Deploy backend to GAE in Project B
         run: |
-          gcloud app deploy app.yaml --quiet
+          gcloud app deploy backend/app.yaml --quiet
