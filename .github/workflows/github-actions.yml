@@ -30,8 +30,8 @@ jobs:
           project_id: stacks-and-joules-dev
           version: latest
 
-      - name: Activate Service Account
-        run: gcloud auth activate-service-account --key-file=- <<<"${{ secrets.GCP_SA_KEY }}"
+      # - name: Activate Service Account
+      #   run: gcloud auth activate-service-account --key-file=- <<<"${{ secrets.GCP_SA_KEY }}"
 
       - name: Get gcloud config
         run: gcloud config list
