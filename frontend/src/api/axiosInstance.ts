@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+const API_URL = import.meta.env.VITE_API_URL || "none";
+
+if (API_URL === undefined) {
+    throw new Error('API_URL is not defined');
+}
+
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/api/',
+    baseURL: API_URL,
 });
 
 axiosInstance.interceptors.request.use(

@@ -34,6 +34,11 @@ jobs:
           workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
           service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
           args: app deploy app.yaml
+      
+      - name: Set Up Frontend
+
+      - name: Create env file
+          run: echo "${{ secrets.S_AND_J_FE_ENV_FILE }}" > .env
 
       - name: Set up Cloud SDK for Backend
         uses: google-github-actions/setup-gcloud@v1
@@ -49,3 +54,4 @@ jobs:
           cd backend
           ls -al
           gcloud app deploy app.yaml --quiet
+
