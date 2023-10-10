@@ -16,30 +16,43 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Python version
-        uses: actions/setup-python@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          python-version: 3.9 # Adjust according to your project's Python version.
+          node-version: "16"
 
-      - name: Install dependencies
-        run: |
-          cd backend
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: "Authenticate to Google Cloud"
-        id: "auth"
-        uses: "google-github-actions/auth@v1"
-        with:
-          workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
-          service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
-          args: app deploy app.yaml
-
-      - name: Create Frontend for Project
+      - name: Install dependencies and build
         run: |
           cd frontend
-          echo "${{ secrets.S_AND_J_FE_ENV_FILE }}" > .env
-          ls -al
+          npm install
+          npm run build
+
+      - name: Deploy to GCS
+        uses: GoogleCloudPlatform/github-actions/gsutil-action@master
+        with:
+          service_account_key: ${{ secrets.GCS_SA_KEY_FE }}
+          project_id: ${{ secrets.GCP_PROJECT_ID_FE }}
+          bucket_name: "stacks-and-joules-fe-dev"
+          folder: "dist"
+
+      # - name: Set up Python version
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: 3.9 # Adjust according to your project's Python version.
+
+      # - name: Install dependencies
+      #   run: |
+      #     cd backend
+      #     python -m pip install --upgrade pip
+      #     pip install -r requirements.txt
+
+      # - name: "Authenticate to Google Cloud"
+      #   id: "auth"
+      #   uses: "google-github-actions/auth@v1"
+      #   with:
+      #     workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
+      #     service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
+      #     args: app deploy app.yaml
 
       # - name: Set up Cloud SDK for Backend
       #   uses: google-github-actions/setup-gcloud@v1
