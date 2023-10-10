@@ -27,11 +27,20 @@ jobs:
           npm install
           npm run build
 
-      - name: Deploy to GCS
-        uses: GoogleCloudPlatform/github-actions/gsutil-action@master
+      # - name: "Authenticate to Google Cloud"
+      #   id: "auth"
+      #   uses: "google-github-actions/auth@v1"
+      #   with:
+      #     workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
+      #     service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
+      #     args: app deploy app.yaml
+
+      - name: "Authenticate to Google Cloud"
+        id: "auth"
+        uses: "google-github-actions/auth@v1"
         with:
-          service_account_key: ${{ secrets.GCS_SA_KEY_FE }}
-          project_id: ${{ secrets.GCP_PROJECT_ID_FE }}
+          workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
+          service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
           bucket_name: "stacks-and-joules-fe-dev"
           folder: "dist"
 
@@ -45,14 +54,6 @@ jobs:
       #     cd backend
       #     python -m pip install --upgrade pip
       #     pip install -r requirements.txt
-
-      # - name: "Authenticate to Google Cloud"
-      #   id: "auth"
-      #   uses: "google-github-actions/auth@v1"
-      #   with:
-      #     workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
-      #     service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
-      #     args: app deploy app.yaml
 
       # - name: Set up Cloud SDK for Backend
       #   uses: google-github-actions/setup-gcloud@v1
