@@ -36,4 +36,4 @@ jobs:
 
       - name: Upload build assets to GCS
         run: |
-          gsutil -m cp -r frontend/dist/* gs://stacks-and-joules-fe-dev/
+          gsutil -m cp -r frontend/dist/* gs://stacks-and-joules-fe/
