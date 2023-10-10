@@ -32,7 +32,7 @@ jobs:
         uses: "google-github-actions/auth@v1"
         with:
           workload_identity_provider: "projects/66681826221/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
-          service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
+          service_account: "stacks-and-joules-admin@stacks-and-joules-fe-dev.iam.gserviceaccount.com"
 
       - name: Upload build assets to GCS
         run: |
