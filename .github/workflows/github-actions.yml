@@ -35,23 +35,20 @@ jobs:
           service_account: "paulgasbarra@stacks-and-joules-dev.iam.gserviceaccount.com"
           args: app deploy app.yaml
 
-      - name: Create env file
+      - name: Create Frontend for Project
         run: |
           cd frontend
           echo "${{ secrets.S_AND_J_FE_ENV_FILE }}" > .env
           ls -al
 
-      - name: Set up Cloud SDK for Backend
-        uses: google-github-actions/setup-gcloud@v1
-        with:
-          project_id: stacks-and-joules-dev
-          version: latest
+      # - name: Set up Cloud SDK for Backend
+      #   uses: google-github-actions/setup-gcloud@v1
+      #   with:
+      #     project_id: stacks-and-joules-dev
+      #     version: latest
 
-      - name: List directory contents
-        run: ls -al
-
-      - name: Deploy backend to GAE in Project B
-        run: |
-          cd backend
-          ls -al
-          gcloud app deploy app.yaml --quiet
+      # - name: Deploy backend to GAE in Project B
+      #   run: |
+      #     cd backend
+      #     ls -al
+      #     gcloud app deploy app.yaml --quiet
