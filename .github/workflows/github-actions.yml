@@ -22,7 +22,10 @@ jobs:
         run: |
           cd frontend
           npm install
-          npm run build
+          vite build
+
+      - name: List build output
+        run: ls -al dist
 
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.1
