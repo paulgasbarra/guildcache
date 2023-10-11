@@ -33,4 +33,4 @@ jobs:
 
       - name: Upload to GCS
         run: |
-          gsutil -m cp -r dist/* gs://stacks-and-joules-frontend-dev/
+          gsutil -m cp -r frontend/dist/* gs://stacks-and-joules-frontend-dev/
