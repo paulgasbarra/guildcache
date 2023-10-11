@@ -22,7 +22,7 @@ jobs:
         run: |
           cd frontend
           npm install
-          vite build
+          npm run build
 
       - name: List build output
         run: ls -al dist
