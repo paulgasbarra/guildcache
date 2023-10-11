@@ -25,7 +25,9 @@ jobs:
           npm run build
 
       - name: List build output
-        run: ls -al dist
+        run: |
+          cd frontend
+          ls -al dist
 
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v0.2.1
