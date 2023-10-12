@@ -1,10 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Navigate,
-} from "react-router-dom";
+import { createHashRouter, RouterProvider, Navigate } from "react-router-dom";
 import AuthProvider, { useAuth } from "./components/AuthContext";
 import "./index.css";
 import {
@@ -28,7 +24,7 @@ import {
 import App from "./App";
 
 const router = (isAuthenticated = false) => {
-  return createBrowserRouter([
+  return createHashRouter([
     {
       element: <App />,
       children: [
@@ -60,8 +56,7 @@ const router = (isAuthenticated = false) => {
           path: "/student/:id",
           element: isAuthenticated ? <StudentView /> : <Navigate to="/admin" />,
         },
-        { path: "/partners", element: <Partners />,
-},
+        { path: "/partners", element: <Partners /> },
       ],
     },
   ]);
