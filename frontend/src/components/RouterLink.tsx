@@ -11,7 +11,7 @@ export const RouterLink: React.FC<RouterLinkProps> = ({
   endpoint,
 }) => (
   <Link
-    className="text-sm font-semibold text-gray-900 rounded-lg p-3 text-sm hover:text-gray-500 hover:bg-gray-50"
+    className="text-base text-primary-blue font-nav font-black rounded-lg p-3 text-sm hover:text-gray-500 hover:bg-gray-50"
     to={endpoint}
   >
     {children}

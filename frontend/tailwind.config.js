@@ -3,7 +3,14 @@ export default {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   media: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    fontFamily: {
+      'nav': ['Satoshi', 'sans-serif']
+    },
+    extend: {
+      textColor:{
+        'primary-blue': '#3B82F6',
+      }
+    },
   },
   variants: {
     extend: {},
