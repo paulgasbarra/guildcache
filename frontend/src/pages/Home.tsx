@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
+import HeroSection from "../components/HeroSection";
 
 export const Home: React.FC = () => (
   <>
-    <h1>Stacks and Joules!</h1>
+    <HeroSection />
   </>
 );
-
