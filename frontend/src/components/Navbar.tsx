@@ -6,7 +6,7 @@ import { logo } from "../assets/images";
 const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
   return (
-    <nav className="flex justify-center font-nav px-10">
+    <nav className="flex justify-center font-nav px-32">
       <div className="group relative w-full flex justify-between">
         <NavLink endpoint="/enroll">BECOME A STUDENT</NavLink>
         <NavLink endpoint="/partners">EMPLOYMENT PARTNERSHIP</NavLink>
