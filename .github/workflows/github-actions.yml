@@ -41,6 +41,4 @@ jobs:
         run: |
           gsutil -m cp -r frontend/dist/* gs://stacks-and-joules-frontend-dev/
 
-      - name: Print site URL
-        run: |
-          echo "Check the deployed site at: https://storage.googleapis.com/stacks-and-joules-frontend-dev/index.html"
+      # "Check the deployed site at: https://storage.googleapis.com/stacks-and-joules-frontend-dev/index.html"
