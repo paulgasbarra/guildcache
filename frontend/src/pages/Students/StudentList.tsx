@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { axiosInstance, ENDPOINTS } from "../../api";
 import { Student } from "../../types/Student";
 import StudentTable from "../../components/StudentTable";
+import ModelTable from "../../components/ModelTable";
 import { useAuth } from "../../components/AuthContext";
 
 export const StudentList: React.FC = () => {
@@ -34,11 +34,14 @@ export const StudentList: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 m-6">
-      <Link to="/create-student">Create Student</Link>
+    <div className="space-y-6">
       {students.length === 0 && <p>No students found</p>}
       {students.length > 0 && (
-        <StudentTable students={students} handleDelete={handleDelete} />
+        <ModelTable
+          modelList={students}
+          headers={["name", "email"]}
+          handleDelete={handleDelete}
+        />
       )}
     </div>
   );
