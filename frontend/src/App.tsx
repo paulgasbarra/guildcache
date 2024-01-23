@@ -14,7 +14,9 @@ import {
   StudentCreation,
   StudentList,
   StudentView,
-  TeachersList,
+  InstructorCreation,
+  InstructorList,
+  InstructorView,
 } from "./pages";
 import { useAuth } from "./components/AuthContext";
 
@@ -35,7 +37,9 @@ function App() {
           <Route path="students" element={<StudentList />} />
           <Route path="students/:id" element={<StudentView />} />
           <Route path="create-student" element={<StudentCreation />} />
-          <Route path="teachers" element={<TeachersList />} />
+          <Route path="instructors" element={<InstructorList />} />
+          <Route path="instructors/:id" element={<InstructorView />} />
+          <Route path="create-instructor" element={<InstructorCreation />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<ErrorPage />} />

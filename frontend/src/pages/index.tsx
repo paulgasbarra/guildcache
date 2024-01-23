@@ -14,7 +14,9 @@ import { StudentList } from "./Students/StudentList";
 import { StudentCreation } from "./Students/StudentCreate";
 import { StudentView } from "./Students/StudentView";
 import { Partners } from "./Partners";
-import { TeachersList } from "./Teachers/TeachersList";
+import { InstructorList } from "./Instructors/InstructorList";
+import { InstructorCreation } from "./Instructors/InstructorCreate";
+import { InstructorView } from "./Instructors/InstructorView";
 
 export {
   About,
@@ -33,5 +35,7 @@ export {
   StudentCreation,
   StudentView,
   StudentList,
-  TeachersList,
+  InstructorCreation,
+  InstructorList,
+  InstructorView,
 };

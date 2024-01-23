@@ -1,0 +1,60 @@
+import { InputObjectType } from "../../types/InputObjectType";
+
+export const InstructorFormFields: InputObjectType[] = [
+  {
+    id: "name",
+    placeholder: "Name",
+    type: "text",
+    label: "Name",
+    error: [],
+    value: "",
+  },
+  {
+    id: "address",
+    placeholder: "Address",
+    type: "text",
+    label: "Address",
+    error: [],
+    value: "",
+  },
+  {
+    id: "phone",
+    placeholder: "Phone",
+    type: "text",
+    label: "Phone",
+    error: [],
+    value: "",
+  },
+  {
+    id: "email",
+    placeholder: "Email",
+    type: "text",
+    label: "Email",
+    error: [],
+    value: "",
+  },
+  {
+    id: "website",
+    placeholder: "Website",
+    type: "text",
+    label: "Website",
+    error: [],
+    value: "",
+  },
+  {
+    id: "instagram",
+    placeholder: "Instagram",
+    type: "text",
+    label: "Instagram",
+    error: [],
+    value: "",
+  },
+  {
+    id: "salary",
+    placeholder: "Salary",
+    type: "number",
+    label: "Salary",
+    error: [],
+    value: "",
+  },
+];

@@ -13,5 +13,3 @@ export interface Student {
   class_number: string;
   class_date: string;
 }
-
-//how to update input with selection values?

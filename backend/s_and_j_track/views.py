@@ -1,6 +1,6 @@
 from rest_framework import viewsets, generics
-from .serializers import StudentSerializer, EmployerSerializer, ApplicationSerializer, DonorSerializer
-from .models import Student, Employer, Application, Donor
+from .serializers import StudentSerializer, InstructorSerializer, EmployerSerializer, ApplicationSerializer, DonorSerializer
+from .models import Student, Instructor, Employer, Application, Donor
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -21,6 +21,11 @@ class StudentListCreateView(generics.ListCreateAPIView):
 class StudentDeleteView(generics.DestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+@permission_classes([IsAuthenticated])
+class InstructorViewSet(viewsets.ModelViewSet):
+    queryset = Instructor.objects.all()
+    serializer_class = InstructorSerializer
 
 class EmployerViewSet(viewsets.ModelViewSet): 
     queryset = Employer.objects.all()

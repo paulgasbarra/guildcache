@@ -1,10 +1,15 @@
 from rest_framework import serializers
-from .models import Student, Employer, Application, Donor
+from .models import Student, Instructor, Employer, Application, Donor
 
 class StudentSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Student
         fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'resume_link', 'lca_cert', 'epa_608_cert', 's_j_cert', 'class_site', 'class_number', 'class_date']
+
+class InstructorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Instructor
+        fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'website', 'instagram', 'tiktok', 'salary']
 
 class EmployerSerializer(serializers.ModelSerializer): 
     class Meta: 

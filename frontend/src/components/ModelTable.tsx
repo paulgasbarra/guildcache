@@ -15,9 +15,12 @@ const ModelTable: React.FC<TableProps> = ({
   return (
     <table className="divide-y divide-gray-200 shadow-md bg-white rounded-lg">
       <thead className="bg-gray-800">
-        <tr>
+        <tr key="table-header">
           {headers.map((header) => (
-            <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+            <th
+              key={header}
+              className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider"
+            >
               {header}
             </th>
           ))}

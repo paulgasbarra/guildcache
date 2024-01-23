@@ -4,9 +4,9 @@ import ModelForm from "../../components/ModelForm";
 import { Link } from "react-router-dom";
 import Modal from "../../components/Modal";
 import { AxiosError } from "axios";
-import { StudentFormFields } from "./StudentFormFields";
+import { InstructorFormFields } from "./InstructorFormFields";
 
-export function StudentCreation() {
+export function InstructorCreation() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalText, setModalText] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -14,16 +14,16 @@ export function StudentCreation() {
   const handleSubmit = async (formData: {}) => {
     try {
       const response = await axiosInstance.post(
-        ENDPOINTS.STUDENTS.LIST,
+        ENDPOINTS.INSTRUCTORS.LIST,
         formData
       );
-      console.log("Student created:", response.data);
+      console.log("Instructor created:", response.data);
       setModalOpen(true);
-      setModalText("Student created");
+      setModalText("Instructor created");
       setErrorMessage("");
       // Handle success - maybe redirect or clear the form
     } catch (error: any | AxiosError) {
-      console.error("Error creating student:", error);
+      console.error("Error creating instructor:", error);
       setErrorMessage(error.request.response);
       setModalOpen(true);
       setModalText("Something went wrong.");
@@ -37,15 +37,15 @@ export function StudentCreation() {
   return (
     <div className="flex flex-col w-full">
       <Link
-        to="/admin/students"
+        to="/admin/instructors"
         className="bg-gray-800 text-white w100 hover:underline w-full p-2"
       >
-        Back to Students
+        Back to Instructors
       </Link>
       <ModelForm
         onSubmit={handleSubmit}
         errorMessage={errorMessage}
-        initialFormData={StudentFormFields}
+        initialFormData={InstructorFormFields}
       />
       <Modal open={modalOpen} onClose={onClose}>
         {modalText}

@@ -27,7 +27,6 @@ const ModelForm: React.FC<ModelFormProps> = ({
     for (const error in errorMessageObject) {
       errorIds.push(error);
     }
-    console.log(errorIds);
     formData.forEach((field) => {
       if (errorIds.includes(field.id)) {
         field.error = errorMessageObject[field.id];

@@ -21,13 +21,28 @@ const SidebarNav = () => {
           </ul>
         </li>
         <li>
-          <Link to="teachers" className="block py-2 px-4 hover:bg-gray-600">
-            Teachers
+          <Link to="instructors" className="block py-2 px-4 hover:bg-gray-600">
+            Instructors
           </Link>
+          <ul>
+            <li>
+              <Link
+                className="block py-2 px-8 hover:bg-gray-600"
+                to="create-instructor"
+              >
+                Create Instructor
+              </Link>
+            </li>
+          </ul>
         </li>
         <li>
           <Link to="donors" className="block py-2 px-4 hover:bg-gray-600">
             Donors
+          </Link>
+        </li>
+        <li>
+          <Link to="employers" className="block py-2 px-4 hover:bg-gray-600">
+            Employers
           </Link>
         </li>
       </ul>

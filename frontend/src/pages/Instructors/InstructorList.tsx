@@ -1,43 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { axiosInstance, ENDPOINTS } from "../../api";
-import { Student } from "../../types/Student";
+import { Instructor } from "../../types/Instructor";
 import ModelTable from "../../components/ModelTable";
 import { useAuth } from "../../components/AuthContext";
 
-export const StudentList: React.FC = () => {
-  const [students, setStudents] = useState<Student[]>([]);
+export const InstructorList: React.FC = () => {
+  const [instructors, setInstructors] = useState<Instructor[]>([]);
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     if (isAuthenticated) {
       axiosInstance
-        .get(ENDPOINTS.STUDENTS.LIST)
+        .get(ENDPOINTS.INSTRUCTORS.LIST)
         .then((response) => {
-          setStudents(response.data);
+          setInstructors(response.data);
         })
         .catch((error) => {
-          console.error("Error fetching the students:", error);
+          console.error("Error fetching the instructors:", error);
         });
     }
   }, []);
 
   const handleDelete = async (id: string) => {
     await axiosInstance
-      .delete(ENDPOINTS.STUDENTS.DETAILS(id))
+      .delete(ENDPOINTS.INSTRUCTORS.DETAILS(id))
       .then(() => {
-        setStudents(students.filter((student) => student.id !== id));
+        setInstructors(
+          instructors.filter((instructor) => instructor.id !== id)
+        );
       })
       .catch((error) => {
-        console.error("Error deleting the student:", error);
+        console.error("Error deleting the instructor:", error);
       });
   };
 
   return (
     <div className="space-y-6">
-      {students.length === 0 && <p>No students found</p>}
-      {students.length > 0 && (
+      {instructors.length === 0 && <p>No instructors found</p>}
+      {instructors.length > 0 && (
         <ModelTable
-          modelList={students}
+          modelList={instructors}
           headers={["name", "email"]}
           handleDelete={handleDelete}
         />
