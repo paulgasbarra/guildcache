@@ -1,12 +1,12 @@
 import React from "react";
 import EntityList from "../../components/EntityList";
 
-export const InstructorList: React.FC = () => {
+export const DonorList: React.FC = () => {
   return (
     <EntityList
-      endpoint="/instructors"
+      endpoint="/donors"
       headers={["name", "email"]}
-      entityType="Instructor"
+      entityType="Donor"
     />
   );
 };

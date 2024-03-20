@@ -18,6 +18,14 @@ const SidebarNav = () => {
                 Create Student
               </Link>
             </li>
+            <li>
+              <Link
+                className="block py-2 px-8 hover:bg-gray-600"
+                to="upload-student-csv"
+              >
+                Upload Students CSV
+              </Link>
+            </li>
           </ul>
         </li>
         <li>
@@ -39,11 +47,31 @@ const SidebarNav = () => {
           <Link to="donors" className="block py-2 px-4 hover:bg-gray-600">
             Donors
           </Link>
+          <ul>
+            <li>
+              <Link
+                className="block py-2 px-8 hover:bg-gray-600"
+                to="create-donor"
+              >
+                Create Donor
+              </Link>
+            </li>
+          </ul>
         </li>
         <li>
           <Link to="employers" className="block py-2 px-4 hover:bg-gray-600">
             Employers
           </Link>
+          <ul>
+            <li>
+              <Link
+                className="block py-2 px-8 hover:bg-gray-600"
+                to="create-employer"
+              >
+                Create Employer
+              </Link>
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>

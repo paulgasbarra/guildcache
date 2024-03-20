@@ -1,0 +1,68 @@
+import { InputObjectType } from "../../types/InputObjectType";
+
+export const DonorFormFields: InputObjectType[] = [
+  {
+    id: "name",
+    placeholder: "Name",
+    type: "text",
+    label: "Name",
+    error: [],
+    value: "",
+  },
+  {
+    id: "address",
+    placeholder: "Address",
+    type: "text",
+    label: "Address",
+    error: [],
+    value: "",
+  },
+  {
+    id: "phone",
+    placeholder: "Phone",
+    type: "text",
+    label: "Phone",
+    error: [],
+    value: "",
+  },
+  {
+    id: "email",
+    placeholder: "Email",
+    type: "text",
+    label: "Email",
+    error: [],
+    value: "",
+  },
+  {
+    id: "website",
+    placeholder: "Website",
+    type: "text",
+    label: "Website",
+    error: [],
+    value: "",
+  },
+  {
+    id: "linkedin",
+    placeholder: "Linkedin",
+    type: "text",
+    label: "Linkedin",
+    error: [],
+    value: "",
+  },
+  {
+    id: "instagram",
+    placeholder: "Instagram",
+    type: "text",
+    label: "Instagram",
+    error: [],
+    value: "",
+  },
+  {
+    id: "tiktok",
+    placeholder: "Tiktok",
+    type: "string",
+    label: "Ticktok",
+    error: [],
+    value: "",
+  },
+];

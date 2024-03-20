@@ -54,17 +54,19 @@ const ModelForm: React.FC<ModelFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 m-6 float-left">
-      {formData.map((input) => (
-        <FormInput
-          key={input.id}
-          id={input.id}
-          placeholder={input.placeholder}
-          type={input.type}
-          label={input.label}
-          error={input.error}
-          handleChange={handleChange}
-        />
-      ))}
+      <div className="columns-2">
+        {formData.map((input) => (
+          <FormInput
+            key={input.id}
+            id={input.id}
+            placeholder={input.placeholder}
+            type={input.type}
+            label={input.label}
+            error={input.error}
+            handleChange={handleChange}
+          />
+        ))}
+      </div>
       <div>
         <button
           type="submit"
