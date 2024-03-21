@@ -1,8 +1,10 @@
 import React from "react";
-import HeroSection from "../components/HeroSection";
 
 export const Home: React.FC = () => (
   <>
-    <HeroSection />
+    <div>
+      Welcome to Guildcache, a customized CRM for Educational Programs supported
+      by Philanthropy
+    </div>
   </>
 );

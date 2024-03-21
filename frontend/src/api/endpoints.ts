@@ -3,7 +3,7 @@ const ENDPOINTS = {
     LIST: "students/",
     DETAILS: (id: string) => `students/${id}/`,
     CREATE: "students/",
-    UPLOAD: "students/upload/",
+    UPLOAD: "upload/students/",
   },
   INSTRUCTORS: {
     LIST: "instructors/",

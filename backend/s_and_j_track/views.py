@@ -118,10 +118,8 @@ def generic_csv_upload(request, model_name):
         for field in model._meta.fields:
             csv_value = row.get(field.name)
             if csv_value:
-                # Convert "TRUE"/"FALSE" strings to booleans for BooleanFields
                 if isinstance(field, models.BooleanField):
                     csv_value = csv_value.upper() == 'TRUE'
-                # Add more type checks and conversions as necessary
 
                 setattr(model_instance, field.name, csv_value)
 
