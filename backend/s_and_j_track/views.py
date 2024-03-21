@@ -55,77 +55,48 @@ def login_view(request):
         return Response({"token": token.key}, status=200)
     else:
         return Response({"error": "Invalid credentials"}, status=400)
+    
 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])  # Ensure only authenticated users can upload
-def upload_csv(request):
+def generic_csv_upload_wrapper(model, serializer, request):
     if request.method == 'POST':
         csv_file = request.FILES.get('file')
         if not csv_file:
             return Response({"error": "Please upload a CSV file."}, status=400)
 
-        #create a student model from the csv file
-     
-        students = []
+        model_list = []
         decoded_file = csv_file.read().decode('utf-8').splitlines()
         reader = csv.DictReader(decoded_file)
         for row in reader:
+            # confirm that values are valid for the model especially for boolean fields
+            for key, value in row.items():
+                if value.upper() == 'TRUE':
+                    row[key] = True
+                elif value.upper() == 'FALSE':
+                    row[key] = False
+            model_instance = model(**row)
+            model_list.append(model_instance)
 
-            student = Student(
-                name=row['name'], 
-                address=row['address'], 
-                phone=row['phone'],
-                email=row['email'],
-                linkedin=row['linkedin'],
-                resume_link=row['resume_link'],
-                lca_cert=row['lca_cert'].upper() == 'TRUE',  # Convert to boolean
-                epa_608_cert=row['epa_608_cert'].upper() == 'TRUE',  # Convert to boolean
-                s_j_cert=row['s_j_cert'].upper() == 'TRUE',
-                class_site=row['class_site'],
-                class_number=row['class_number'],
-                class_date=row['class_date']
-                )
-
-            students.append(student)
-
-        Student.objects.bulk_create(students)
+        model.objects.bulk_create(model_list)
     
         return Response({"message": "File uploaded successfully"}, status=200)
+    
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated]) 
+def upload_students(request):
+    return generic_csv_upload_wrapper(Student, StudentSerializer, request)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def generic_csv_upload_wrapper(request, model_name):
-    return generic_csv_upload(request._request, model_name)
+def upload_instructors(request):
+    return generic_csv_upload_wrapper(Instructor, InstructorSerializer, request)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-def generic_csv_upload(request, model_name):
-    try:
-        model = apps.get_model('your_app_name', model_name)
-    except LookupError:
-        return Response({"error": f"Model {model_name} not found."}, status=400)
+def upload_employers(request):
+    return generic_csv_upload_wrapper(Employer, EmployerSerializer, request)
 
-    csv_file = request.FILES.get('file')
-    if not csv_file:
-        return Response({"error": "Please upload a CSV file."}, status=400)
-
-    decoded_file = csv_file.read().decode('utf-8').splitlines()
-    reader = csv.DictReader(decoded_file)
-
-    model_instances = []
-    for row in reader:
-        model_instance = model()
-        for field in model._meta.fields:
-            csv_value = row.get(field.name)
-            if csv_value:
-                if isinstance(field, models.BooleanField):
-                    csv_value = csv_value.upper() == 'TRUE'
-
-                setattr(model_instance, field.name, csv_value)
-
-        model_instances.append(model_instance)
-
-    with transaction.atomic():
-        model.objects.bulk_create(model_instances)
-
-    return Response({"message": f"{model_name} data uploaded successfully"}, status=200)
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def upload_donors(request):
+    return generic_csv_upload_wrapper(Donor, DonorSerializer, request)

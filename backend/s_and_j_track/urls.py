@@ -7,7 +7,11 @@ from .views import (StudentViewSet,
                     ApplicationViewSet, 
                     DonorViewSet, 
                     login_view, 
-                    generic_csv_upload_wrapper)
+                    upload_students,
+                    upload_instructors,
+                    upload_donors,
+                    upload_employers,
+                )
 
 router = DefaultRouter()
 router.register('students', StudentViewSet)
@@ -18,7 +22,10 @@ router.register('instructors', InstructorViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('upload/<str:model_name>/', generic_csv_upload_wrapper, name='generic_upload'),
+    path('upload/students/', upload_students, name='upload-csv'),
+    path('upload/instructors/', upload_instructors, name='upload-csv'),
+    path('upload/donors/', upload_donors, name='upload-csv'),
+    path('upload/employers/', upload_employers, name='upload-csv'),
     path('students', StudentListCreateView.as_view(), name='student-list-create'),
     path('login/', login_view, name='login'),
     
