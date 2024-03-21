@@ -9,12 +9,15 @@ import { StudentCSVUpload } from "./Students/StudentCSVUpload";
 import { InstructorList } from "./Instructors/InstructorList";
 import { InstructorCreation } from "./Instructors/InstructorCreate";
 import { InstructorView } from "./Instructors/InstructorView";
+import { InstructorCSVUpload } from "./Instructors/InstructorCSVUpload";
 import { DonorList } from "./Donors/DonorList";
 import { DonorCreation } from "./Donors/DonorCreate";
 import { DonorView } from "./Donors/DonorView";
+import { DonorCSVUpload } from "./Donors/DonorCSVUpload";
 import { EmployerList } from "./Employers/EmployerList";
 import { EmployerCreation } from "./Employers/EmployerCreate";
 import { EmployerView } from "./Employers/EmployerView";
+import { EmployerCSVUpload } from "./Employers/EmployerCSVUpload";
 
 export {
   Admin,
@@ -28,10 +31,13 @@ export {
   InstructorCreation,
   InstructorList,
   InstructorView,
+  InstructorCSVUpload,
   DonorList,
   DonorCreation,
   DonorView,
+  DonorCSVUpload,
   EmployerList,
   EmployerCreation,
   EmployerView,
+  EmployerCSVUpload,
 };

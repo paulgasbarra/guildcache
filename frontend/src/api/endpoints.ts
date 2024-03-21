@@ -9,16 +9,19 @@ const ENDPOINTS = {
     LIST: "instructors/",
     DETAILS: (id: string) => `instructors/${id}`,
     CREATE: "instructors/",
+    UPLOAD: "upload/instructors/",
   },
   DONORS: {
     LIST: "donors/",
     DETAILS: (id: string) => `donors/${id}`,
     CREATE: "donors/",
+    UPLOAD: "upload/donors/",
   },
   EMPLOYERS: {
     LIST: "employers/",
     DETAILS: (id: string) => `employers/${id}`,
     CREATE: "employers/",
+    UPLOAD: "upload/employers/",
   },
   LOGIN: "login/",
   // ... other model or resource endpoints

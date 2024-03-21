@@ -15,7 +15,7 @@ const ModelTable: React.FC<TableProps> = ({
   return (
     <table className="divide-y divide-gray-200 shadow-md bg-white rounded-lg">
       <thead className="bg-gray-800">
-        <tr key="table-header">
+        <tr key="table-header" className="w-full bg-gray-800">
           {headers.map((header) => (
             <th
               key={header}

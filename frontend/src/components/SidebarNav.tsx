@@ -41,6 +41,14 @@ const SidebarNav = () => {
                 Create Instructor
               </Link>
             </li>
+            <li>
+              <Link
+                className="block py-2 px-8 hover:bg-gray-600"
+                to="upload-instructor-csv"
+              >
+                Upload Instructors CSV
+              </Link>
+            </li>
           </ul>
         </li>
         <li>
@@ -56,6 +64,14 @@ const SidebarNav = () => {
                 Create Donor
               </Link>
             </li>
+            <li>
+              <Link
+                className="block py-2 px-8 hover:bg-gray-600"
+                to="upload-donor-csv"
+              >
+                Upload Donors CSV
+              </Link>
+            </li>
           </ul>
         </li>
         <li>
@@ -69,6 +85,14 @@ const SidebarNav = () => {
                 to="create-employer"
               >
                 Create Employer
+              </Link>
+            </li>
+            <li>
+              <Link
+                className="block py-2 px-8 hover:bg-gray-600"
+                to="upload-employer-csv"
+              >
+                Upload Employers CSV
               </Link>
             </li>
           </ul>
