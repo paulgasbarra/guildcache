@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
     'faker',
     'rest_framework',
     'rest_framework.authtoken',
@@ -96,6 +97,10 @@ TIME_ZONE = 'America/New_York'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+# Static files
+
+STATIC_URL = 'static/'
 
 # Default primary key field type
 
