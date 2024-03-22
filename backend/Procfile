@@ -1,1 +1,1 @@
-web: gunicorn stacks_and_joules.wsgi.application
+web: gunicorn stacks_and_joules.wsgi:application
