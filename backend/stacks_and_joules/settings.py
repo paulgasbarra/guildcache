@@ -15,7 +15,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')  # Use environment v
 DEBUG = os.getenv('DEBUG', 'True') == 'True'  # Assuming you save DEBUG as 'True' or 'False' in the .env file
 
 CORS_ORIGIN_ALLOW_ALL = True
-ALLOWED_HOSTS = ['34.86.20.108', '.localhost', '127.0.0.1', '[::1]', 'stacks-and-joules-dev.ue.r.appspot.com']
+ALLOWED_HOSTS = ['34.86.20.108', '.localhost', '127.0.0.1', '[::1]', 'guildcache-5e47e83eae32.herokuapp.com']
 
 # Application definition
 
