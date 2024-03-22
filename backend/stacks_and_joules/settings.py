@@ -46,6 +46,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'stacks_and_joules.urls'
 
+STATICFILES_DIRS = [BASE_DIR / '../../frontend/dist/']
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
