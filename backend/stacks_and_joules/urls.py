@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 
 admin.site.site_header = "Stacks & Joules Tracks"  # default: "Django Administration"
 admin.site.index_title = "S&J Admin"  # default: "Site administration"
@@ -24,4 +25,5 @@ admin.site.site_title = "Stacks & Joules Admin Portal"  # default: "Django site 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('s_and_j_track.urls')),
+    path('', TemplateView.as_view(template_name='index.html')),
 ]
