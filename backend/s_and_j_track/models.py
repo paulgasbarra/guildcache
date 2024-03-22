@@ -74,7 +74,7 @@ class Cohort(models.Model):
     end_date = models.DateField()
     students = models.ManyToManyField(Student)
     location = models.CharField(max_length=200)
-    instructors = models.ManyToManyField(Donor)
+    instructors = models.ManyToManyField(Instructor)
 
     def __str__(self):
         return self.name
