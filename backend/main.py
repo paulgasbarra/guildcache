@@ -1,3 +1,3 @@
-from stacks_and_joules import wsgi
+from backend.stacks_and_joules import wsgi
 
 app = wsgi.application
