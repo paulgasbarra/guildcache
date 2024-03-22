@@ -16,10 +16,3 @@ jobs:
           heroku_app_name: "guildcache" #Must be unique in Heroku
           heroku_email: "paulgasbarra@gmail.com"
           appdir: "backend"
-      - name: Install Heroku CLI
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
-      - name: Login to Heroku
-        run: heroku login --apikey ${{secrets.HEROKU_API_KEY}}
-      - name: Restart Heroku app
-        run: heroku restart --app guildcache
