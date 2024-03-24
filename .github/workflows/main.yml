@@ -9,10 +9,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Deploy to Heroku
+        uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.13.15 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "guildcache" #Must be unique in Heroku
           heroku_email: "paulgasbarra@gmail.com"
           appdir: "backend"
+      - name: Deploy to Netlify
+        uses: jsmrcaga/action-netlify-deploy@v2.0.0
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          build_directory: "frontend/dist"
