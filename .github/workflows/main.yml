@@ -24,11 +24,13 @@ jobs:
           node-version: "20"
           cache: "npm"
       - name: Install Dependencies
-        run: cd frontend | npm install
-        working-directory: frontend
+        run: cd frontend | npm ci
+      - name: Build project
+        run: npm run build
       - name: Deploy to Netlify
-        uses: jsmrcaga/action-netlify-deploy@v2.0.0
-        with:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-          build_directory: frontend/build
+        id: netlify_deploy
+        run: |
+          netlify deploy \
+            --dir dist \
+            --site ${{ secrets.NETLIFY_SITE_ID }} \
+            --auth ${{ secrets.NETLIFY_AUTH_TOKEN }}
