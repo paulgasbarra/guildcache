@@ -17,6 +17,12 @@ jobs:
           heroku_app_name: "guildcache" #Must be unique in Heroku
           heroku_email: "paulgasbarra@gmail.com"
           appdir: "backend"
+      - name: Test Build Script
+        run: |
+          cd frontend
+          npm run build
+        env:
+          CI: true
       - name: Deploy to Netlify
         uses: jsmrcaga/action-netlify-deploy@v2.0.0
         with:
