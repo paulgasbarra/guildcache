@@ -1,6 +1,6 @@
 import { InputObjectType } from "../../types/InputObjectType";
 
-export const DonorFormFields: InputObjectType[] = [
+export const CohortFormFields: InputObjectType[] = [
   {
     id: "name",
     placeholder: "Name",

@@ -2,6 +2,10 @@ import { Admin } from "./Admin/Admin";
 import { ErrorPage } from "./Error";
 import { Home } from "./Home";
 import { Login } from "./Admin/Login";
+import { CohortList } from "./Cohorts/CohortList";
+import { CohortCreation } from "./Cohorts/CohortCreate";
+import { CohortView } from "./Cohorts/CohortView";
+import { CohortCSVUpload } from "./Cohorts/CohortCSVUpload";
 import { StudentList } from "./Students/StudentList";
 import { StudentCreation } from "./Students/StudentCreate";
 import { StudentView } from "./Students/StudentView";
@@ -24,6 +28,10 @@ export {
   ErrorPage,
   Home,
   Login,
+  CohortCreation,
+  CohortView,
+  CohortList,
+  CohortCSVUpload,
   StudentCreation,
   StudentView,
   StudentList,

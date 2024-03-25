@@ -6,6 +6,10 @@ import {
   Admin,
   ErrorPage,
   Login,
+  CohortCreation,
+  CohortList,
+  CohortView,
+  CohortCSVUpload,
   StudentCreation,
   StudentList,
   StudentView,
@@ -33,6 +37,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/admin" element={isAuthenticated ? <Admin /> : <Login />}>
+          <Route path="cohorts" element={<CohortList />} />
+          <Route path="cohorts/:id" element={<CohortView />} />
+          <Route path="create-cohort" element={<CohortCreation />} />
+          <Route path="upload-cohort-csv" element={<CohortCSVUpload />} />
           <Route path="students" element={<StudentList />} />
           <Route path="students/:id" element={<StudentView />} />
           <Route path="create-student" element={<StudentCreation />} />
