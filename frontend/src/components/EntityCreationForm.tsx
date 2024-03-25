@@ -7,6 +7,7 @@ import { AxiosError } from "axios";
 import { InputObjectType } from "../types/InputObjectType";
 
 interface EntityCreationFormProps {
+  formTitle: string;
   postEndpoint: string;
   formFields: {};
   backLink: string;
@@ -14,6 +15,7 @@ interface EntityCreationFormProps {
 }
 
 export const EntityCreationForm: React.FC<EntityCreationFormProps> = ({
+  formTitle,
   postEndpoint,
   formFields,
   backLink,
@@ -51,6 +53,7 @@ export const EntityCreationForm: React.FC<EntityCreationFormProps> = ({
       >
         Back
       </Link>
+      <h2 className="text-2xl font-bold ml-6">{formTitle}</h2>
       <ModelForm
         onSubmit={handleSubmit}
         errorMessage={errorMessage}

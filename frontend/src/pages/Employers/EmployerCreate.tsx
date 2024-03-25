@@ -5,6 +5,7 @@ import { EmployerFormFields } from "./EmployerFormFields";
 export const EmployerCreation: React.FC = () => {
   return (
     <EntityCreationForm
+      formTitle="Create - Employer"
       postEndpoint="/employers"
       formFields={EmployerFormFields}
       backLink="/admin/employers"

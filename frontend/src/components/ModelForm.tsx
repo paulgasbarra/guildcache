@@ -54,7 +54,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 m-6 float-left">
-      <div className="columns-2">
+      <div>
         {formData.map((input) => (
           <FormInput
             key={input.id}

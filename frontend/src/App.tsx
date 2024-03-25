@@ -27,7 +27,6 @@ import { useAuth } from "./components/AuthContext";
 
 function App() {
   const { isAuthenticated } = useAuth();
-  console.log("isAuthenticated", isAuthenticated);
   return (
     <>
       <Header />

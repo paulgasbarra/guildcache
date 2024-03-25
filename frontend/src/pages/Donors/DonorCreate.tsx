@@ -5,6 +5,7 @@ import { DonorFormFields } from "./DonorFormFields";
 export const DonorCreation: React.FC = () => {
   return (
     <EntityCreationForm
+      formTitle="Create - Donor"
       postEndpoint="/donors"
       formFields={DonorFormFields}
       backLink="/admin/donors"

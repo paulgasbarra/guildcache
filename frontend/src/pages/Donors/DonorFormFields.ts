@@ -61,7 +61,7 @@ export const DonorFormFields: InputObjectType[] = [
     id: "tiktok",
     placeholder: "Tiktok",
     type: "string",
-    label: "Ticktok",
+    label: "Tiktok",
     error: [],
     value: "",
   },
