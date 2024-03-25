@@ -24,6 +24,7 @@ const ModelTable: React.FC<TableProps> = ({
               {header}
             </th>
           ))}
+          <th />
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-300">

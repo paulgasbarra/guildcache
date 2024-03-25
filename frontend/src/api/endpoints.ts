@@ -23,6 +23,12 @@ const ENDPOINTS = {
     CREATE: "employers/",
     UPLOAD: "upload/employers/",
   },
+  COHORTS: {
+    LIST: "cohorts/",
+    DETAILS: (id: string) => `cohorts/${id}`,
+    CREATE: "cohorts/",
+    UPLOAD: "upload/cohorts/",
+  },
   LOGIN: "login/",
   // ... other model or resource endpoints
 };
