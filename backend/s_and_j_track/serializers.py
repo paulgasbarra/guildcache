@@ -27,6 +27,8 @@ class DonorSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'website', 'instagram', 'tiktok']
 
 class CohortSerializer(serializers.ModelSerializer):
+    students = StudentSerializer(many=True, read_only=True)
+
     class Meta:
         model = Cohort
-        fields = ['id', 'name', 'start_date', 'end_date', 'location']
+        fields = ['id', 'name', 'start_date', 'end_date', 'location', 'students']

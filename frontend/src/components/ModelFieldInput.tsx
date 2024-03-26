@@ -17,6 +17,7 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
   onChange,
   options,
 }) => {
+  if (type === "association") return null;
   if (type === "select") {
     return (
       <div>

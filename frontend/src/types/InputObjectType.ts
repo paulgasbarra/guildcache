@@ -6,6 +6,6 @@ export interface InputObjectType {
   type: HTMLInputTypeAttribute;
   label: string;
   error: [];
-  value: string | number | boolean;
+  value: string | number | boolean | object[];
   options?: any;
 }

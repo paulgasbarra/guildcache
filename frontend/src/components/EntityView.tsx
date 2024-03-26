@@ -6,11 +6,11 @@ import Modal from "./Modal";
 import { Link } from "react-router-dom";
 
 interface EntityViewProps {
-  entityFormFields: { id: string; label: string }[]; // Assuming a common structure for form fields
-  fetchDetailEndpoint: (id: string) => string; // Function to get the fetch detail endpoint
-  updateDetailEndpoint: (id: string) => string; // Function to get the update detail endpoint
-  backLink: string; // URL to go back to the entity list
-  successMessage: string; // Message to display upon successful update
+  entityFormFields: { id: string; label: string; type: string }[];
+  fetchDetailEndpoint: (id: string) => string;
+  updateDetailEndpoint: (id: string) => string;
+  backLink: string;
+  successMessage: string;
 }
 
 export const EntityView: React.FC<EntityViewProps> = ({
@@ -29,6 +29,7 @@ export const EntityView: React.FC<EntityViewProps> = ({
     const fetchEntity = async () => {
       try {
         const response = await axiosInstance.get(fetchDetailEndpoint(entityId));
+        console.log(response.data);
         setFormData(response.data);
       } catch (error) {
         console.error("Error fetching entity:", error);
@@ -80,6 +81,7 @@ export const EntityView: React.FC<EntityViewProps> = ({
                 key={field.id}
                 labelName={field.label}
                 name={field.id}
+                type={field.type}
                 value={formData[field.id]}
                 onChange={onChange}
               />
@@ -100,7 +102,7 @@ export const EntityView: React.FC<EntityViewProps> = ({
         </>
       ) : (
         <>
-          <div className="grid grid-cols-2 gap-4 p-4 bg-white rounded-lg">
+          <div className="flex flex-col gap-4 p-4 bg-white rounded-lg">
             {entityFormFields.map((field) => (
               <ModelFieldDisplay
                 key={field.id}

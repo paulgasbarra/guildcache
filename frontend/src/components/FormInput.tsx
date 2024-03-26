@@ -19,6 +19,8 @@ export const FormInput: React.FC<FormInputProps> = ({
   handleChange,
   options,
 }) => {
+  if (type === "association") return null;
+
   if (type !== "select") {
     return (
       <div>

@@ -156,8 +156,8 @@ export const StudentView = () => {
               onChange={onChange}
             />
             <ModelFieldInput
-              labelName="cohort"
-              name="Cohort"
+              labelName="Cohort"
+              name="cohort"
               value={formData.class_date}
               onChange={onChange}
               type="select"
