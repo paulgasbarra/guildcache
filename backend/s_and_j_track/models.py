@@ -24,6 +24,7 @@ class Donor(models.Model):
     website = models.URLField()
     instagram = models.URLField()
     tiktok = models.URLField()
+    notes = models.TextField()
 
     def __str__(self):
         return self.name
@@ -51,6 +52,7 @@ class Student(models.Model):
     class_number = models.IntegerField()
     class_date = models.DateField()
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, related_name='students')
+    notes = models.TextField()
 
     def __str__(self):
         return self.name
