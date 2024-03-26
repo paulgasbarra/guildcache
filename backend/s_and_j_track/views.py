@@ -1,6 +1,6 @@
 from rest_framework import viewsets, generics
-from .serializers import StudentSerializer, InstructorSerializer, EmployerSerializer, ApplicationSerializer, DonorSerializer
-from .models import Student, Instructor, Employer, Application, Donor
+from .serializers import StudentSerializer, InstructorSerializer, EmployerSerializer, ApplicationSerializer, DonorSerializer, CohortSerializer
+from .models import Student, Instructor, Employer, Application, Donor, Cohort
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -10,6 +10,20 @@ import csv
 from django.apps import apps
 from django.db import transaction
 
+@permission_classes([IsAuthenticated])
+class CohortViewSet(viewsets.ModelViewSet): 
+    queryset = Cohort.objects.all()
+    serializer_class = CohortSerializer
+
+@permission_classes([IsAuthenticated])
+class CohortListCreateView(generics.ListCreateAPIView):
+    queryset = Cohort.objects.all()
+    serializer_class = CohortSerializer
+
+@permission_classes([IsAuthenticated])
+class CohortDeleteView(generics.DestroyAPIView):
+    queryset = Cohort.objects.all()
+    serializer_class = CohortSerializer
 
 @permission_classes([IsAuthenticated])
 class StudentViewSet(viewsets.ModelViewSet): 
@@ -100,3 +114,8 @@ def upload_employers(request):
 @permission_classes([IsAuthenticated])
 def upload_donors(request):
     return generic_csv_upload_wrapper(Donor, DonorSerializer, request)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def upload_cohorts(request):
+    return generic_csv_upload_wrapper(Cohort, CohortSerializer, request)

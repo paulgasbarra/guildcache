@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export const StudentView = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({} as any);
+  const [cohorts, setCohorts] = useState([] as any);
   const [modalOpen, setModalOpen] = useState(false);
   const studentId = window.location.pathname.split("/")[3];
 
@@ -22,8 +23,18 @@ export const StudentView = () => {
     }
   };
 
+  const fetchCohorts = async () => {
+    try {
+      const response = await axiosInstance.get(ENDPOINTS.COHORTS.LIST);
+      setCohorts(response.data);
+    } catch (error) {
+      console.error("Error fetching cohorts:", error);
+    }
+  };
+
   useEffect(() => {
     fetchStudent();
+    fetchCohorts();
   }, []);
 
   const toggleEditing = () => {
@@ -144,6 +155,14 @@ export const StudentView = () => {
               value={formData.class_date}
               onChange={onChange}
             />
+            <ModelFieldInput
+              labelName="cohort"
+              name="Cohort"
+              value={formData.class_date}
+              onChange={onChange}
+              type="select"
+              options={cohorts}
+            />
           </div>
           <button
             onClick={cancelEditing}
@@ -188,6 +207,10 @@ export const StudentView = () => {
               value={formData.class_number}
             />
             <ModelFieldDisplay name="Class Date" value={formData.class_date} />
+            <ModelFieldDisplay
+              name="Cohort"
+              value={formData.cohort ? formData.cohort : "None set"}
+            />
           </div>
           <button
             onClick={toggleEditing}

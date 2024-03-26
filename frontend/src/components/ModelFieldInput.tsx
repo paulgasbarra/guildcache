@@ -6,6 +6,7 @@ interface ModelFieldInputProps {
   value: any;
   type?: string | undefined;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  options?: { id: string | number; name: string }[];
 }
 
 export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
@@ -14,7 +15,31 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
   value,
   type,
   onChange,
+  options,
 }) => {
+  if (type === "select") {
+    return (
+      <div>
+        <label htmlFor={name} className="block text-gray-700 font-medium">
+          {name}
+        </label>
+        <select
+          id={value}
+          name={name}
+          className="mt-1 p-2 border rounded-md w-full"
+          onChange={onChange}
+        >
+          <option value="">Select {name}</option>
+          {options &&
+            options.map((option) => (
+              <option key={option.name} value={option.id}>
+                {option.name}
+              </option>
+            ))}
+        </select>
+      </div>
+    );
+  }
   return (
     <div className="flex items-center space-x-2">
       <label htmlFor={name} className="text-blue-700 font-medium">

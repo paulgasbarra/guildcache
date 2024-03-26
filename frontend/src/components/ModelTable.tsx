@@ -28,16 +28,16 @@ const ModelTable: React.FC<TableProps> = ({
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-300">
-        {modelList.map((instance) => (
+        {modelList.map((instance, index) => (
           <tr key={instance.id} className="hover:bg-gray-100">
             <td className="px-6 py-4 whitespace-nowrap">
               <Link to={`${instance.id}`} className="block hover:underline">
-                {instance.name}
+                {instance[headers[0]]}
               </Link>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               <Link to={`${instance.id}`} className="block hover:underline">
-                {instance.email}
+                {instance[headers[1]]}
               </Link>
             </td>
             <td className="px-6 py-4 whitespace-nowrap">

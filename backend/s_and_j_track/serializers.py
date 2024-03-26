@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Student, Instructor, Employer, Application, Donor
+from .models import Student, Instructor, Employer, Application, Donor, Cohort
 
 class StudentSerializer(serializers.ModelSerializer): 
     class Meta: 
@@ -25,3 +25,8 @@ class DonorSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Donor
         fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'website', 'instagram', 'tiktok']
+
+class CohortSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cohort
+        fields = ['id', 'name', 'start_date', 'end_date', 'instructors', 'students']

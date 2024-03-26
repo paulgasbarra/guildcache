@@ -7,4 +7,5 @@ export interface InputObjectType {
   label: string;
   error: [];
   value: string | number | boolean;
+  options?: any;
 }

@@ -8,6 +8,7 @@ interface FormInputProps {
   error: string[];
   handleChange: any;
   value?: any;
+  options?: { value: string; label: string }[];
 }
 
 export const FormInput: React.FC<FormInputProps> = ({
@@ -17,25 +18,56 @@ export const FormInput: React.FC<FormInputProps> = ({
   type,
   error,
   handleChange,
+  value,
+  options,
 }) => {
+  if (type !== "select") {
+    return (
+      <div>
+        <label htmlFor={id} className="block text-gray-700 font-medium">
+          {label}
+        </label>
+        <input
+          id={id}
+          name={id}
+          type={type}
+          placeholder={placeholder}
+          className="mt-1 p-2 border rounded-md"
+          onChange={handleChange}
+        />
+        {error.map((e: string, index: number) => (
+          <div key={index} className="text-red-600">
+            {e}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div>
       <label htmlFor={id} className="block text-gray-700 font-medium">
         {label}
       </label>
-      <input
+      <select
         id={id}
         name={id}
-        type={type}
-        placeholder={placeholder}
-        className="mt-1 p-2 border rounded-md"
+        className="mt-1 p-2 border rounded-md w-full"
         onChange={handleChange}
-      />
-      <div className="text-red-600">
-        {error.map((e: string) => (
-          <div>{e}</div>
-        ))}
-      </div>
+      >
+        <option value="">Select {label}</option>
+        {options &&
+          options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+      </select>
+      {error.map((e: string, index: number) => (
+        <div key={index} className="text-red-600">
+          {e}
+        </div>
+      ))}
     </div>
   );
 };

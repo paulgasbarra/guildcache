@@ -40,6 +40,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
     const { name, value, type, checked } = event.target;
     const index = formData.findIndex((d) => d.id === name);
     formData[index].value = type === "checked" ? checked : value;
+    console.log(value);
     setFormData(formData);
   };
 
@@ -53,29 +54,32 @@ const ModelForm: React.FC<ModelFormProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 m-6 float-left">
-      <div>
-        {formData.map((input) => (
-          <FormInput
-            key={input.id}
-            id={input.id}
-            placeholder={input.placeholder}
-            type={input.type}
-            label={input.label}
-            error={input.error}
-            handleChange={handleChange}
-          />
-        ))}
-      </div>
-      <div>
-        <button
-          type="submit"
-          className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-60 w-full rounded-md p-2"
-        >
-          Submit
-        </button>
-      </div>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="space-y-6 m-6 float-left">
+        <div>
+          {formData.map((input) => (
+            <FormInput
+              key={input.id}
+              id={input.id}
+              placeholder={input.placeholder}
+              type={input.type}
+              label={input.label}
+              error={input.error}
+              handleChange={handleChange}
+              options={input.options}
+            />
+          ))}
+        </div>
+        <div>
+          <button
+            type="submit"
+            className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-60 w-full rounded-md p-2"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
