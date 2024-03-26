@@ -4,7 +4,7 @@ from .models import Student, Instructor, Employer, Application, Donor, Cohort
 class StudentSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Student
-        fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'resume_link', 'lca_cert', 'epa_608_cert', 's_j_cert', 'class_site', 'class_number', 'class_date']
+        fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'resume_link', 'lca_cert', 'epa_608_cert', 's_j_cert', 'class_site', 'class_number', 'class_date', "cohort"]
 
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,4 +29,4 @@ class DonorSerializer(serializers.ModelSerializer):
 class CohortSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cohort
-        fields = ['id', 'name', 'start_date', 'end_date', 'instructors', 'students']
+        fields = ['id', 'name', 'start_date', 'end_date', 'location']

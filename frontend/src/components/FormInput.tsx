@@ -7,7 +7,6 @@ interface FormInputProps {
   type: string;
   error: string[];
   handleChange: any;
-  value?: any;
   options?: { value: string; label: string }[];
 }
 
@@ -18,7 +17,6 @@ export const FormInput: React.FC<FormInputProps> = ({
   type,
   error,
   handleChange,
-  value,
   options,
 }) => {
   if (type !== "select") {

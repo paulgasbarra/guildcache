@@ -28,7 +28,7 @@ const ModelTable: React.FC<TableProps> = ({
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-300">
-        {modelList.map((instance, index) => (
+        {modelList.map((instance) => (
           <tr key={instance.id} className="hover:bg-gray-100">
             <td className="px-6 py-4 whitespace-nowrap">
               <Link to={`${instance.id}`} className="block hover:underline">

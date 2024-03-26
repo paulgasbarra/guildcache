@@ -5,7 +5,7 @@ interface ModelFieldInputProps {
   labelName: string;
   value: any;
   type?: string | undefined;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: any) => void;
   options?: { id: string | number; name: string }[];
 }
 
