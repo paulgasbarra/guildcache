@@ -7,14 +7,14 @@ const Navbar: React.FC = () => {
   const { isAuthenticated } = useAuth();
   return (
     <nav className="bg-white shadow-lg">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="w-full mx-auto px-4">
         <div className="flex justify-between">
           <div className="flex space-x-7">
             <div>
               <a href="#" className="flex items-center py-4 px-2">
                 <img src={logo} alt="Logo" className="h-8 w-8 mr-2" />
                 <span className="font-semibold text-gray-500 text-lg">
-                  guildcache
+                  GuildCache
                 </span>
               </a>
             </div>

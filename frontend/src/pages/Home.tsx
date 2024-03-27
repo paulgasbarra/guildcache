@@ -8,11 +8,11 @@ export const Home: React.FC = () => (
           Welcome to GuildCache
         </h1>
         <p className="text-gray-600">
-          Discover a world of possibilities and connect with like-minded
-          individuals.
+          Manage students, instructors, and donors in a single, simple,
+          relationship management system.
         </p>
       </div>
-      <div className="w-1/2 text-right">poop</div>
+      <div className="w-1/2 text-right"></div>
     </div>
   </>
 );
