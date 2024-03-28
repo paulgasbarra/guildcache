@@ -27,7 +27,7 @@ export const InstructorCreation: React.FC = () => {
       const updatedFormFields: InputObjectType[] = [
         ...instructorFormFields,
         {
-          id: "cohort",
+          id: "cohorts",
           placeholder: "Select Cohort",
           type: "select",
           multiple: true,

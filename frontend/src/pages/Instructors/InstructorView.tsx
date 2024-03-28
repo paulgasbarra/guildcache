@@ -19,6 +19,7 @@ export const InstructorView = () => {
       const response = await axiosInstance.get(
         ENDPOINTS.INSTRUCTORS.DETAILS(instructorId)
       );
+      console.log(response.data);
       setFormData(response.data);
     } catch (error) {
       console.error("Error fetching instructor:", error);
@@ -60,6 +61,7 @@ export const InstructorView = () => {
   };
 
   const submitEdit = async () => {
+    console.log("submitting edit", formData);
     try {
       await axiosInstance.put(
         ENDPOINTS.INSTRUCTORS.DETAILS(instructorId),
@@ -144,7 +146,7 @@ export const InstructorView = () => {
             Edit
           </button>
           <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-            Student Updated
+            Instructor Updated
           </Modal>
         </>
       )}

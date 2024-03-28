@@ -34,6 +34,7 @@ class Cohort(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     location = models.CharField(max_length=200)
+    instructors = models.ManyToManyField('Instructor', related_name='cohorts')
 
     def __str__(self):
         return self.name
@@ -67,7 +68,6 @@ class Instructor(models.Model):
     instagram = models.URLField()
     tiktok = models.URLField()
     salary = models.DecimalField(max_digits=9, decimal_places=2)
-    cohorts = models.ManyToManyField('Cohort', related_name='instructors')
 
     def __str__(self):
         return self.name
