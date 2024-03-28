@@ -50,6 +50,22 @@ export const InstructorFormFields: InputObjectType[] = [
     value: "",
   },
   {
+    id: "linkedin",
+    placeholder: "LinkedIn",
+    type: "text",
+    label: "LinkedIn",
+    error: [],
+    value: "",
+  },
+  {
+    id: "tiktok",
+    placeholder: "TikTok",
+    type: "text",
+    label: "TikTok",
+    error: [],
+    value: "",
+  },
+  {
     id: "salary",
     placeholder: "Salary",
     type: "number",

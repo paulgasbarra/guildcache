@@ -40,7 +40,6 @@ const ModelForm: React.FC<ModelFormProps> = ({
     const { name, value, type, checked } = event.target;
     const index = formData.findIndex((d) => d.id === name);
     formData[index].value = type === "checked" ? checked : value;
-    console.log(value);
     setFormData(formData);
   };
 
@@ -63,6 +62,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
               id={input.id}
               placeholder={input.placeholder}
               type={input.type}
+              multiple={input.multiple}
               label={input.label}
               error={input.error}
               handleChange={handleChange}

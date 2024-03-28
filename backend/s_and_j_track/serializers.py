@@ -7,9 +7,15 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'resume_link', 'lca_cert', 'epa_608_cert', 's_j_cert', 'class_site', 'class_number', 'class_date', "cohort"]
 
 class InstructorSerializer(serializers.ModelSerializer):
+    cohorts = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
+      
     class Meta:
         model = Instructor
-        fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'website', 'instagram', 'tiktok', 'salary']
+        fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'website', 'instagram', 'tiktok', 'salary', "cohorts"]
 
 class EmployerSerializer(serializers.ModelSerializer): 
     class Meta: 
@@ -28,7 +34,12 @@ class DonorSerializer(serializers.ModelSerializer):
 
 class CohortSerializer(serializers.ModelSerializer):
     students = StudentSerializer(many=True, read_only=True)
+    instructors = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field='name'
+    )
 
     class Meta:
         model = Cohort
-        fields = ['id', 'name', 'start_date', 'end_date', 'location', 'students']
+        fields = ['id', 'name', 'start_date', 'end_date', 'location', 'students', 'instructors']

@@ -42,4 +42,13 @@ export const CohortFormFields: InputObjectType[] = [
     value: [],
     options: [],
   },
+  {
+    id: "instructors",
+    placeholder: "Instructors",
+    type: "association",
+    label: "Instructors",
+    error: [],
+    value: [],
+    options: [],
+  },
 ];

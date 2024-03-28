@@ -1,73 +1,45 @@
 import React from "react";
+import TextInput from "./TextInput";
+import SelectInput from "./SelectInput";
+import CheckboxGroupInput from "./CheckboxGroupInput";
 
 interface FormInputProps {
   id: string;
   label: string;
   placeholder: string | undefined;
   type: string;
+  multiple?: boolean;
   error: string[];
   handleChange: any;
   options?: { value: string; label: string }[];
 }
 
-export const FormInput: React.FC<FormInputProps> = ({
-  id,
-  label,
-  placeholder,
-  type,
-  error,
-  handleChange,
-  options,
-}) => {
-  if (type === "association") return null;
+export const FormInput: React.FC<FormInputProps> = (props) => {
+  const { id, label, error, handleChange, type, multiple, options } = props;
 
-  if (type !== "select") {
+  if (type === "select" && !multiple && options) {
     return (
-      <div>
-        <label htmlFor={id} className="block text-gray-700 font-medium">
-          {label}
-        </label>
-        <input
-          id={id}
-          name={id}
-          type={type}
-          placeholder={placeholder}
-          className="mt-1 p-2 border rounded-md"
-          onChange={handleChange}
-        />
-        {error.map((e: string, index: number) => (
-          <div key={index} className="text-red-600">
-            {e}
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div>
-      <label htmlFor={id} className="block text-gray-700 font-medium">
-        {label}
-      </label>
-      <select
+      <SelectInput
         id={id}
-        name={id}
-        className="mt-1 p-2 border rounded-md w-full"
-        onChange={handleChange}
-      >
-        <option value="">Select {label}</option>
-        {options &&
-          options.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-      </select>
-      {error.map((e: string, index: number) => (
-        <div key={index} className="text-red-600">
-          {e}
-        </div>
-      ))}
-    </div>
-  );
+        label={label}
+        error={error}
+        handleChange={handleChange}
+        options={options}
+      />
+    );
+  } else if (type === "select" && multiple && options) {
+    return (
+      <CheckboxGroupInput
+        id={id}
+        label={label}
+        error={error}
+        handleChange={handleChange}
+        options={options}
+      />
+    );
+  } else if (type === "association") {
+    return null;
+  } else {
+    return <TextInput {...props} />;
+  }
 };

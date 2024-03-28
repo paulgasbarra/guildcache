@@ -8,4 +8,5 @@ export interface InputObjectType {
   error: [];
   value: string | number | boolean | object[];
   options?: any;
+  multiple?: boolean;
 }

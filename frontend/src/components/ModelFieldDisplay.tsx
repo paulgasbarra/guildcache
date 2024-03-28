@@ -13,6 +13,7 @@ export const ModelFieldDisplay: React.FC<ModelFieldDisplayProps> = ({
       <div>
         <label className="text-blue-700 font-medium mr-2">{name}:</label>
         <ul>
+          {value.length === 0 && <li>No {name}</li>}
           {value.map((v: any, i: number) => (
             <li key={i}>{v.name}</li>
           ))}

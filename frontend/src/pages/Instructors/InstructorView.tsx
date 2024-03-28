@@ -5,12 +5,14 @@ import { ModelFieldInput } from "../../components/ModelFieldInput";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 import { InstructorFormFields } from "./InstructorFormFields";
+import CheckboxGroupInput from "../../components/CheckboxGroupInput";
 
 export const InstructorView = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({} as any);
   const [modalOpen, setModalOpen] = useState(false);
   const instructorId = window.location.pathname.split("/")[3];
+  const [cohorts, setCohorts] = useState([] as any);
 
   const fetchInstructor = async () => {
     try {
@@ -23,8 +25,18 @@ export const InstructorView = () => {
     }
   };
 
+  const fetchCohorts = async () => {
+    try {
+      const response = await axiosInstance.get(ENDPOINTS.COHORTS.LIST);
+      setCohorts(response.data);
+    } catch (error) {
+      console.error("Error fetching cohorts:", error);
+    }
+  };
+
   useEffect(() => {
     fetchInstructor();
+    fetchCohorts();
   }, []);
 
   const toggleEditing = () => {
@@ -83,6 +95,19 @@ export const InstructorView = () => {
                   onChange={onChange}
                 />
               ))}
+            {formData.cohorts && (
+              // sync the instructor's current cohorts with the checkboxes
+              <CheckboxGroupInput
+                id="cohorts"
+                label="Cohorts"
+                error={[]}
+                handleChange={onChange}
+                options={cohorts.map((cohort: any) => ({
+                  value: cohort.id,
+                  label: cohort.name,
+                }))}
+              />
+            )}
           </div>
           <button
             onClick={cancelEditing}
@@ -108,6 +133,9 @@ export const InstructorView = () => {
                   value={formData[field.id]}
                 />
               ))}
+            {formData.cohorts && (
+              <ModelFieldDisplay name="Cohorts" value={formData.cohorts} />
+            )}
           </div>
           <button
             onClick={toggleEditing}
