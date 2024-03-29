@@ -3,9 +3,10 @@ import { EntityCreationForm } from "../../components/EntityCreationForm";
 import { InstructorFormFields as initialInstructorFormFields } from "./InstructorFormFields";
 import { axiosInstance, ENDPOINTS } from "../../api";
 import { InputObjectType } from "../../types/InputObjectType";
+import { Cohort } from "../../types/Cohort";
 
 export const InstructorCreation: React.FC = () => {
-  const [cohorts, setCohorts] = useState([] as any);
+  const [cohorts, setCohorts] = useState<Cohort[]>([]);
   const [instructorFormFields, setinstructorFormFields] = useState<
     InputObjectType[]
   >(initialInstructorFormFields);
@@ -34,7 +35,7 @@ export const InstructorCreation: React.FC = () => {
           label: "Cohort",
           error: [],
           value: "",
-          options: cohorts.map((cohort: any) => ({
+          options: cohorts.map((cohort: Cohort) => ({
             value: cohort.id,
             label: cohort.name,
           })),

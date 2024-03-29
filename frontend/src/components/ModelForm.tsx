@@ -45,7 +45,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
-    console.log("submitting form", formData);
+
     const submitData = formData.reduce((acc, item) => {
       acc[item.id] = item.value;
       return acc;
