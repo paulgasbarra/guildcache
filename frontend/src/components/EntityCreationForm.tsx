@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import Modal from "./Modal";
 import { AxiosError } from "axios";
 import { InputObjectType } from "../types/InputObjectType";
+import { FormField } from "../types/FormField";
 
 interface EntityCreationFormProps {
   formTitle: string;
   postEndpoint: string;
-  formFields: {};
+  formFields: FormField[];
   backLink: string;
   successMessage: string;
 }

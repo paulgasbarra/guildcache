@@ -29,7 +29,7 @@ const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
     } as unknown as React.ChangeEvent<HTMLInputElement>;
 
     handleChange(syntheticEvent);
-  }, [selected]);
+  }, [selected, handleChange, id]);
 
   const onCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value, 10);
