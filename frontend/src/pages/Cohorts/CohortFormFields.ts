@@ -1,6 +1,6 @@
-import { InputObjectType } from "../../types/InputObjectType";
+import { FormField } from "../../types/FormField";
 
-export const CohortFormFields: InputObjectType[] = [
+export const CohortFormFields: FormField[] = [
   {
     id: "name",
     placeholder: "Name",
