@@ -4,6 +4,6 @@ export interface FormField {
   type: string;
   label: string;
   error: [];
-  value: string | number | string[] | number[];
+  value: string | number | boolean | object[];
   options?: { value: string; label: string }[];
 }
