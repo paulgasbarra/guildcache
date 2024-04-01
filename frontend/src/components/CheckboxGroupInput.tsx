@@ -5,7 +5,7 @@ interface CheckboxGroupInputProps {
   label: string;
   error: string[];
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; selected: boolean }[];
 }
 
 const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
@@ -29,7 +29,7 @@ const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
     } as unknown as React.ChangeEvent<HTMLInputElement>;
 
     handleChange(syntheticEvent);
-  }, [selected, handleChange, id]);
+  }, [selected]);
 
   const onCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(event.target.value, 10);
@@ -52,7 +52,7 @@ const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
               className="mr-2 leading-tight"
               type="checkbox"
               value={option.value}
-              checked={selected.includes(parseInt(option.value))}
+              checked={option.selected}
               onChange={onCheckboxChange}
             />
             {option.label}

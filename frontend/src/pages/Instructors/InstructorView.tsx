@@ -6,6 +6,7 @@ import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 import { InstructorFormFields } from "./InstructorFormFields";
 import CheckboxGroupInput from "../../components/CheckboxGroupInput";
+import { Cohort } from "../../types/Cohort";
 
 export const InstructorView = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -19,8 +20,16 @@ export const InstructorView = () => {
       const response = await axiosInstance.get(
         ENDPOINTS.INSTRUCTORS.DETAILS(instructorId)
       );
-      console.log(response.data);
-      setFormData(response.data);
+
+      const fetchedCohorts = await fetchCohorts();
+      setCohorts(fetchedCohorts);
+      const enrichedFormData = {
+        ...response.data,
+        cohorts: response.data.cohorts?.map((id: number) =>
+          fetchedCohorts.find((cohort: Cohort) => cohort.id === id)
+        ),
+      };
+      setFormData(enrichedFormData);
     } catch (error) {
       console.error("Error fetching instructor:", error);
     }
@@ -29,7 +38,7 @@ export const InstructorView = () => {
   const fetchCohorts = async () => {
     try {
       const response = await axiosInstance.get(ENDPOINTS.COHORTS.LIST);
-      setCohorts(response.data);
+      return response.data;
     } catch (error) {
       console.error("Error fetching cohorts:", error);
     }
@@ -37,7 +46,6 @@ export const InstructorView = () => {
 
   useEffect(() => {
     fetchInstructor();
-    fetchCohorts();
   }, []);
 
   const toggleEditing = () => {
@@ -107,6 +115,9 @@ export const InstructorView = () => {
                 options={cohorts.map((cohort: any) => ({
                   value: cohort.id,
                   label: cohort.name,
+                  selected:
+                    formData.cohorts.find((c: Cohort) => c.id === cohort.id) !==
+                    undefined,
                 }))}
               />
             )}
