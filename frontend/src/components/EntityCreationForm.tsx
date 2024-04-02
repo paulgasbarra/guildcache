@@ -33,7 +33,6 @@ export const EntityCreationForm: React.FC<EntityCreationFormProps> = ({
       setModalOpen(true);
       setModalText(successMessage);
       setErrorMessage("");
-      // Handle success - maybe redirect or clear the form
     } catch (error: any | AxiosError) {
       console.error(`Error creating entity:`, error);
       setErrorMessage(error.request?.response || "Something went wrong.");

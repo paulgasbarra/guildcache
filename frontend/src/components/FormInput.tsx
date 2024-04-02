@@ -11,7 +11,7 @@ interface FormInputProps {
   multiple?: boolean;
   error: string[];
   handleChange: any;
-  options?: { value: string; label: string }[];
+  options?: { value: string; label: string; selected?: boolean }[];
 }
 
 export const FormInput: React.FC<FormInputProps> = (props) => {

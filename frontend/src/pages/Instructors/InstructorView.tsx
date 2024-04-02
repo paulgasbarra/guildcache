@@ -20,16 +20,7 @@ export const InstructorView = () => {
       const response = await axiosInstance.get(
         ENDPOINTS.INSTRUCTORS.DETAILS(instructorId)
       );
-
-      const fetchedCohorts = await fetchCohorts();
-      setCohorts(fetchedCohorts);
-      const enrichedFormData = {
-        ...response.data,
-        cohorts: response.data.cohorts?.map((id: number) =>
-          fetchedCohorts.find((cohort: Cohort) => cohort.id === id)
-        ),
-      };
-      setFormData(enrichedFormData);
+      setFormData(response.data);
     } catch (error) {
       console.error("Error fetching instructor:", error);
     }
@@ -38,7 +29,7 @@ export const InstructorView = () => {
   const fetchCohorts = async () => {
     try {
       const response = await axiosInstance.get(ENDPOINTS.COHORTS.LIST);
-      return response.data;
+      setCohorts(response.data);
     } catch (error) {
       console.error("Error fetching cohorts:", error);
     }
@@ -46,6 +37,7 @@ export const InstructorView = () => {
 
   useEffect(() => {
     fetchInstructor();
+    fetchCohorts();
   }, []);
 
   const toggleEditing = () => {
@@ -69,7 +61,6 @@ export const InstructorView = () => {
   };
 
   const submitEdit = async () => {
-    console.log("submitting edit", formData);
     try {
       await axiosInstance.put(
         ENDPOINTS.INSTRUCTORS.DETAILS(instructorId),
@@ -83,7 +74,6 @@ export const InstructorView = () => {
     }
   };
 
-  // use a map to render the fields, may require a model update to include a field type and a field label
   return (
     <div className="flex flex-col">
       <Link
@@ -106,18 +96,15 @@ export const InstructorView = () => {
                 />
               ))}
             {formData.cohorts && (
-              // sync the instructor's current cohorts with the checkboxes
               <CheckboxGroupInput
                 id="cohorts"
                 label="Cohorts"
                 error={[]}
                 handleChange={onChange}
-                options={cohorts.map((cohort: any) => ({
+                options={cohorts.map((cohort: Cohort) => ({
                   value: cohort.id,
                   label: cohort.name,
-                  selected:
-                    formData.cohorts.find((c: Cohort) => c.id === cohort.id) !==
-                    undefined,
+                  selected: formData.cohorts.includes(cohort.id),
                 }))}
               />
             )}
@@ -147,7 +134,15 @@ export const InstructorView = () => {
                 />
               ))}
             {formData.cohorts && (
-              <ModelFieldDisplay name="Cohorts" value={formData.cohorts} />
+              <ModelFieldDisplay
+                name="Cohorts"
+                value={formData.cohorts.map((c: number) => {
+                  const cohort = cohorts.find(
+                    (cohort: Cohort) => cohort.id === c
+                  );
+                  return { name: cohort?.name, value: cohort?.id };
+                })}
+              />
             )}
           </div>
           <button
