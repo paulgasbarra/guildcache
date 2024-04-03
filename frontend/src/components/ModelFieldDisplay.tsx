@@ -1,7 +1,7 @@
 import React from "react";
 type ModelFieldDisplayProps = {
   name: string;
-  value: any;
+  value: string | number | boolean | any[] | undefined;
 };
 
 export const ModelFieldDisplay: React.FC<ModelFieldDisplayProps> = ({
@@ -18,6 +18,14 @@ export const ModelFieldDisplay: React.FC<ModelFieldDisplayProps> = ({
             <li key={i}>{v.name}</li>
           ))}
         </ul>
+      </div>
+    );
+  }
+  if (typeof value === "boolean") {
+    return (
+      <div className="flex items-center">
+        <label className="text-blue-700 font-medium mr-2">{name}:</label>
+        <span>{value ? "Yes" : "No"}</span>
       </div>
     );
   }

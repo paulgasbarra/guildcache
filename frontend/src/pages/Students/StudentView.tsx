@@ -5,6 +5,7 @@ import { ModelFieldInput } from "../../components/ModelFieldInput";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 import { Cohort } from "../../types/Cohort";
+import { StudentFormFields } from "./StudentFormFields";
 
 export const StudentView = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -85,84 +86,20 @@ export const StudentView = () => {
       {isEditing ? (
         <>
           <div className="grid grid-cols-2 gap-4 p-4 bg-white rounded-lg">
-            <ModelFieldInput
-              labelName="Name"
-              name="name"
-              value={formData.name}
-              onChange={onChange}
-            />
-            <ModelFieldInput
-              labelName="Address"
-              name="address"
-              value={formData.address}
-              onChange={onChange}
-            />
-            <ModelFieldInput
-              labelName="Phone"
-              name="phone"
-              value={formData.phone}
-              onChange={onChange}
-            />
-            <ModelFieldInput
-              labelName="Email"
-              name="email"
-              value={formData.email}
-              onChange={onChange}
-            />
-            <ModelFieldInput
-              labelName="Linkedin"
-              name="linkedIn"
-              value={formData.linkedin}
-              onChange={onChange}
-            />
-            <ModelFieldInput
-              labelName="Resume Link"
-              name="resume_link"
-              value={formData.resume_link}
-              onChange={onChange}
-            />
-            <ModelFieldInput
-              labelName="LCA Certification"
-              name="lca_cert"
-              value={formData.lca_cert}
-              onChange={onChange}
-              type="checkbox"
-            />
-            <ModelFieldInput
-              labelName="EPA 608 Certification"
-              name="epa_608_cert"
-              value={formData.epa_608_cert}
-              onChange={onChange}
-              type="checkbox"
-            />
-            <ModelFieldInput
-              labelName="S&J Certification"
-              name="s_j_cert"
-              value={formData.s_j_cert}
-              onChange={onChange}
-              type="checkbox"
-            />
-            <ModelFieldInput
-              labelName="Class Site"
-              name="class_site"
-              value={formData.class_site}
-              onChange={onChange}
-            />
-            <ModelFieldInput
-              labelName="Class Number"
-              name="class_number"
-              value={formData.class_number}
-              onChange={onChange}
-            />
-            <ModelFieldInput
-              labelName="class_date"
-              name="Class Date"
-              value={formData.class_date}
-              onChange={onChange}
-            />
+            {StudentFormFields &&
+              StudentFormFields.map((field) => (
+                <ModelFieldInput
+                  key={field.id}
+                  labelName={field.label}
+                  name={field.id}
+                  type={field.type}
+                  value={formData[field.id]}
+                  onChange={onChange}
+                />
+              ))}
             <ModelFieldInput
               labelName="Cohort"
-              name="cohort"
+              name="Cohort"
               value={formData.class_date}
               onChange={onChange}
               type="select"
@@ -185,33 +122,15 @@ export const StudentView = () => {
       ) : (
         <>
           <div className="grid grid-cols-2 gap-4 p-4 bg-white rounded-lg">
-            <ModelFieldDisplay name="Name" value={formData.name} />
-            <ModelFieldDisplay name="Address" value={formData.address} />
-            <ModelFieldDisplay name="Phone" value={formData.phone} />
-            <ModelFieldDisplay name="Email" value={formData.email} />
-            <ModelFieldDisplay name="LinkedIn" value={formData.linkedin} />
-            <ModelFieldDisplay
-              name="Resume Link"
-              value={formData.resume_link}
-            />
-            <ModelFieldDisplay
-              name="LCA Certification"
-              value={formData.lca_cert ? "Yes" : "No"}
-            />
-            <ModelFieldDisplay
-              name="EPA 608 Certification"
-              value={formData.epa_608_cert ? "Yes" : "No"}
-            />
-            <ModelFieldDisplay
-              name="S&J Certification"
-              value={formData.s_j_cert ? "Yes" : "No"}
-            />
-            <ModelFieldDisplay name="Class Site" value={formData.class_site} />
-            <ModelFieldDisplay
-              name="Class Number"
-              value={formData.class_number}
-            />
-            <ModelFieldDisplay name="Class Date" value={formData.class_date} />
+            {" "}
+            {StudentFormFields &&
+              StudentFormFields.map((field) => (
+                <ModelFieldDisplay
+                  key={field.id}
+                  name={field.label}
+                  value={formData[field.id]}
+                />
+              ))}
             <ModelFieldDisplay
               name="Cohort"
               value={
