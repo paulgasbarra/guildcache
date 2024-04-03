@@ -4,6 +4,7 @@ import { axiosInstance, ENDPOINTS } from "../../api";
 import { ModelFieldInput } from "../../components/ModelFieldInput";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
+import { Cohort } from "../../types/Cohort";
 
 export const StudentView = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -55,6 +56,10 @@ export const StudentView = () => {
   const cancelEditing = () => {
     setIsEditing(false);
     fetchStudent();
+  };
+
+  const getCohort = (id: number) => {
+    return cohorts.find((cohort: Cohort) => cohort.id === id).name;
   };
 
   const submitEdit = async () => {
@@ -209,7 +214,11 @@ export const StudentView = () => {
             <ModelFieldDisplay name="Class Date" value={formData.class_date} />
             <ModelFieldDisplay
               name="Cohort"
-              value={formData.cohort ? formData.cohort : "None set"}
+              value={
+                formData.cohort && cohorts.length > 0
+                  ? getCohort(formData.cohort)
+                  : "None set"
+              }
             />
           </div>
           <button
