@@ -17,11 +17,11 @@ from .views import (StudentViewSet,
 
 router = DefaultRouter()
 router.register('students', StudentViewSet, basename='students')
-router.register('employers', EmployerViewSet)
+router.register('employers', EmployerViewSet, basename='employers')
 router.register('applications', ApplicationViewSet)
-router.register('donors', DonorViewSet)
-router.register('instructors', InstructorViewSet)
-router.register('cohorts', CohortViewSet)
+router.register('donors', DonorViewSet, basename='donors')
+router.register('instructors', InstructorViewSet, basename='instructors')
+router.register('cohorts', CohortViewSet, basename='cohorts')
 
 urlpatterns = [
     path('', include(router.urls)),

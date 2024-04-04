@@ -30,6 +30,7 @@ class Employer(models.Model):
     job_listings = models.URLField()
     company_size = models.IntegerField()
     speciality = models.CharField(max_length=200)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='employers')
 
     def __str__(self):
         return self.name
@@ -44,6 +45,8 @@ class Donor(models.Model):
     instagram = models.URLField()
     tiktok = models.URLField()
     notes = models.TextField()
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='donors')
+
 
     def __str__(self):
         return self.name
@@ -54,6 +57,7 @@ class Cohort(models.Model):
     end_date = models.DateField()
     location = models.CharField(max_length=200)
     instructors = models.ManyToManyField('Instructor', related_name='cohorts')
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='cohorts')
 
     def __str__(self):
         return self.name
@@ -74,8 +78,6 @@ class Student(models.Model):
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, related_name='students')
     notes = models.TextField()
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='students')
-   
-   
 
     def __str__(self):
         return self.name
@@ -90,6 +92,7 @@ class Instructor(models.Model):
     instagram = models.URLField()
     tiktok = models.URLField()
     salary = models.DecimalField(max_digits=9, decimal_places=2)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='instructors')
 
     def __str__(self):
         return self.name

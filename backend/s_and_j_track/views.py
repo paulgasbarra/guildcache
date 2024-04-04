@@ -12,8 +12,10 @@ from django.db import transaction
 
 @permission_classes([IsAuthenticated])
 class CohortViewSet(viewsets.ModelViewSet): 
-    queryset = Cohort.objects.all()
     serializer_class = CohortSerializer
+    def get_queryset(self):
+        user_org = self.request.user.userprofile.organization
+        return Cohort.objects.filter(organization=user_org)
 
 @permission_classes([IsAuthenticated])
 class CohortListCreateView(generics.ListCreateAPIView):
@@ -22,10 +24,8 @@ class CohortListCreateView(generics.ListCreateAPIView):
 
 @permission_classes([IsAuthenticated])
 class CohortDeleteView(generics.DestroyAPIView):
+    queryset = Cohort.objects.all()
     serializer_class = CohortSerializer
-    def get_queryset(self):
-        user_org = self.request.user.userprofile.organization
-        return Cohort.objects.filter(organization=user_org)
 
 @permission_classes([IsAuthenticated])
 class StudentViewSet(viewsets.ModelViewSet): 
@@ -46,20 +46,26 @@ class StudentDeleteView(generics.DestroyAPIView):
 
 @permission_classes([IsAuthenticated])
 class InstructorViewSet(viewsets.ModelViewSet):
-    queryset = Instructor.objects.all()
     serializer_class = InstructorSerializer
+    def get_queryset(self):
+        user_org = self.request.user.userprofile.organization
+        return Instructor.objects.filter(organization=user_org)
 
 class EmployerViewSet(viewsets.ModelViewSet): 
-    queryset = Employer.objects.all()
     serializer_class = EmployerSerializer
+    def get_queryset(self):
+        user_org = self.request.user.userprofile.organization
+        return Employer.objects.filter(organization=user_org)
 
 class ApplicationViewSet(viewsets.ModelViewSet): 
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
 class DonorViewSet(viewsets.ModelViewSet):
-    queryset = Donor.objects.all()
     serializer_class = DonorSerializer
+    def get_queryset(self):
+        user_org = self.request.user.userprofile.organization
+        return Donor.objects.filter(organization=user_org)
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
