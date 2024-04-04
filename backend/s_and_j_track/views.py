@@ -22,13 +22,17 @@ class CohortListCreateView(generics.ListCreateAPIView):
 
 @permission_classes([IsAuthenticated])
 class CohortDeleteView(generics.DestroyAPIView):
-    queryset = Cohort.objects.all()
     serializer_class = CohortSerializer
+    def get_queryset(self):
+        user_org = self.request.user.userprofile.organization
+        return Cohort.objects.filter(organization=user_org)
 
 @permission_classes([IsAuthenticated])
 class StudentViewSet(viewsets.ModelViewSet): 
-    queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    def get_queryset(self):
+        user_org = self.request.user.userprofile.organization
+        return Student.objects.filter(organization=user_org)
 
 @permission_classes([IsAuthenticated])
 class StudentListCreateView(generics.ListCreateAPIView):

@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 class Organization(models.Model):
     name = models.CharField(max_length=200, unique=True)
@@ -10,6 +11,13 @@ class Organization(models.Model):
 
     def __str__(self):
         return self.name
+    
+class UserProfile(models.Model):  
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='users')
+
+    def __str__(self):
+        return self.user.username
 
 class Employer(models.Model):
     name = models.CharField(max_length=200)
