@@ -1,5 +1,16 @@
 from django.db import models
 
+class Organization(models.Model):
+    name = models.CharField(max_length=200, unique=True)
+    address = models.CharField(max_length=200)
+    phone = models.CharField(max_length=50)
+    email = models.EmailField()
+    linkedin = models.URLField()
+    website = models.URLField()
+
+    def __str__(self):
+        return self.name
+
 class Employer(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=200)
@@ -54,6 +65,9 @@ class Student(models.Model):
     class_date = models.DateField()
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, related_name='students')
     notes = models.TextField()
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='students')
+   
+   
 
     def __str__(self):
         return self.name
