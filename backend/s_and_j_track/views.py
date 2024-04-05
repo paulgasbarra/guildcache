@@ -1,5 +1,5 @@
 from rest_framework import viewsets, generics
-from .serializers import StudentSerializer, InstructorSerializer, EmployerSerializer, ApplicationSerializer, DonorSerializer, CohortSerializer
+from .serializers import StudentSerializer, InstructorSerializer, EmployerSerializer, ApplicationSerializer, DonorSerializer, CohortSerializer, UserProfileSerializer
 from .models import Student, Instructor, Employer, Application, Donor, Cohort
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
@@ -51,6 +51,7 @@ class InstructorViewSet(viewsets.ModelViewSet):
         user_org = self.request.user.userprofile.organization
         return Instructor.objects.filter(organization=user_org)
 
+@permission_classes([IsAuthenticated])
 class EmployerViewSet(viewsets.ModelViewSet): 
     serializer_class = EmployerSerializer
     def get_queryset(self):
@@ -61,6 +62,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     queryset = Application.objects.all()
     serializer_class = ApplicationSerializer
 
+@permission_classes([IsAuthenticated])
 class DonorViewSet(viewsets.ModelViewSet):
     serializer_class = DonorSerializer
     def get_queryset(self):
@@ -76,9 +78,13 @@ def login_view(request):
     user = authenticate(username=username, password=password)
     if user:
         token, created = Token.objects.get_or_create(user=user)
-        return Response({"token": token.key}, status=200)
+        user_name = user.first_name + " " + user.last_name
+        user_organization = user.userprofile.organization.name
+        
+        return Response({"token": token.key, "user": {"name": user_name, "organization": user_organization}}, status=200)
     else:
         return Response({"error": "Invalid credentials"}, status=400)
+
     
 
 def generic_csv_upload_wrapper(model, serializer, request):

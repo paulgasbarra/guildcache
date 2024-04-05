@@ -4,7 +4,7 @@ import { useAuth } from "./AuthContext";
 import logo from "../assets/images/guildcache-logo.png";
 
 const Navbar: React.FC = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, organization } = useAuth();
   return (
     <nav className="bg-white shadow-lg">
       <div className="w-full mx-auto px-4">
@@ -20,6 +20,7 @@ const Navbar: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center space-x-1">
+            <h1>{organization}</h1>
             <NavLink endpoint="/login">
               {isAuthenticated ? "Sign Out" : "Sign In"}
             </NavLink>

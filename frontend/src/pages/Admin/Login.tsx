@@ -16,7 +16,8 @@ export const Login = () => {
         username: username,
         password: password,
       });
-      login(response.data.token);
+      const { token, user } = response.data;
+      login(token, user);
       navigate("/admin");
     } catch (error) {
       console.error("Error logging in:", error);
