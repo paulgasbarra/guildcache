@@ -6,6 +6,7 @@ import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 import { Cohort } from "../../types/Cohort";
 import { StudentFormFields } from "./StudentFormFields";
+import NotesField from "../../components/NotesField";
 
 export const StudentView = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -63,15 +64,25 @@ export const StudentView = () => {
     return cohorts.find((cohort: Cohort) => cohort.id === id).name;
   };
 
-  const submitEdit = async () => {
+  const submitEdit = async (updatedFormData = formData) => {
     try {
-      await axiosInstance.put(ENDPOINTS.STUDENTS.DETAILS(studentId), formData);
+      await axiosInstance.put(
+        ENDPOINTS.STUDENTS.DETAILS(studentId),
+        updatedFormData
+      );
       setModalOpen(true);
       setIsEditing(false);
+      // Ensure state is updated with the latest formData after successful submission
+      setFormData(updatedFormData);
     } catch (error) {
       console.error("Error updating student:", error);
       // Handle error - maybe display a notification
     }
+  };
+
+  const updateNote = async (note: string) => {
+    const updatedFormData = { ...formData, notes: note };
+    await submitEdit(updatedFormData);
   };
 
   // use a map to render the fields, may require a model update to include a field type and a field label
@@ -100,7 +111,7 @@ export const StudentView = () => {
             <ModelFieldInput
               labelName="Cohort"
               name="Cohort"
-              value={formData.class_date}
+              value={null}
               onChange={onChange}
               type="select"
               options={cohorts}
@@ -139,7 +150,9 @@ export const StudentView = () => {
                   : "None set"
               }
             />
+            <NotesField notes={formData.notes} updateNote={updateNote} />
           </div>
+
           <button
             onClick={toggleEditing}
             className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-60 w-full rounded-md p-2"

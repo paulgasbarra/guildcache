@@ -9,7 +9,6 @@ export interface Student {
   lca_cert: boolean;
   epa_608_cert: boolean;
   s_j_cert: boolean;
-  class_site: string;
-  class_number: string;
-  class_date: string;
+  notes: string;
+  hired: boolean;
 }

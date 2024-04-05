@@ -64,20 +64,19 @@ class Cohort(models.Model):
     
 class Student(models.Model):
     name = models.CharField(max_length=200)
-    address = models.CharField(max_length=200)
-    phone = models.CharField(max_length=50)
+    address = models.CharField(max_length=200, blank=True)
+    phone = models.CharField(max_length=50, blank=True)
     email = models.EmailField(unique=True)
-    linkedin = models.URLField()
-    resume_link = models.URLField()
+    linkedin = models.URLField(blank=True)
+    resume_link = models.URLField(blank=True)
     lca_cert = models.BooleanField(default=False)
     epa_608_cert = models.BooleanField(default=False)
     s_j_cert = models.BooleanField(default=False)
-    class_site = models.CharField(max_length=200)
-    class_number = models.IntegerField()
-    class_date = models.DateField()
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, related_name='students')
-    notes = models.TextField()
+    notes = models.TextField(blank=True)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='students')
+    hired = models.BooleanField(default=False)
+    employer = models.ForeignKey(Employer, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.name
