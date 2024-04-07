@@ -68,7 +68,7 @@ export const DonorFormFields: InputObjectType[] = [
   {
     id: "contacts",
     placeholder: "Contacts",
-    type: "array",
+    type: "members",
     label: "Contacts",
     error: [],
     value: "",

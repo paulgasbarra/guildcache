@@ -103,13 +103,38 @@ export const EntityView: React.FC<EntityViewProps> = ({
       ) : (
         <>
           <div className="flex flex-col gap-4 p-4 bg-white rounded-lg">
-            {entityFormFields.map((field) => (
-              <ModelFieldDisplay
-                key={field.id}
-                name={field.label}
-                value={formData[field.id]}
-              />
-            ))}
+            {entityFormFields.map((field) => {
+              if (field.type === "members") {
+                return (
+                  <div>
+                    <label className="text-blue-700 font-medium mr-2">
+                      {field.label}:
+                    </label>
+                    <button className="text-blue-600 underline">
+                      Add Contact
+                    </button>
+                    <ul>
+                      {formData[field.id] &&
+                        formData[field.id].length === 0 && (
+                          <li>No {field.label}</li>
+                        )}
+                      {formData[field.id] &&
+                        formData[field.id].map((v: any, i: number) => (
+                          <li key={i}>{v.name}</li>
+                        ))}
+                    </ul>
+                  </div>
+                );
+              } else {
+                return (
+                  <ModelFieldDisplay
+                    key={field.id}
+                    name={field.label}
+                    value={formData[field.id]}
+                  />
+                );
+              }
+            })}
           </div>
           <button
             onClick={toggleEditing}

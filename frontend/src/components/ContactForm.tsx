@@ -1,17 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { EntityCreationForm } from "./EntityCreationForm";
+import { ENDPOINTS } from "../api";
+import { ContactFormFields } from "../formFields/ContactFormFields";
 
-interface ContactFormProps {
-  incomingFormData?: {
-    id?: number;
-    name: string;
-    phone: string;
-    email: string;
-    is_primary: boolean;
-  };
-}
-
-const ContactForm: React.FC<ContactFormProps> = () => {
+const ContactForm: React.FC = ({}) => {
   return (
     <EntityCreationForm
       formTitle="Create - Contact"
