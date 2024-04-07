@@ -1,10 +1,15 @@
 from rest_framework import serializers
-from .models import Student, Instructor, Employer, Application, Donor, Cohort, UserProfile
+from .models import Student, Instructor, Employer, Application, Donor, Cohort, UserProfile, Contact
 
 class StudentSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Student
         fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'resume_link', 'lca_cert', 'epa_608_cert', 's_j_cert', 'notes', 'hired', 'cohort', 'employer']
+
+class ContactSerializer(serializers.ModelSerializer): 
+    class Meta: 
+        model = Contact
+        fields = ['id', 'name', 'address', 'phone', 'email', 'primary_contact', 'donor', 'employer', 'is_primary']
 
 class InstructorSerializer(serializers.ModelSerializer):
     cohorts = serializers.PrimaryKeyRelatedField(
@@ -19,7 +24,7 @@ class InstructorSerializer(serializers.ModelSerializer):
 class EmployerSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Employer
-        fields = ['id', 'name', 'address', 'website', 'primary_contact', 'phone', 'email', 'linkedin', 'job_listings', 'company_size', 'speciality']
+        fields = ['id', 'name', 'address', 'website', 'primary_contact', 'phone', 'email', 'linkedin', 'job_listings', 'company_size', 'speciality', 'contacts']
 
 class ApplicationSerializer(serializers.ModelSerializer): 
     class Meta: 
@@ -27,9 +32,11 @@ class ApplicationSerializer(serializers.ModelSerializer):
         fields = ['id', 'student', 'employer', 'applied_date', 'passed_date', 'hired_date', 'salary_or_hourly_rate']
 
 class DonorSerializer(serializers.ModelSerializer): 
+    contacts = ContactSerializer(many=True, read_only=True)
+    
     class Meta: 
         model = Donor
-        fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'website', 'instagram', 'tiktok']
+        fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'website', 'instagram', 'tiktok', 'contacts']
 
 class CohortSerializer(serializers.ModelSerializer):
     students = StudentSerializer(many=True, read_only=True)
