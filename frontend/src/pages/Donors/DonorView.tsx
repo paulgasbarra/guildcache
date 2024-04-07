@@ -1,6 +1,6 @@
 import React from "react";
 import { ENDPOINTS } from "../../api";
-import { DonorFormFields } from "./DonorFormFields";
+import { DonorFormFields } from "../../formFields/DonorFormFields";
 import { EntityView } from "../../components/EntityView";
 
 export const DonorView = () => {

@@ -4,7 +4,7 @@ import { axiosInstance, ENDPOINTS } from "../../api";
 import { ModelFieldInput } from "../../components/ModelFieldInput";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
-import { InstructorFormFields } from "./InstructorFormFields";
+import { InstructorFormFields } from "../../formFields/InstructorFormFields";
 import CheckboxGroupInput from "../../components/CheckboxGroupInput";
 import { Cohort } from "../../types/Cohort";
 

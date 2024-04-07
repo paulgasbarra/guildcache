@@ -1,6 +1,6 @@
-import { InputObjectType } from "../../types/InputObjectType";
+import { InputObjectType } from "../types/InputObjectType";
 
-export const DonorFormFields: InputObjectType[] = [
+export const EmployerFormFields: InputObjectType[] = [
   {
     id: "name",
     placeholder: "Name",
@@ -14,6 +14,14 @@ export const DonorFormFields: InputObjectType[] = [
     placeholder: "Address",
     type: "text",
     label: "Address",
+    error: [],
+    value: "",
+  },
+  {
+    id: "primary_contact",
+    placeholder: "Primary Contact",
+    type: "text",
+    label: "Primary Contact",
     error: [],
     value: "",
   },
@@ -50,26 +58,26 @@ export const DonorFormFields: InputObjectType[] = [
     value: "",
   },
   {
-    id: "instagram",
-    placeholder: "Instagram",
+    id: "job_listings",
+    placeholder: "Job Listings",
     type: "text",
-    label: "Instagram",
+    label: "Job Listings",
     error: [],
     value: "",
   },
   {
-    id: "tiktok",
-    placeholder: "Tiktok",
-    type: "string",
-    label: "Tiktok",
+    id: "company_size",
+    placeholder: "Company Size",
+    type: "number",
+    label: "Company Size",
     error: [],
     value: "",
   },
   {
-    id: "contacts",
-    placeholder: "Contacts",
-    type: "array",
-    label: "Contacts",
+    id: "speciality",
+    placeholder: "Speciality",
+    type: "text",
+    label: "Speciality",
     error: [],
     value: "",
   },

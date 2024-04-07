@@ -1,6 +1,6 @@
 import React from "react";
 import { ENDPOINTS } from "../../api";
-import { CohortFormFields } from "./CohortFormFields";
+import { CohortFormFields } from "../../formFields/CohortFormFields";
 import { EntityView } from "../../components/EntityView";
 
 export const CohortView = () => {

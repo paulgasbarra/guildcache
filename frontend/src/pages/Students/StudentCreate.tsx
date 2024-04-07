@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { axiosInstance, ENDPOINTS } from "../../api";
-import { StudentFormFields as initialStudentFormFields } from "./StudentFormFields";
+import { StudentFormFields as initialStudentFormFields } from "../../formFields/StudentFormFields";
 import { InputObjectType } from "../../types/InputObjectType";
 import { EntityCreationForm } from "../../components/EntityCreationForm";
 

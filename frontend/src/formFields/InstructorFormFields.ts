@@ -1,4 +1,4 @@
-import { InputObjectType } from "../../types/InputObjectType";
+import { InputObjectType } from "../types/InputObjectType";
 
 export const InstructorFormFields: InputObjectType[] = [
   {

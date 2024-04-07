@@ -1,6 +1,6 @@
 import React from "react";
 import { EntityCreationForm } from "../../components/EntityCreationForm";
-import { CohortFormFields } from "./CohortFormFields";
+import { CohortFormFields } from "../../formFields/CohortFormFields";
 import { ENDPOINTS } from "../../api";
 
 export const CohortCreation: React.FC = () => {

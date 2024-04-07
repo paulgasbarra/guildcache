@@ -1,6 +1,6 @@
 import React from "react";
 import { ENDPOINTS } from "../../api";
-import { EmployerFormFields } from "./EmployerFormFields";
+import { EmployerFormFields } from "../../formFields/EmployerFormFields";
 import { EntityView } from "../../components/EntityView";
 
 export const EmployerView = () => {

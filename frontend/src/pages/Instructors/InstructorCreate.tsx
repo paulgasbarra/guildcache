@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { EntityCreationForm } from "../../components/EntityCreationForm";
-import { InstructorFormFields as initialInstructorFormFields } from "./InstructorFormFields";
+import { InstructorFormFields as initialInstructorFormFields } from "../../formFields/InstructorFormFields";
 import { axiosInstance, ENDPOINTS } from "../../api";
 import { InputObjectType } from "../../types/InputObjectType";
 import { Cohort } from "../../types/Cohort";

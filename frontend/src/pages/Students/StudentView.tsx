@@ -5,7 +5,7 @@ import { ModelFieldInput } from "../../components/ModelFieldInput";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 import { Cohort } from "../../types/Cohort";
-import { StudentFormFields } from "./StudentFormFields";
+import { StudentFormFields } from "../../formFields/StudentFormFields";
 import NotesField from "../../components/NotesField";
 
 export const StudentView = () => {
