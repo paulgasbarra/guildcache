@@ -4,6 +4,7 @@ import { ModelFieldDisplay } from "./ModelFieldDisplay";
 import { ModelFieldInput } from "./ModelFieldInput";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
+import MembersView from "./MembersView";
 
 interface EntityViewProps {
   entityFormFields: { id: string; label: string; type: string }[];
@@ -106,24 +107,11 @@ export const EntityView: React.FC<EntityViewProps> = ({
             {entityFormFields.map((field) => {
               if (field.type === "members") {
                 return (
-                  <div>
-                    <label className="text-blue-700 font-medium mr-2">
-                      {field.label}:
-                    </label>
-                    <button className="text-blue-600 underline">
-                      Add Contact
-                    </button>
-                    <ul>
-                      {formData[field.id] &&
-                        formData[field.id].length === 0 && (
-                          <li>No {field.label}</li>
-                        )}
-                      {formData[field.id] &&
-                        formData[field.id].map((v: any, i: number) => (
-                          <li key={i}>{v.name}</li>
-                        ))}
-                    </ul>
-                  </div>
+                  <MembersView
+                    label={field.label}
+                    key={field.id}
+                    members={formData[field.id]}
+                  />
                 );
               } else {
                 return (
@@ -150,3 +138,9 @@ export const EntityView: React.FC<EntityViewProps> = ({
     </div>
   );
 };
+// this is tricky. I'm trying to build a piece of a component that manages a separate but related model.
+// I want the entity form to work across other models. But this one has looks for the field type of "members"
+// and if it is then you will have options to add memeberss or edit members. I'd like to stay on the same page
+// when adding or editing members. But I'm uncomfortable adding just a bunch of if statements to the component.
+// and I'm not certain other models will have member fields. I feel like things are about to get messy. What if I had members component inside
+// it would be like a todo list item. I've built those before so I can edit and add items to a list. I could use that as a reference.
