@@ -12,6 +12,7 @@ interface EntityViewProps {
   updateDetailEndpoint: (id: string) => string;
   backLink: string;
   successMessage: string;
+  modelType?: string;
 }
 
 export const EntityView: React.FC<EntityViewProps> = ({
@@ -20,6 +21,7 @@ export const EntityView: React.FC<EntityViewProps> = ({
   updateDetailEndpoint,
   backLink,
   successMessage,
+  modelType,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({} as any);
@@ -104,12 +106,14 @@ export const EntityView: React.FC<EntityViewProps> = ({
         <>
           <div className="flex flex-col gap-4 p-4 bg-white rounded-lg">
             {entityFormFields.map((field) => {
-              if (field.type === "members") {
+              if (field.type === "members" && modelType !== undefined) {
                 return (
                   <MembersView
                     label={field.label}
                     key={field.id}
                     members={formData[field.id]}
+                    groupId={entityId}
+                    groupType={modelType}
                   />
                 );
               } else {

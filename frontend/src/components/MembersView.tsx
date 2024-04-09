@@ -1,59 +1,95 @@
 import React, { useEffect, useState } from "react";
 import { ModelFieldInput } from "./ModelFieldInput";
+import Modal from "./Modal";
 import { axiosInstance } from "../api";
 import { Contact } from "../types/Contact";
 import { ContactFormFields } from "../formFields/ContactFormFields";
-import { FormField } from "../types/FormField";
+import { InputObjectType } from "../types/InputObjectType";
 import { ENDPOINTS } from "../api";
 
-type FormData = Contact | null;
-
 interface MemberFormProps {
-  formData: FormData;
-  formFields: FormField[];
-  onSubmit: (formData: FormData) => void;
+  formFields: InputObjectType[];
+  initialValues?: { [key: string]: string | number | boolean };
+  onSubmit: (values: { [key: string]: string | number | boolean }) => void;
   closeForm: () => void;
 }
 
 const MemberForm: React.FC<MemberFormProps> = ({
-  formData,
   formFields,
+  initialValues,
   onSubmit,
   closeForm,
 }) => {
-  const [newFormData, setNewFormData] = useState<Contact | null>(null);
+  const [formData, setFormData] = useState<{ [key: string]: any }>({});
 
   useEffect(() => {
-    if (formData) {
-      setNewFormData(formData);
-    }
-  }, []);
+    const initialFormData = formFields.reduce((acc, field) => {
+      // Check if initial value for the field is provided
+      const hasInitialValue =
+        initialValues && initialValues[field.id] !== undefined;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewFormData({ ...newFormData, [e.target.name]: e.target.value });
+      // Determine the default value based on the input type if no initial value is provided
+      let defaultValue;
+      if (hasInitialValue) {
+        defaultValue = initialValues[field.id];
+      } else {
+        switch (field.type) {
+          case "checkbox":
+            defaultValue = false; // Falsy value for checkbox is 'false'
+            break;
+          case "number":
+            defaultValue = 0; // Falsy value for number is '0'
+            break;
+          case "select":
+            // Assuming your select options are an array and you want the first option as the default
+            defaultValue =
+              field.options && field.options.length > 0
+                ? field.options[0].value
+                : "";
+            break;
+          case "text":
+          case "email":
+          case "textarea": // Assuming you might add a textarea type
+          default:
+            defaultValue = ""; // Falsy value for text, email, textarea, etc. is an empty string
+            break;
+        }
+      }
+
+      return {
+        ...acc,
+        [field.id]: defaultValue,
+      };
+    }, {});
+
+    setFormData(initialFormData);
+  }, [formFields, initialValues]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
-    onSubmit(newFormData);
+    onSubmit(formData);
     closeForm();
   };
 
   const handleCancel = () => {
-    setNewFormData(null);
     closeForm();
   };
 
   return (
     <div>
       {formFields &&
-        newFormData &&
+        formData &&
         formFields.map((field: any) => (
           <ModelFieldInput
             key={field.id}
             labelName={field.label}
             name={field.id}
-            value={newFormData[field.id]}
-            onChange={onChange}
+            type={field.type}
+            value={formData[field.id]}
+            onChange={handleChange}
           />
         ))}
       <button onClick={handleSubmit}>Submit</button>
@@ -99,7 +135,7 @@ const Member: React.FC<MemberProps> = ({
     <div>
       {isEditing ? (
         <MemberForm
-          formData={newFormData}
+          initialValues={newFormData}
           formFields={ContactFormFields}
           onSubmit={submitEdit}
           closeForm={cancelEditing}
@@ -118,17 +154,26 @@ const Member: React.FC<MemberProps> = ({
 interface MemberViewProps {
   members: Contact[] | any[];
   label: string;
+  groupId: number | string;
+  groupType: string;
 }
 
-const MembersView: React.FC<MemberViewProps> = ({ members, label }) => {
+const MembersView: React.FC<MemberViewProps> = ({
+  members,
+  label,
+  groupId,
+  groupType,
+}) => {
   const [isAdding, setIsAdding] = useState(false);
 
   const toggleAdding = () => {
-    console.log(members);
     setIsAdding(!isAdding);
   };
 
-  const addMember = async (formData: FormData) => {
+  const addMember = async (formData: {
+    [key: string]: string | boolean | number;
+  }) => {
+    formData = { ...formData, [groupType]: groupId };
     const url = ENDPOINTS[label.toUpperCase() as "CONTACTS"].CREATE;
     try {
       await axiosInstance.post(url, formData);
@@ -147,7 +192,6 @@ const MembersView: React.FC<MemberViewProps> = ({ members, label }) => {
       </div>
       {isAdding && (
         <MemberForm
-          formData={null}
           formFields={ContactFormFields}
           onSubmit={addMember}
           closeForm={toggleAdding}
@@ -161,10 +205,10 @@ const MembersView: React.FC<MemberViewProps> = ({ members, label }) => {
             updateMemberEndpoint={ENDPOINTS[
               label.toUpperCase() as "CONTACTS"
             ].DETAILS(member.id)}
-            successMessage="Member updated successfully"
+            successMessage="Contact updated successfully"
           />
         ))}
-      {!members && <li>No {"Contact"}</li>}
+      {!members && <li>No {"Contacts"}</li>}
     </div>
   );
 };

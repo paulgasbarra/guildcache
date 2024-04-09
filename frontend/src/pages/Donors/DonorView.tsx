@@ -11,6 +11,7 @@ export const DonorView = () => {
       updateDetailEndpoint={ENDPOINTS.DONORS.DETAILS}
       backLink="/admin/donors"
       successMessage="Donor updated"
+      modelType="donor"
     />
   );
 };
