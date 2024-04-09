@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ModelFieldInput } from "./ModelFieldInput";
-import Modal from "./Modal";
 import { axiosInstance } from "../api";
 import { Contact } from "../types/Contact";
 import { ContactFormFields } from "../formFields/ContactFormFields";
@@ -107,7 +106,6 @@ interface MemberProps {
 const Member: React.FC<MemberProps> = ({
   memberData,
   updateMemberEndpoint,
-  successMessage,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newFormData, setNewFormData] = useState(memberData);
