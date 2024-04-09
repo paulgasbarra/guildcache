@@ -1,6 +1,6 @@
 from rest_framework import viewsets, generics
-from .serializers import StudentSerializer, InstructorSerializer, EmployerSerializer, ApplicationSerializer, DonorSerializer, CohortSerializer, UserProfileSerializer
-from .models import Student, Instructor, Employer, Application, Donor, Cohort
+from .serializers import StudentSerializer, InstructorSerializer, EmployerSerializer, ApplicationSerializer, DonorSerializer, CohortSerializer, ContactSerializer
+from .models import Student, Instructor, Employer, Application, Donor, Cohort, Contact
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
@@ -26,6 +26,12 @@ class CohortListCreateView(generics.ListCreateAPIView):
 class CohortDeleteView(generics.DestroyAPIView):
     queryset = Cohort.objects.all()
     serializer_class = CohortSerializer
+
+@permission_classes([IsAuthenticated])
+class ContactViewSet(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+    
 
 @permission_classes([IsAuthenticated])
 class StudentViewSet(viewsets.ModelViewSet): 

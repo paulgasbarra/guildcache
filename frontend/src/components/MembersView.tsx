@@ -1,40 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ModelFieldInput } from "./ModelFieldInput";
 import { axiosInstance } from "../api";
 import { Contact } from "../types/Contact";
+import { ContactFormFields } from "../formFields/ContactFormFields";
+import { FormField } from "../types/FormField";
+import { ENDPOINTS } from "../api";
+
+type FormData = Contact | null;
 
 interface MemberFormProps {
-  formData: Contact | any;
-  formFields: any;
-  submitForm: () => void;
-  cancel: () => void;
+  formData: FormData;
+  formFields: FormField[];
+  onSubmit: (formData: FormData) => void;
+  closeForm: () => void;
 }
 
-const MemberForm: React.FC<MemberFormProps> = ({ formData }) => {
-  const [newFormData, setNewFormData] = useState<Contact | any>(formData);
+const MemberForm: React.FC<MemberFormProps> = ({
+  formData,
+  formFields,
+  onSubmit,
+  closeForm,
+}) => {
+  const [newFormData, setNewFormData] = useState<Contact | null>(null);
+
+  useEffect(() => {
+    if (formData) {
+      setNewFormData(formData);
+    }
+  }, []);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewFormData({ ...newFormData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async () => {
-    submitForm(newFormData);
+    onSubmit(newFormData);
+    closeForm();
   };
 
   const handleCancel = () => {
-    cancel();
+    setNewFormData(null);
+    closeForm();
   };
 
   return (
     <div>
-      {newFormData &&
-        newFormData.map((field: any) => (
-          <>
-            <ModelFieldInput key={field.id} field={field} onChange={onChange} />
-            <button onClick={submitEdit}>Submit</button>
-            <button onClick={cancelEditing}>Cancel</button>
-          </>
+      {formFields &&
+        newFormData &&
+        formFields.map((field: any) => (
+          <ModelFieldInput
+            key={field.id}
+            labelName={field.label}
+            name={field.id}
+            value={newFormData[field.id]}
+            onChange={onChange}
+          />
         ))}
+      <button onClick={handleSubmit}>Submit</button>
+      <button onClick={handleCancel}>Cancel</button>
     </div>
   );
 };
@@ -47,7 +70,7 @@ interface MemberProps {
 
 const Member: React.FC<MemberProps> = ({
   memberData,
-  updateMemberEndpoint = " /api/members/",
+  updateMemberEndpoint,
   successMessage,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -62,16 +85,9 @@ const Member: React.FC<MemberProps> = ({
     setNewFormData(memberData);
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewFormData({ ...newFormData, [e.target.name]: e.target.value });
-  };
-
   const submitEdit = async () => {
     try {
-      await axiosInstance.put(
-        updateMemberEndpoint(newFormData.id),
-        newFormData
-      );
+      await axiosInstance.put(updateMemberEndpoint, newFormData);
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating entity:", error);
@@ -84,9 +100,9 @@ const Member: React.FC<MemberProps> = ({
       {isEditing ? (
         <MemberForm
           formData={newFormData}
-          formFields={[]}
-          submitForm={submitEdit}
-          cancel={cancelEditing}
+          formFields={ContactFormFields}
+          onSubmit={submitEdit}
+          closeForm={cancelEditing}
         />
       ) : (
         <div className="flex flex-row gap-2">
@@ -108,21 +124,43 @@ const MembersView: React.FC<MemberViewProps> = ({ members, label }) => {
   const [isAdding, setIsAdding] = useState(false);
 
   const toggleAdding = () => {
+    console.log(members);
     setIsAdding(!isAdding);
   };
+
+  const addMember = async (formData: FormData) => {
+    const url = ENDPOINTS[label.toUpperCase() as "CONTACTS"].CREATE;
+    try {
+      await axiosInstance.post(url, formData);
+      setIsAdding(false);
+    } catch (error) {
+      console.error("Error adding member:", error);
+      // Handle error - maybe display a notification
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-row space-between">
         <label className="text-blue-700 font-medium mr-2">{label}:</label>
         <button onClick={toggleAdding}>Add {label}</button>
       </div>
-      {isAdding && <MemberForm />}
+      {isAdding && (
+        <MemberForm
+          formData={null}
+          formFields={ContactFormFields}
+          onSubmit={addMember}
+          closeForm={toggleAdding}
+        />
+      )}
       {members &&
         members.map((member) => (
           <Member
             key={member.id}
             memberData={member}
-            updateMemberEndpoint={"/api/members/" + member.id + "/"}
+            updateMemberEndpoint={ENDPOINTS[
+              label.toUpperCase() as "CONTACTS"
+            ].DETAILS(member.id)}
             successMessage="Member updated successfully"
           />
         ))}

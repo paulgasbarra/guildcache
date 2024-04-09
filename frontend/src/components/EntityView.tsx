@@ -30,7 +30,6 @@ export const EntityView: React.FC<EntityViewProps> = ({
     const fetchEntity = async () => {
       try {
         const response = await axiosInstance.get(fetchDetailEndpoint(entityId));
-        console.log(response.data);
         setFormData(response.data);
       } catch (error) {
         console.error("Error fetching entity:", error);
@@ -138,9 +137,3 @@ export const EntityView: React.FC<EntityViewProps> = ({
     </div>
   );
 };
-// this is tricky. I'm trying to build a piece of a component that manages a separate but related model.
-// I want the entity form to work across other models. But this one has looks for the field type of "members"
-// and if it is then you will have options to add memeberss or edit members. I'd like to stay on the same page
-// when adding or editing members. But I'm uncomfortable adding just a bunch of if statements to the component.
-// and I'm not certain other models will have member fields. I feel like things are about to get messy. What if I had members component inside
-// it would be like a todo list item. I've built those before so I can edit and add items to a list. I could use that as a reference.
