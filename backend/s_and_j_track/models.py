@@ -86,7 +86,6 @@ class Contact(models.Model):
     address = models.CharField(max_length=200, blank=True)
     phone = models.CharField(max_length=50, blank=True)
     email = models.EmailField(unique=True)
-    primary_contact = models.BooleanField(default=False)
     donor = models.ForeignKey(Donor, on_delete=models.CASCADE, related_name='contacts', null=True, blank=True)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE, related_name='contacts', null=True, blank=True)
     is_primary = models.BooleanField(default=False)
