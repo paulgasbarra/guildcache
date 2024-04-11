@@ -33,7 +33,6 @@ export const EntityView: React.FC<EntityViewProps> = ({
   }, [entityId, fetchDetailEndpoint]);
 
   const fetchEntity = async () => {
-    console.log("fetching entity");
     try {
       const response = await axiosInstance.get(fetchDetailEndpoint(entityId));
       setFormData(response.data);

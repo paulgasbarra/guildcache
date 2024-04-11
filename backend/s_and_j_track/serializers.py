@@ -9,7 +9,7 @@ class StudentSerializer(serializers.ModelSerializer):
 class ContactSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Contact
-        fields = ['id', 'name', 'address', 'phone', 'email', 'primary_contact', 'donor', 'employer', 'is_primary']
+        fields = ['id', 'name', 'address', 'phone', 'email', 'donor', 'employer', 'is_primary']
 
 class InstructorSerializer(serializers.ModelSerializer):
     cohorts = serializers.PrimaryKeyRelatedField(

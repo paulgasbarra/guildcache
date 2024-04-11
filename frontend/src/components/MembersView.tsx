@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ModelFieldInput } from "./ModelFieldInput";
 import { axiosInstance } from "../api";
 import { Contact } from "../types/Contact";
 import { ContactFormFields } from "../formFields/ContactFormFields";
+import Modal from "./Modal";
 import { InputObjectType } from "../types/InputObjectType";
 import { ENDPOINTS } from "../api";
 
@@ -12,6 +13,7 @@ interface MemberFormProps {
   onSubmit: (values: { [key: string]: string | number | boolean }) => void;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
   closeForm: () => void;
+  removeMember?: (id: string) => void;
 }
 
 const MemberForm: React.FC<MemberFormProps> = ({
@@ -20,6 +22,7 @@ const MemberForm: React.FC<MemberFormProps> = ({
   onChange,
   initialValues,
   closeForm,
+  removeMember,
 }) => {
   const handleSubmit = async () => {
     onSubmit(initialValues);
@@ -44,6 +47,11 @@ const MemberForm: React.FC<MemberFormProps> = ({
           />
         ))}
       <button onClick={handleSubmit}>Submit</button>
+      {removeMember && (
+        <button onClick={() => removeMember(initialValues.id.toString())}>
+          Remove
+        </button>
+      )}
       <button onClick={handleCancel}>Cancel</button>
     </div>
   );
@@ -54,12 +62,17 @@ interface MemberProps {
   updateMemberEndpoint: string;
   successMessage: string;
   refetchEntity: () => void;
+  removeMember: (id: string) => void;
+  confirmWithModal: (successMessage: string) => void;
 }
 
 const Member: React.FC<MemberProps> = ({
   memberData,
   updateMemberEndpoint,
   refetchEntity,
+  removeMember,
+  confirmWithModal,
+  successMessage,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newFormData, setNewFormData] = useState(memberData);
@@ -67,6 +80,12 @@ const Member: React.FC<MemberProps> = ({
   const toggleEditing = () => {
     setIsEditing(!isEditing);
   };
+
+  useEffect(() => {
+    if (JSON.stringify(newFormData) !== JSON.stringify(memberData)) {
+      setNewFormData(memberData);
+    }
+  }, [memberData]);
 
   const cancelEditing = () => {
     setIsEditing(false);
@@ -84,9 +103,10 @@ const Member: React.FC<MemberProps> = ({
       await axiosInstance.put(updateMemberEndpoint, newFormData);
       refetchEntity();
       setIsEditing(false);
+      confirmWithModal(successMessage);
     } catch (error) {
       console.error("Error updating entity:", error);
-      // Handle error - maybe display a notification
+      confirmWithModal("Error updating entity. " + error);
     }
   };
 
@@ -99,6 +119,7 @@ const Member: React.FC<MemberProps> = ({
           onSubmit={submitEdit}
           closeForm={cancelEditing}
           onChange={onChange}
+          removeMember={removeMember}
         />
       ) : (
         <div className="flex flex-row gap-2">
@@ -128,6 +149,8 @@ const MembersView: React.FC<MemberViewProps> = ({
 }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [newFormData, setNewFormData] = useState<{ [key: string]: any }>({});
+  const [modalOpen, setModalOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const toggleAdding = () => {
     setIsAdding(!isAdding);
@@ -150,10 +173,30 @@ const MembersView: React.FC<MemberViewProps> = ({
       if (refetchEntity) {
         refetchEntity();
       }
+      confirmWithModal("Contact added successfully");
       setIsAdding(false);
     } catch (error) {
       console.error("Error adding member:", error);
-      // Handle error - maybe display a notification
+      confirmWithModal("Error adding member. " + error);
+    }
+  };
+
+  const confirmWithModal = (successMessage: string) => {
+    setSuccessMessage(successMessage);
+    setModalOpen(true);
+  };
+
+  const removeMember = async (id: string) => {
+    const url = ENDPOINTS[label.toUpperCase() as "CONTACTS"].DETAILS(id);
+    try {
+      await axiosInstance.delete(url);
+      if (refetchEntity) {
+        refetchEntity();
+      }
+      confirmWithModal("Contact removed successfully");
+    } catch (error) {
+      console.error("Error removing member:", error);
+      confirmWithModal("Error removing member. " + error);
     }
   };
 
@@ -210,10 +253,15 @@ const MembersView: React.FC<MemberViewProps> = ({
               label.toUpperCase() as "CONTACTS"
             ].DETAILS(member.id)}
             refetchEntity={refetchEntity}
+            removeMember={removeMember}
             successMessage="Contact updated successfully"
+            confirmWithModal={confirmWithModal}
           />
         ))}
       {!members && <li>No {"Contacts"}</li>}
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        {successMessage}
+      </Modal>
     </div>
   );
 };
