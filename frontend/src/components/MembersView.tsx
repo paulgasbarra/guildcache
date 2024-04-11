@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ModelFieldInput } from "./ModelFieldInput";
 import { axiosInstance } from "../api";
 import { Contact } from "../types/Contact";
@@ -8,68 +8,21 @@ import { ENDPOINTS } from "../api";
 
 interface MemberFormProps {
   formFields: InputObjectType[];
-  initialValues?: { [key: string]: string | number | boolean };
+  initialValues: { [key: string]: string | number | boolean };
   onSubmit: (values: { [key: string]: string | number | boolean }) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
   closeForm: () => void;
 }
 
 const MemberForm: React.FC<MemberFormProps> = ({
   formFields,
-  initialValues,
   onSubmit,
+  onChange,
+  initialValues,
   closeForm,
 }) => {
-  const [formData, setFormData] = useState<{ [key: string]: any }>({});
-
-  useEffect(() => {
-    const initialFormData = formFields.reduce((acc, field) => {
-      // Check if initial value for the field is provided
-      const hasInitialValue =
-        initialValues && initialValues[field.id] !== undefined;
-
-      // Determine the default value based on the input type if no initial value is provided
-      let defaultValue;
-      if (hasInitialValue) {
-        defaultValue = initialValues[field.id];
-      } else {
-        switch (field.type) {
-          case "checkbox":
-            defaultValue = false; // Falsy value for checkbox is 'false'
-            break;
-          case "number":
-            defaultValue = 0; // Falsy value for number is '0'
-            break;
-          case "select":
-            // Assuming your select options are an array and you want the first option as the default
-            defaultValue =
-              field.options && field.options.length > 0
-                ? field.options[0].value
-                : "";
-            break;
-          case "text":
-          case "email":
-          case "textarea": // Assuming you might add a textarea type
-          default:
-            defaultValue = ""; // Falsy value for text, email, textarea, etc. is an empty string
-            break;
-        }
-      }
-
-      return {
-        ...acc,
-        [field.id]: defaultValue,
-      };
-    }, {});
-
-    setFormData(initialFormData);
-  }, [formFields, initialValues]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   const handleSubmit = async () => {
-    onSubmit(formData);
+    onSubmit(initialValues);
     closeForm();
   };
 
@@ -79,16 +32,15 @@ const MemberForm: React.FC<MemberFormProps> = ({
 
   return (
     <div>
-      {formFields &&
-        formData &&
+      {initialValues &&
         formFields.map((field: any) => (
           <ModelFieldInput
             key={field.id}
             labelName={field.label}
             name={field.id}
             type={field.type}
-            value={formData[field.id]}
-            onChange={handleChange}
+            value={initialValues[field.id]}
+            onChange={onChange}
           />
         ))}
       <button onClick={handleSubmit}>Submit</button>
@@ -101,11 +53,13 @@ interface MemberProps {
   memberData: Contact | any;
   updateMemberEndpoint: string;
   successMessage: string;
+  refetchEntity: () => void;
 }
 
 const Member: React.FC<MemberProps> = ({
   memberData,
   updateMemberEndpoint,
+  refetchEntity,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newFormData, setNewFormData] = useState(memberData);
@@ -119,9 +73,16 @@ const Member: React.FC<MemberProps> = ({
     setNewFormData(memberData);
   };
 
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setNewFormData({ ...newFormData, [e.target.name]: value });
+  };
+
   const submitEdit = async () => {
     try {
       await axiosInstance.put(updateMemberEndpoint, newFormData);
+      refetchEntity();
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating entity:", error);
@@ -137,6 +98,7 @@ const Member: React.FC<MemberProps> = ({
           formFields={ContactFormFields}
           onSubmit={submitEdit}
           closeForm={cancelEditing}
+          onChange={onChange}
         />
       ) : (
         <div className="flex flex-row gap-2">
@@ -154,6 +116,7 @@ interface MemberViewProps {
   label: string;
   groupId: number | string;
   groupType: string;
+  refetchEntity: () => void;
 }
 
 const MembersView: React.FC<MemberViewProps> = ({
@@ -161,11 +124,20 @@ const MembersView: React.FC<MemberViewProps> = ({
   label,
   groupId,
   groupType,
+  refetchEntity,
 }) => {
   const [isAdding, setIsAdding] = useState(false);
+  const [newFormData, setNewFormData] = useState<{ [key: string]: any }>({});
 
   const toggleAdding = () => {
     setIsAdding(!isAdding);
+    setNewFormData(blankMember);
+  };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+    setNewFormData({ ...newFormData, [e.target.name]: value });
   };
 
   const addMember = async (formData: {
@@ -175,12 +147,44 @@ const MembersView: React.FC<MemberViewProps> = ({
     const url = ENDPOINTS[label.toUpperCase() as "CONTACTS"].CREATE;
     try {
       await axiosInstance.post(url, formData);
+      if (refetchEntity) {
+        refetchEntity();
+      }
       setIsAdding(false);
     } catch (error) {
       console.error("Error adding member:", error);
       // Handle error - maybe display a notification
     }
   };
+
+  const blankMember = ContactFormFields.reduce((acc, field) => {
+    let defaultValue;
+    switch (field.type) {
+      case "checkbox":
+        defaultValue = false; // Falsy value for checkbox is 'false'
+        break;
+      case "number":
+        defaultValue = 0; // Falsy value for number is '0'
+        break;
+      case "select":
+        // Assuming your select options are an array and you want the first option as the default
+        defaultValue =
+          field.options && field.options.length > 0
+            ? field.options[0].value
+            : "";
+        break;
+      case "text":
+      case "email":
+      case "textarea": // Assuming you might add a textarea type
+      default:
+        defaultValue = ""; // Falsy value for text, email, textarea, etc. is an empty string
+        break;
+    }
+    return {
+      ...acc,
+      [field.id]: defaultValue,
+    };
+  }, {});
 
   return (
     <div>
@@ -191,6 +195,8 @@ const MembersView: React.FC<MemberViewProps> = ({
       {isAdding && (
         <MemberForm
           formFields={ContactFormFields}
+          initialValues={newFormData}
+          onChange={onChange}
           onSubmit={addMember}
           closeForm={toggleAdding}
         />
@@ -203,6 +209,7 @@ const MembersView: React.FC<MemberViewProps> = ({
             updateMemberEndpoint={ENDPOINTS[
               label.toUpperCase() as "CONTACTS"
             ].DETAILS(member.id)}
+            refetchEntity={refetchEntity}
             successMessage="Contact updated successfully"
           />
         ))}

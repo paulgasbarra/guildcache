@@ -29,17 +29,18 @@ export const EntityView: React.FC<EntityViewProps> = ({
   const entityId = window.location.pathname.split("/")[3]; // You might want to pass this as a prop for more flexibility
 
   useEffect(() => {
-    const fetchEntity = async () => {
-      try {
-        const response = await axiosInstance.get(fetchDetailEndpoint(entityId));
-        setFormData(response.data);
-      } catch (error) {
-        console.error("Error fetching entity:", error);
-      }
-    };
-
     fetchEntity();
   }, [entityId, fetchDetailEndpoint]);
+
+  const fetchEntity = async () => {
+    console.log("fetching entity");
+    try {
+      const response = await axiosInstance.get(fetchDetailEndpoint(entityId));
+      setFormData(response.data);
+    } catch (error) {
+      console.error("Error fetching entity:", error);
+    }
+  };
 
   const toggleEditing = () => {
     setIsEditing(!isEditing);
@@ -114,6 +115,7 @@ export const EntityView: React.FC<EntityViewProps> = ({
                     members={formData[field.id]}
                     groupId={entityId}
                     groupType={modelType}
+                    refetchEntity={fetchEntity}
                   />
                 );
               } else {
