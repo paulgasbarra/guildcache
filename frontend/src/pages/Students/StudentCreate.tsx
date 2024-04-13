@@ -49,7 +49,6 @@ export function StudentCreation() {
         formTitle="Create - Student"
         postEndpoint={ENDPOINTS.STUDENTS.CREATE}
         formFields={studentFormFields}
-        backLink="/admin/students"
         successMessage="Student created successfully"
       />
     )

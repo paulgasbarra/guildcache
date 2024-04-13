@@ -9,7 +9,6 @@ export const CohortCreation: React.FC = () => {
       formTitle="Create - Cohort"
       postEndpoint={ENDPOINTS.COHORTS.CREATE}
       formFields={CohortFormFields}
-      backLink="/admin/cohorts"
       successMessage="Cohort created"
     />
   );

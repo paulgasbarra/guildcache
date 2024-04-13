@@ -50,7 +50,6 @@ export const InstructorCreation: React.FC = () => {
       formTitle="Create - Instructor"
       postEndpoint={ENDPOINTS.INSTRUCTORS.CREATE}
       formFields={instructorFormFields}
-      backLink="/admin/instructors"
       successMessage="Instructor created"
     />
   );

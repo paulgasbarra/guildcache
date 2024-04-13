@@ -40,7 +40,7 @@ const CSVUpload: React.FC<CSVUploadProps> = ({ endpoint }) => {
   };
 
   return (
-    <div>
+    <div className="grow">
       <input type="file" onChange={handleFileChange} />
       <br />
       <button className="border p-2" onClick={handleFileUpload}>

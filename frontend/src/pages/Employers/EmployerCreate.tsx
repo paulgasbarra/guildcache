@@ -9,7 +9,6 @@ export const EmployerCreation: React.FC = () => {
       formTitle="Create - Employer"
       postEndpoint={ENDPOINTS.EMPLOYERS.CREATE}
       formFields={EmployerFormFields}
-      backLink="/admin/employers"
       successMessage="Employer created"
     />
   );

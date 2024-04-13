@@ -5,7 +5,7 @@ const defaultContext: AuthContextType = {
   isAuthenticated: false,
   login: () => {},
   logout: () => {},
-  organization: "",
+  organization: null,
   user: "",
 };
 
@@ -24,7 +24,9 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     !!localStorage.getItem("access_token")
   );
   const [user, setUser] = useState("");
-  const [organization, setOrganization] = useState("");
+  const [organization, setOrganization] = useState(
+    localStorage.getItem("organization")
+  );
 
   const login = (
     token: string,
@@ -32,6 +34,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   ) => {
     const { name, organization } = user;
     localStorage.setItem("access_token", token);
+    localStorage.setItem("organization", organization);
     setIsAuthenticated(true);
     setUser(name);
     setOrganization(organization);

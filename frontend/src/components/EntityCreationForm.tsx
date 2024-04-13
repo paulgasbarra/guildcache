@@ -11,7 +11,6 @@ interface EntityCreationFormProps {
   formTitle: string;
   postEndpoint: string;
   formFields: FormField[];
-  backLink: string;
   successMessage: string;
 }
 
@@ -19,7 +18,6 @@ export const EntityCreationForm: React.FC<EntityCreationFormProps> = ({
   formTitle,
   postEndpoint,
   formFields,
-  backLink,
   successMessage,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -47,12 +45,6 @@ export const EntityCreationForm: React.FC<EntityCreationFormProps> = ({
 
   return (
     <div className="flex flex-col w-full">
-      <Link
-        to={backLink}
-        className="bg-gray-800 text-white w-full hover:underline p-2"
-      >
-        Back
-      </Link>
       <h2 className="text-2xl font-bold ml-6">{formTitle}</h2>
       <ModelForm
         onSubmit={handleSubmit}

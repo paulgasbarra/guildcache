@@ -9,7 +9,6 @@ export const DonorCreation: React.FC = () => {
       formTitle="Create - Donor"
       postEndpoint={ENDPOINTS.DONORS.CREATE}
       formFields={DonorFormFields}
-      backLink="/admin/donors"
       successMessage="Donor created"
     />
   );

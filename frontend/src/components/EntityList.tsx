@@ -44,9 +44,6 @@ const EntityList: React.FC<{
       {entities.length === 0 && <p>No {entityType}s found</p>}
       {entities.length > 0 && (
         <>
-          <div className="text-xl text-center bg-gray-800 text-white p-3">
-            {entityType}s
-          </div>
           <ModelTable
             modelList={entities}
             headers={headers}

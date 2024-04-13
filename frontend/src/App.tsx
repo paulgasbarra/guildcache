@@ -39,27 +39,24 @@ function App() {
         <Route path="/admin" element={isAuthenticated ? <Admin /> : <Login />}>
           <Route path="cohorts" element={<CohortList />} />
           <Route path="cohorts/:id" element={<CohortView />} />
-          <Route path="create-cohort" element={<CohortCreation />} />
-          <Route path="upload-cohort-csv" element={<CohortCSVUpload />} />
+          <Route path="cohorts/create" element={<CohortCreation />} />
+          <Route path="cohorts/upload" element={<CohortCSVUpload />} />
           <Route path="students" element={<StudentList />} />
           <Route path="students/:id" element={<StudentView />} />
-          <Route path="create-student" element={<StudentCreation />} />
-          <Route path="upload-student-csv" element={<StudentCSVUpload />} />
+          <Route path="students/create" element={<StudentCreation />} />
+          <Route path="students/upload" element={<StudentCSVUpload />} />
           <Route path="instructors" element={<InstructorList />} />
           <Route path="instructors/:id" element={<InstructorView />} />
-          <Route path="create-instructor" element={<InstructorCreation />} />
-          <Route
-            path="upload-instructor-csv"
-            element={<InstructorCSVUpload />}
-          />
+          <Route path="instructors/create" element={<InstructorCreation />} />
+          <Route path="instructors/upload" element={<InstructorCSVUpload />} />
           <Route path="donors" element={<DonorList />} />
           <Route path="donors/:id" element={<DonorView />} />
-          <Route path="create-donor" element={<DonorCreation />} />
-          <Route path="upload-donor-csv" element={<DonorCSVUpload />} />
+          <Route path="donors/create" element={<DonorCreation />} />
+          <Route path="donors/upload" element={<DonorCSVUpload />} />
           <Route path="employers" element={<EmployerList />} />
           <Route path="employers/:id" element={<EmployerView />} />
-          <Route path="create-employer" element={<EmployerCreation />} />
-          <Route path="upload-employer-csv" element={<EmployerCSVUpload />} />
+          <Route path="employers/create" element={<EmployerCreation />} />
+          <Route path="employers/upload" element={<EmployerCSVUpload />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<ErrorPage />} />
