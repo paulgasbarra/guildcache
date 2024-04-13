@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "./NavLink";
 import { useAuth } from "./AuthContext";
 import logo from "../assets/images/guildcache-logo.png";
