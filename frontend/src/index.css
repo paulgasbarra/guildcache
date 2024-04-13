@@ -1,9 +1,14 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 @font-face {
-    font-family: "Satoshi";
-    src: url('https://fonts.cdnfonts.com/css/satoshi');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Satoshi"),
+    url("https://fonts.cdnfonts.com/s/85546/Satoshi-Regular.woff")
+      format("woff");
+}
+table {
+  margin-top: 0px !important;
 }

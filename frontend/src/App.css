@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-family: "Satoshi", sans-serif;
 }
 
 .logo {
@@ -16,6 +17,10 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+table {
+  margin-top: 0px;
 }
 
 @keyframes logo-spin {

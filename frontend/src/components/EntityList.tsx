@@ -40,14 +40,19 @@ const EntityList: React.FC<{
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full">
       {entities.length === 0 && <p>No {entityType}s found</p>}
       {entities.length > 0 && (
-        <ModelTable
-          modelList={entities}
-          headers={headers}
-          handleDelete={handleDelete}
-        />
+        <>
+          <div className="text-xl text-center bg-gray-800 text-white p-3">
+            {entityType}s
+          </div>
+          <ModelTable
+            modelList={entities}
+            headers={headers}
+            handleDelete={handleDelete}
+          />
+        </>
       )}
     </div>
   );

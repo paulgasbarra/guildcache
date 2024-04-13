@@ -13,8 +13,8 @@ const ModelTable: React.FC<TableProps> = ({
   handleDelete,
 }) => {
   return (
-    <table className="divide-y divide-gray-200 shadow-md bg-white rounded-lg">
-      <thead className="bg-gray-800">
+    <table className="w-full mt-0">
+      <thead className="bg-gray-800 ">
         <tr key="table-header" className="w-full bg-gray-800">
           {headers.map((header) => (
             <th
