@@ -72,7 +72,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
         <div>
           <button
             type="submit"
-            className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-60 w-full rounded-md p-2"
+            className="text-white bg-gray-500 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-60 w-full rounded-md p-2"
           >
             Submit
           </button>

@@ -3,5 +3,10 @@ import CSVUpload from "../../components/CSVUpload";
 import { ENDPOINTS } from "../../api";
 
 export function InstructorCSVUpload() {
-  return <CSVUpload endpoint={ENDPOINTS.INSTRUCTORS.UPLOAD} />;
+  return (
+    <CSVUpload
+      endpoint={ENDPOINTS.INSTRUCTORS.UPLOAD}
+      modelName={"Instructor"}
+    />
+  );
 }

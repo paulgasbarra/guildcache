@@ -3,5 +3,7 @@ import CSVUpload from "../../components/CSVUpload";
 import { ENDPOINTS } from "../../api";
 
 export function StudentCSVUpload() {
-  return <CSVUpload endpoint={ENDPOINTS.STUDENTS.UPLOAD} />;
+  return (
+    <CSVUpload endpoint={ENDPOINTS.STUDENTS.UPLOAD} modelName={"Student"} />
+  );
 }

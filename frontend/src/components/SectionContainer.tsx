@@ -11,7 +11,7 @@ const SectionContainer: React.FC<SectionContainerProps> = ({
 }) => {
   return (
     <div className="section-container w-full">
-      <div className="text-xl text-center bg-gray-800 text-white p-3 capitalize">
+      <div className="text-xl font-bold text-center bg-gray-800 text-white p-3 capitalize">
         {headerText}
       </div>
       {children}

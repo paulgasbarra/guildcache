@@ -34,7 +34,7 @@ const MemberForm: React.FC<MemberFormProps> = ({
   };
 
   return (
-    <div>
+    <div className="flex flex-row gap-2">
       {initialValues &&
         formFields.map((field: any) => (
           <ModelFieldInput
@@ -125,6 +125,8 @@ const Member: React.FC<MemberProps> = ({
         <div className="flex flex-row gap-2">
           <h1>{newFormData.name}</h1>
           <p>{newFormData.email}</p>
+          <p>{newFormData.phone}</p>
+          {newFormData.is_primary && <p>Primary</p>}
           <button onClick={toggleEditing}>Edit</button>
         </div>
       )}

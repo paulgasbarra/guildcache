@@ -11,7 +11,7 @@ export const ModelFieldDisplay: React.FC<ModelFieldDisplayProps> = ({
   if (Array.isArray(value)) {
     return (
       <div>
-        <label className="text-blue-700 font-medium mr-2">{name}:</label>
+        <label className="text-gray-700 font-medium mr-2">{name}:</label>
         <ul>
           {value.length === 0 && <li>No {name}</li>}
           {value.map((v: any, i: number) => (
@@ -24,15 +24,15 @@ export const ModelFieldDisplay: React.FC<ModelFieldDisplayProps> = ({
   if (typeof value === "boolean") {
     return (
       <div className="flex items-center">
-        <label className="text-blue-700 font-medium mr-2">{name}:</label>
-        <span>{value ? "Yes" : "No"}</span>
+        <label className="block text-gray-700 font-medium mr-2">{name}:</label>
+        <span className="font-bold">{value ? "Yes" : "No"}</span>
       </div>
     );
   }
   return (
     <div className="flex items-center">
-      <label className="text-blue-700 font-medium mr-2">{name}:</label>
-      <span>{value}</span>
+      <label className="block text-gray-700 font-medium mr-2">{name}:</label>
+      <span className="font-bold">{value}</span>
     </div>
   );
 };

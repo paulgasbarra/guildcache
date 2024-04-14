@@ -4,9 +4,10 @@ import { axiosInstance } from "../api";
 
 interface CSVUploadProps {
   endpoint: string;
+  modelName?: string;
 }
 
-const CSVUpload: React.FC<CSVUploadProps> = ({ endpoint }) => {
+const CSVUpload: React.FC<CSVUploadProps> = ({ endpoint, modelName }) => {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -40,10 +41,15 @@ const CSVUpload: React.FC<CSVUploadProps> = ({ endpoint }) => {
   };
 
   return (
-    <div className="grow">
+    <div className="p-4 flex flex-col ">
+      <h2 className="text-2xl font-bold mb-4">Upload a {modelName} CSV</h2>
       <input type="file" onChange={handleFileChange} />
       <br />
-      <button className="border p-2" onClick={handleFileUpload}>
+      <button
+        disabled={file === null}
+        className="w-1/3 text-white bg-gray-500 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-60 w-full rounded-md p-2 disabled:opacity-50 disabled:cursor-not-allowed"
+        onClick={handleFileUpload}
+      >
         Upload
       </button>
       {error && <div>{error}</div>}
