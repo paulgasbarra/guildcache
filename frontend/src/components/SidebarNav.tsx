@@ -52,7 +52,7 @@ const SidebarNav = () => {
   const [isSelected, setIsSelected] = React.useState<string>("Cohorts");
 
   const handleSelected = (item: string) => {
-    setIsSelected(item === isSelected ? "" : item);
+    setIsSelected(item);
   };
 
   const items = [
@@ -62,6 +62,7 @@ const SidebarNav = () => {
     { title: "Donors", to: "donors" },
     { title: "Employers", to: "employers" },
   ];
+
   return (
     <nav className="bg-gray-800 text-white h-screen p-4 pt-16 float-left w-96">
       <ul>

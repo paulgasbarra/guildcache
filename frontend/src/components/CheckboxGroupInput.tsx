@@ -48,7 +48,7 @@ const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
   };
 
   return (
-    <div>
+    <div className="m-4">
       <label id={id} className="block text-gray-700 font-medium">
         {label}
       </label>

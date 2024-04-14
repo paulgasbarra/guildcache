@@ -6,7 +6,7 @@ import { ENDPOINTS } from "../../api";
 export const EmployerCreation: React.FC = () => {
   return (
     <EntityCreationForm
-      formTitle="Create - Employer"
+      formTitle="Create Employer"
       postEndpoint={ENDPOINTS.EMPLOYERS.CREATE}
       formFields={EmployerFormFields}
       successMessage="Employer created"

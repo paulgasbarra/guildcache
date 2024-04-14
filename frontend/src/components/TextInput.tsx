@@ -15,9 +15,9 @@ const TextInput: React.FC<TextInputProps> = ({
   error,
   handleChange,
 }) => (
-  <div>
+  <div className="mb-3">
     <label htmlFor={id} className="block text-gray-700 font-medium">
-      {label}
+      {label}:
     </label>
     <input
       id={id}

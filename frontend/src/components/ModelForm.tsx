@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { InputObjectType } from "../types/InputObjectType";
-import { FormInput } from "./FormInput";
+import { ModelFieldInput } from "./ModelFieldInput";
 
 interface ModelFormProps {
   initialFormData: InputObjectType[];
@@ -55,19 +55,17 @@ const ModelForm: React.FC<ModelFormProps> = ({
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="space-y-6 m-6 float-left">
+      <form onSubmit={handleSubmit} className="space-y-6 float-left">
         <div>
           {formData.map((input) => (
-            <FormInput
+            <ModelFieldInput
               key={input.id}
-              id={input.id}
-              placeholder={input.placeholder}
+              name={input.id}
+              labelName={input.label}
+              value={input.value}
               type={input.type}
-              multiple={input.multiple}
-              label={input.label}
-              error={input.error}
-              handleChange={handleChange}
               options={input.options}
+              onChange={handleChange}
             />
           ))}
         </div>

@@ -46,7 +46,7 @@ export function StudentCreation() {
   return (
     studentFormFields && (
       <EntityCreationForm
-        formTitle="Create - Student"
+        formTitle="Create Student"
         postEndpoint={ENDPOINTS.STUDENTS.CREATE}
         formFields={studentFormFields}
         successMessage="Student created successfully"

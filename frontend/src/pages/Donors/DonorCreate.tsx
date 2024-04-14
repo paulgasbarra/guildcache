@@ -6,7 +6,7 @@ import { ENDPOINTS } from "../../api";
 export const DonorCreation: React.FC = () => {
   return (
     <EntityCreationForm
-      formTitle="Create - Donor"
+      formTitle="Create Donor"
       postEndpoint={ENDPOINTS.DONORS.CREATE}
       formFields={DonorFormFields}
       successMessage="Donor created"

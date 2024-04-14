@@ -42,13 +42,13 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
     );
   }
   return (
-    <div className="flex items-center space-x-2">
-      <label htmlFor={name} className="text-blue-700 font-medium">
-        {labelName}:
+    <div className={`mb-3 ${type === "checkbox" ? "flex gap-2 " : ""}`}>
+      <label htmlFor={name} className={`block text-grey-700 font-medium`}>
+        {labelName}
       </label>
       <input
         checked={type === "checkbox" ? value === true : undefined}
-        className="border p-1 rounded-md"
+        className="mt-1 border p-2 rounded-md"
         id={name}
         name={name}
         onChange={onChange}

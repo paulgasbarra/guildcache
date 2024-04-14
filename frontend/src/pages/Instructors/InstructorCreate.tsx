@@ -47,7 +47,7 @@ export const InstructorCreation: React.FC = () => {
 
   return (
     <EntityCreationForm
-      formTitle="Create - Instructor"
+      formTitle="Create Instructor"
       postEndpoint={ENDPOINTS.INSTRUCTORS.CREATE}
       formFields={instructorFormFields}
       successMessage="Instructor created"

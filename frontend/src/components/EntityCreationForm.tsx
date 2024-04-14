@@ -43,8 +43,8 @@ export const EntityCreationForm: React.FC<EntityCreationFormProps> = ({
   };
 
   return (
-    <div className="flex flex-col w-full">
-      <h2 className="text-2xl font-bold ml-6">{formTitle}</h2>
+    <div className="flex flex-col w-full p-6">
+      <h2 className="text-2xl font-bold mb-4">{formTitle}</h2>
       <ModelForm
         onSubmit={handleSubmit}
         errorMessage={errorMessage}
