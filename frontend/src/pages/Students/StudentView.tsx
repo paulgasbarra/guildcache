@@ -47,8 +47,12 @@ export const StudentView = () => {
     }
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.type === "checkbox") {
+  const onChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    if (e.target instanceof HTMLInputElement && e.target.type === "checkbox") {
       setFormData({ ...formData, [e.target.name]: e.target.checked });
       return;
     }

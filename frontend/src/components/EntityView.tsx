@@ -45,9 +45,15 @@ export const EntityView: React.FC<EntityViewProps> = ({
     setIsEditing(!isEditing);
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+      e.target instanceof HTMLInputElement && e.target.type === "checkbox"
+        ? e.target.checked
+        : e.target.value;
     setFormData({ ...formData, [e.target.name]: value });
   };
 
