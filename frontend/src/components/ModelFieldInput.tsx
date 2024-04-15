@@ -29,6 +29,7 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
           {name}
         </label>
         <select
+          key={name}
           id={value}
           name={name}
           className="mt-1 p-2 border rounded-md w-full"
@@ -37,7 +38,7 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
           <option value="">Select {name}</option>
           {options &&
             options.map((option) => (
-              <option key={option.name} value={option.id}>
+              <option key={option.id} value={option.id}>
                 {option.name}
               </option>
             ))}

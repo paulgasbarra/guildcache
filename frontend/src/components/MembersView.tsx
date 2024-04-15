@@ -163,6 +163,15 @@ const MembersView: React.FC<MemberViewProps> = ({
   const [newFormData, setNewFormData] = useState<{ [key: string]: any }>({});
   const [modalOpen, setModalOpen] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [displayedMembers, setDisplayedMembers] = useState<Contact[] | any[]>(
+    []
+  );
+
+  useEffect(() => {
+    const sortedMembers =
+      members && members.sort((a) => (a.is_primary ? -1 : 1));
+    setDisplayedMembers(sortedMembers);
+  }, [members]);
 
   const toggleAdding = () => {
     setIsAdding(!isAdding);
@@ -262,8 +271,8 @@ const MembersView: React.FC<MemberViewProps> = ({
           closeForm={toggleAdding}
         />
       )}
-      {members &&
-        members.map((member) => (
+      {displayedMembers &&
+        displayedMembers.map((member) => (
           <Member
             key={member.id}
             memberData={member}
