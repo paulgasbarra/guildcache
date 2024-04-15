@@ -11,7 +11,11 @@ interface MemberFormProps {
   formFields: InputObjectType[];
   initialValues: { [key: string]: string | number | boolean };
   onSubmit: (values: { [key: string]: string | number | boolean }) => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
+  onChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
   closeForm: () => void;
   removeMember?: (id: string) => void;
 }
@@ -92,9 +96,15 @@ const Member: React.FC<MemberProps> = ({
     setNewFormData(memberData);
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+      e.target instanceof HTMLInputElement && e.target.type === "checkbox"
+        ? e.target.checked
+        : e.target.value;
     setNewFormData({ ...newFormData, [e.target.name]: value });
   };
 
@@ -159,9 +169,15 @@ const MembersView: React.FC<MemberViewProps> = ({
     setNewFormData(blankMember);
   };
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value;
+      e.target instanceof HTMLInputElement && e.target.type === "checkbox"
+        ? e.target.checked
+        : e.target.value;
     setNewFormData({ ...newFormData, [e.target.name]: value });
   };
 

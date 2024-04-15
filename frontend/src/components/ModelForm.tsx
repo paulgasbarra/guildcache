@@ -36,10 +36,17 @@ const ModelForm: React.FC<ModelFormProps> = ({
     });
   }, [errorMessage]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = event.target;
-    const index = formData.findIndex((d) => d.id === name);
-    formData[index].value = type === "checked" ? checked : value;
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const index = formData.findIndex((d) => d.id === e.target.name);
+    if ((e.target as HTMLInputElement).type === "checkbox") {
+      formData[index].value = (e.target as HTMLInputElement).checked;
+    } else {
+      formData[index].value = e.target.value;
+    }
     setFormData(formData);
   };
 
