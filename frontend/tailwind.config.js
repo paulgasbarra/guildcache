@@ -11,6 +11,9 @@ export default {
       textColor: {
         "primary-blue": "#3B82F6",
       },
+      transitionProperty: {
+        height: "height",
+      },
     },
   },
   variants: {

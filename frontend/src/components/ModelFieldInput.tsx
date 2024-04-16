@@ -26,16 +26,16 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
     return (
       <div>
         <label htmlFor={name} className="block text-gray-700 font-medium">
-          {name}
+          {labelName}
         </label>
         <select
           key={name}
           id={value}
           name={name}
-          className="mt-1 p-2 border rounded-md w-full"
+          className="mt-1 p-2 border rounded-md w-full focus:ring-gray-500 focus:border-gray-500 accent-gray-500"
           onChange={onChange}
         >
-          <option value="">Select {name}</option>
+          <option value="">Select {labelName}</option>
           {options &&
             options.map((option) => (
               <option key={option.id} value={option.id}>
@@ -53,7 +53,7 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
       </label>
       <input
         checked={type === "checkbox" ? value === true : undefined}
-        className="mt-1 border p-2 rounded-md"
+        className="mt-1 border p-2 rounded-md focus:ring-gray-500 focus:border-gray-500 checked:bg-gray-500"
         id={name}
         name={name}
         onChange={onChange}

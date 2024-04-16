@@ -5,6 +5,8 @@ import { ModelFieldInput } from "./ModelFieldInput";
 import Modal from "./Modal";
 import { Link } from "react-router-dom";
 import MembersView from "./MembersView";
+import GrayButton from "./PrimaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 interface EntityViewProps {
   entityFormFields: { id: string; label: string; type: string }[];
@@ -94,19 +96,13 @@ export const EntityView: React.FC<EntityViewProps> = ({
                 onChange={onChange}
               />
             ))}
+            <div className="flex gap-4">
+              <SecondaryButton onClick={cancelEditing}>
+                Cancel Edit
+              </SecondaryButton>
+              <GrayButton onClick={submitEdit}>Submit</GrayButton>
+            </div>
           </div>
-          <button
-            onClick={cancelEditing}
-            className="text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-60 w-full rounded-md p-2"
-          >
-            Cancel Edit
-          </button>
-          <button
-            onClick={submitEdit}
-            className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 w-full rounded-md p-2"
-          >
-            Submit
-          </button>
         </>
       ) : (
         <>
@@ -133,13 +129,11 @@ export const EntityView: React.FC<EntityViewProps> = ({
                 );
               }
             })}
+
+            <GrayButton onClick={toggleEditing} type="button">
+              Edit
+            </GrayButton>
           </div>
-          <button
-            onClick={toggleEditing}
-            className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-60 w-full rounded-md p-2"
-          >
-            Edit
-          </button>
         </>
       )}
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>

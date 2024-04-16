@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 import { Cohort } from "../../types/Cohort";
 import { StudentFormFields } from "../../formFields/StudentFormFields";
 import NotesField from "../../components/NotesField";
+import PrimaryButton from "../../components/PrimaryButton";
+import SecondaryButton from "../../components/SecondaryButton";
 
 export const StudentView = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -121,18 +123,12 @@ export const StudentView = () => {
               options={cohorts}
             />
           </div>
-          <button
-            onClick={cancelEditing}
-            className="text-white bg-pink-600 hover:bg-pink-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-60 w-full rounded-md p-2"
-          >
-            Cancel Edit
-          </button>
-          <button
-            onClick={submitEdit}
-            className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-60 w-full rounded-md p-2"
-          >
-            Submit
-          </button>
+          <div className="p-4 flex gap-4 ">
+            <SecondaryButton onClick={cancelEditing}>
+              Cancel Edit
+            </SecondaryButton>
+            <PrimaryButton onClick={submitEdit}>Submit</PrimaryButton>
+          </div>
         </>
       ) : (
         <>
@@ -154,15 +150,11 @@ export const StudentView = () => {
                   : "None set"
               }
             />
-            <NotesField notes={formData.notes} updateNote={updateNote} />
           </div>
-
-          <button
-            onClick={toggleEditing}
-            className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-60 w-full rounded-md p-2"
-          >
-            Edit
-          </button>
+          <div className="flex flex-col gap-4 pl-4 pr-4 bg-white rounded-lg">
+            <NotesField notes={formData.notes} updateNote={updateNote} />
+            <PrimaryButton onClick={toggleEditing}>Edit</PrimaryButton>
+          </div>
           <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
             Student Updated
           </Modal>

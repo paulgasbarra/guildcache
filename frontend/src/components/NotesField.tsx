@@ -22,11 +22,15 @@ const NotesField: React.FC<NotesFieldProps> = ({ notes, updateNote }) => {
   };
 
   return (
-    <div className="flex flex-col">
-      <label className="text-blue-700 font-medium mr-2">Notes:</label>
-      <textarea value={note} onChange={handleTextChange} />
+    <div className="flex flex-col max-h-96">
+      <label className="text-gray-700 font-medium mr-2">Notes:</label>
+      <textarea
+        className="h-32 mb-2"
+        value={note}
+        onChange={handleTextChange}
+      />
       <button
-        className="text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-60 w-full rounded-md p-2"
+        className="text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-60 w-96 rounded-md p-2"
         onClick={handleButtonClick}
       >
         Save Notes

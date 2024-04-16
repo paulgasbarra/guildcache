@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { InputObjectType } from "../types/InputObjectType";
 import { ModelFieldInput } from "./ModelFieldInput";
+import GrayButton from "./PrimaryButton";
 
 interface ModelFormProps {
   initialFormData: InputObjectType[];
@@ -81,12 +82,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
           ))}
         </div>
         <div>
-          <button
-            type="submit"
-            className="text-white bg-gray-500 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-60 w-full rounded-md p-2"
-          >
-            Submit
-          </button>
+          <GrayButton type="submit">Submit</GrayButton>
         </div>
       </form>
     </div>

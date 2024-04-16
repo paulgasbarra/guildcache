@@ -21,9 +21,9 @@ const NavItem: React.FC<NavItemProps> = ({ onClick, selected, title, to }) => {
         {title}
       </Link>
       <div
-        className={`overflow-hidden transition-all  ease-in-out ${
-          selected ? "h-auto" : "h-0"
-        }`}
+        className={`transition-[height] linear ${
+          selected ? "h-20" : "h-0"
+        } overflow-hidden`}
       >
         <ul>
           <li>
