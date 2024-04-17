@@ -10,7 +10,7 @@ interface ModelFieldInputProps {
       | React.ChangeEvent<HTMLSelectElement>
       | React.ChangeEvent<HTMLInputElement>
   ) => void;
-  options?: { id: string | number; name: string }[];
+  options?: { id: string | number; label: string }[];
 }
 
 export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
@@ -35,11 +35,13 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
           className="mt-1 p-2 border rounded-md w-full focus:ring-gray-500 focus:border-gray-500 accent-gray-500"
           onChange={onChange}
         >
-          <option value="">Select {labelName}</option>
+          <option key={"select"} value="">
+            Select {labelName}
+          </option>
           {options &&
             options.map((option) => (
               <option key={option.id} value={option.id}>
-                {option.name}
+                {option.label || option.id}
               </option>
             ))}
         </select>

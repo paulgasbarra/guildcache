@@ -23,7 +23,10 @@ export function StudentCreation() {
   }, []);
 
   useEffect(() => {
-    if (cohorts.length > 0) {
+    if (
+      cohorts.length > 0 &&
+      studentFormFields.find((f) => f.id === "cohort") === undefined
+    ) {
       const updatedFormFields: InputObjectType[] = [
         ...studentFormFields,
         {

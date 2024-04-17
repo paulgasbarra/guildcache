@@ -17,6 +17,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
   const [formData, setFormData] = useState(initialFormData);
 
   useEffect(() => {
+    console.log(initialFormData);
     if (initialFormData) {
       setFormData(initialFormData);
     }
