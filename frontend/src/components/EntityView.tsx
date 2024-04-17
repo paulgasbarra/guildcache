@@ -94,6 +94,7 @@ export const EntityView: React.FC<EntityViewProps> = ({
                 type={field.type}
                 value={formData[field.id]}
                 onChange={onChange}
+                options={[]}
               />
             ))}
             <div className="flex gap-4">
