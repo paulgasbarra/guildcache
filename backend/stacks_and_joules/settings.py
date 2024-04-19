@@ -67,10 +67,14 @@ WSGI_APPLICATION = 'stacks_and_joules.wsgi.application'
 
 # Database
 
-DATABASES = {
+DATABASES = DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'guildcache',
+        'USER': 'paulgasbarra',
+        'PASSWORD': os.getenv('DB_PASSWORD'),  
+        'HOST': 'localhost',
+        'PORT': '5432',          
     }
 }
 
