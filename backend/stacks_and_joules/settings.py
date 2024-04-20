@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 # Load .env file
 load_dotenv()
@@ -66,16 +67,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'stacks_and_joules.wsgi.application'
 
 # Database
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-DATABASES = DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'guildcache',
-        'USER': 'paulgasbarra',
-        'PASSWORD': os.getenv('DB_PASSWORD'),  
-        'HOST': 'localhost',
-        'PORT': '5432',          
-    }
+DATABASES = {
+    'default': dj_database_url.config(
+        conn_max_age=600,
+        conn_health_checks=True,
+    ),
 }
 
 # Password validation
