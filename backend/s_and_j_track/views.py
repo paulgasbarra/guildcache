@@ -85,7 +85,7 @@ def login_view(request):
     if user:
         token, created = Token.objects.get_or_create(user=user)
         user_name = user.first_name + " " + user.last_name
-        user_organization = user.userprofile.organization.name
+        user_organization = {"name": user.userprofile.organization.name, "id": user.userprofile.organization.id}
         
         return Response({"token": token.key, "user": {"name": user_name, "organization": user_organization}}, status=200)
     else:

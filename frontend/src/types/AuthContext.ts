@@ -1,7 +1,11 @@
 export type AuthContextType = {
   isAuthenticated: boolean;
-  login: (token: string, user: { name: string; organization: string }) => void;
+  login: (
+    token: string,
+    user: { name: string; organization: { name: string; id: string } }
+  ) => void;
   logout: () => void;
-  organization: string | null;
+  organization: string;
+  organizationId: string;
   user: string;
 };

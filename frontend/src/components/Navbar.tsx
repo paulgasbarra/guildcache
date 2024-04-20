@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center space-x-1">
-            <h1>{organization}</h1>
+            <h1>{organization || null}</h1>
             <NavLink endpoint="/login">
               {isAuthenticated ? "Sign Out" : "Sign In"}
             </NavLink>

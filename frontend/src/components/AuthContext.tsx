@@ -5,7 +5,8 @@ const defaultContext: AuthContextType = {
   isAuthenticated: false,
   login: () => {},
   logout: () => {},
-  organization: null,
+  organization: "",
+  organizationId: "-1",
   user: "",
 };
 
@@ -25,19 +26,24 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   );
   const [user, setUser] = useState("");
   const [organization, setOrganization] = useState(
-    localStorage.getItem("organization")
+    localStorage.getItem("organization") || ""
+  );
+  const [organizationId, setOrganizationId] = useState(
+    localStorage.getItem("organization_id") || "-1"
   );
 
   const login = (
     token: string,
-    user: { name: string; organization: string }
+    user: { name: string; organization: { name: string; id: string } }
   ) => {
     const { name, organization } = user;
     localStorage.setItem("access_token", token);
-    localStorage.setItem("organization", organization);
+    localStorage.setItem("organization", JSON.stringify(organization.name));
+    localStorage.setItem("organization_id", organization.id.toString());
     setIsAuthenticated(true);
     setUser(name);
-    setOrganization(organization);
+    setOrganization(organization.name);
+    setOrganizationId(organization.id);
   };
 
   const logout = () => {
@@ -49,7 +55,14 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, login, logout, organization, user }}
+      value={{
+        isAuthenticated,
+        login,
+        logout,
+        organization,
+        organizationId,
+        user,
+      }}
     >
       {children}
     </AuthContext.Provider>

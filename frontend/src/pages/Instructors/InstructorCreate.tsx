@@ -28,7 +28,6 @@ export const InstructorCreation: React.FC = () => {
       cohorts.length > 0 &&
       instructorFormFields.find((f) => f.id === "cohorts") === undefined
     ) {
-      console.log(cohorts);
       const updatedFormFields: InputObjectType[] = [
         ...instructorFormFields,
         {

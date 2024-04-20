@@ -44,7 +44,7 @@ class CohortSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cohort
-        fields = ['id', 'name', 'start_date', 'end_date', 'location', 'students', 'instructors']
+        fields = ['id', 'name', 'start_date', 'end_date', 'location', 'students', 'instructors', 'organization']
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
