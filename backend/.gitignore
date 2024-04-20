@@ -1,3 +1,4 @@
 # pyc files
 *.pyc
 *.env
+venv/
