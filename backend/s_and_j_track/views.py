@@ -13,6 +13,11 @@ from django.db import transaction
 @permission_classes([IsAuthenticated])
 class CohortViewSet(viewsets.ModelViewSet): 
     serializer_class = CohortSerializer
+
+    def perform_create(self, serializer):
+        user_org = self.request.user.userprofile.organization
+        serializer.save(organization=user_org)
+        
     def get_queryset(self):
         user_org = self.request.user.userprofile.organization
         return Cohort.objects.filter(organization=user_org)
@@ -36,6 +41,11 @@ class ContactViewSet(viewsets.ModelViewSet):
 @permission_classes([IsAuthenticated])
 class StudentViewSet(viewsets.ModelViewSet): 
     serializer_class = StudentSerializer
+
+    def perform_create(self, serializer):
+        user_org = self.request.user.userprofile.organization
+        serializer.save(organization=user_org)
+
     def get_queryset(self):
         user_org = self.request.user.userprofile.organization
         return Student.objects.filter(organization=user_org)
@@ -53,6 +63,11 @@ class StudentDeleteView(generics.DestroyAPIView):
 @permission_classes([IsAuthenticated])
 class InstructorViewSet(viewsets.ModelViewSet):
     serializer_class = InstructorSerializer
+    
+    def perform_create(self, serializer):
+        user_org = self.request.user.userprofile.organization
+        serializer.save(organization=user_org)   
+
     def get_queryset(self):
         user_org = self.request.user.userprofile.organization
         return Instructor.objects.filter(organization=user_org)
@@ -60,6 +75,9 @@ class InstructorViewSet(viewsets.ModelViewSet):
 @permission_classes([IsAuthenticated])
 class EmployerViewSet(viewsets.ModelViewSet): 
     serializer_class = EmployerSerializer
+    def perform_create(self, serializer):
+        user_org = self.request.user.userprofile.organization
+        serializer.save(organization=user_org)
     def get_queryset(self):
         user_org = self.request.user.userprofile.organization
         return Employer.objects.filter(organization=user_org)
@@ -71,6 +89,9 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 @permission_classes([IsAuthenticated])
 class DonorViewSet(viewsets.ModelViewSet):
     serializer_class = DonorSerializer
+    def perform_create(self, serializer):
+        user_org = self.request.user.userprofile.organization
+        serializer.save(organization=user_org)
     def get_queryset(self):
         user_org = self.request.user.userprofile.organization
         return Donor.objects.filter(organization=user_org)

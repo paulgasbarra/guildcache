@@ -24,7 +24,7 @@ class InstructorSerializer(serializers.ModelSerializer):
 class EmployerSerializer(serializers.ModelSerializer): 
     class Meta: 
         model = Employer
-        fields = ['id', 'name', 'address', 'website', 'primary_contact', 'phone', 'email', 'linkedin', 'job_listings', 'company_size', 'speciality', 'contacts']
+        fields = ['id', 'name', 'address', 'website', 'primary_contact', 'phone', 'email', 'linkedin', 'job_listings', 'company_size', 'speciality']
 
 class ApplicationSerializer(serializers.ModelSerializer): 
     class Meta: 
@@ -44,7 +44,7 @@ class CohortSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cohort
-        fields = ['id', 'name', 'start_date', 'end_date', 'location', 'students', 'instructors', 'organization']
+        fields = ['id', 'name', 'start_date', 'end_date', 'location', 'students', 'instructors']
 
 
 class UserProfileSerializer(serializers.ModelSerializer):

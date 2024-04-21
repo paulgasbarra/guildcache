@@ -32,15 +32,17 @@ export const InstructorCreation: React.FC = () => {
         ...instructorFormFields,
         {
           id: "cohorts",
-          placeholder: "Select Cohort",
-          type: "select",
+          placeholder: "",
+          type: "checkbox-group",
           multiple: true,
-          label: "Cohort",
+          label: "Select Cohorts",
           error: [],
-          value: "",
+          value: [],
           options: cohorts.map((cohort: Cohort) => ({
-            value: cohort.id,
+            id: cohort.id,
+            value: cohort.id.toString(),
             label: cohort.name,
+            selected: false,
           })),
         },
       ];

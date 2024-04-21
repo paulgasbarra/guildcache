@@ -1,4 +1,5 @@
 import React from "react";
+import CheckboxGroupInput from "./CheckboxGroupInput";
 
 interface ModelFieldInputProps {
   name: string;
@@ -10,7 +11,12 @@ interface ModelFieldInputProps {
       | React.ChangeEvent<HTMLSelectElement>
       | React.ChangeEvent<HTMLInputElement>
   ) => void;
-  options?: { id: string | number; label: string }[];
+  options: {
+    id: string | number;
+    label: string;
+    selected: boolean;
+    value: string;
+  }[];
 }
 
 export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
@@ -22,6 +28,22 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
   options,
 }) => {
   if (type === "association" || type === "members") return null;
+  if (type === "checkbox-group" && options) {
+    return (
+      <CheckboxGroupInput
+        id={name}
+        label={labelName}
+        error={[]}
+        handleChange={onChange}
+        value={value}
+        options={options.map((option) => ({
+          value: option.value,
+          label: option.label,
+          selected: option.selected,
+        }))}
+      />
+    );
+  }
   if (type === "select") {
     return (
       <div>
@@ -40,7 +62,7 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
           </option>
           {options &&
             options.map((option) => (
-              <option key={option.id} value={option.id}>
+              <option key={option.id} value={option.value}>
                 {option.label || option.id}
               </option>
             ))}

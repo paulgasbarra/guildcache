@@ -11,7 +11,6 @@ export const CohortCreation: React.FC = () => {
     React.useState(CohortFormFields);
 
   useEffect(() => {
-    console.log("organizationId", organizationId);
     const updatedFormFields: InputObjectType[] = [
       ...cohortFormFields,
       {

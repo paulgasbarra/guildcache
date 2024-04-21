@@ -5,7 +5,8 @@ interface CheckboxGroupInputProps {
   label: string;
   error: string[];
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  options: { value: string; label: string; selected?: boolean }[];
+  value: number[];
+  options: { value: string; label: string; selected: boolean }[];
 }
 
 const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
@@ -14,6 +15,7 @@ const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
   error,
   handleChange,
   options,
+  value = [],
 }) => {
   const [selected, setSelected] = useState<number[]>([]);
 
@@ -48,18 +50,20 @@ const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
   };
 
   return (
-    <div className="m-4">
+    <div className="mb-4">
       <label id={id} className="block text-gray-700 font-medium">
         {label}
       </label>
       {options.map((option) => (
-        <div key={option.value}>
+        <div className="p-2" key={option.value}>
           <label>
             <input
               className="mr-2 leading-tight"
               type="checkbox"
               value={option.value}
-              checked={option.selected}
+              checked={
+                option.selected || value.includes(parseInt(option.value))
+              }
               onChange={onCheckboxChange}
             />
             {option.label}
