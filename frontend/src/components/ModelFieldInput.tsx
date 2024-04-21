@@ -11,7 +11,7 @@ interface ModelFieldInputProps {
       | React.ChangeEvent<HTMLSelectElement>
       | React.ChangeEvent<HTMLInputElement>
   ) => void;
-  options: {
+  options?: {
     id: string | number;
     label: string;
     selected: boolean;

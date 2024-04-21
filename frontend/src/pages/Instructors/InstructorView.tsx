@@ -107,6 +107,7 @@ export const InstructorView = () => {
                 label="Cohorts"
                 error={[]}
                 handleChange={onChange}
+                value={formData.cohorts}
                 options={cohorts.map((cohort: Cohort) => ({
                   value: cohort.id,
                   label: cohort.name,

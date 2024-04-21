@@ -70,25 +70,20 @@ export const StudentView = () => {
     return cohorts.find((cohort: Cohort) => cohort.id === id).name;
   };
 
-  const submitEdit = async (updatedFormData = formData) => {
+  const submitEdit = async () => {
     try {
-      await axiosInstance.put(
-        ENDPOINTS.STUDENTS.DETAILS(studentId),
-        updatedFormData
-      );
+      await axiosInstance.put(ENDPOINTS.STUDENTS.DETAILS(studentId), formData);
       setModalOpen(true);
       setIsEditing(false);
-      // Ensure state is updated with the latest formData after successful submission
-      setFormData(updatedFormData);
     } catch (error) {
-      console.error("Error updating student:", error);
+      console.error("Error updating instructor:", error);
       // Handle error - maybe display a notification
     }
   };
 
   const updateNote = async (note: string) => {
-    const updatedFormData = { ...formData, notes: note };
-    await submitEdit(updatedFormData);
+    setFormData({ ...formData, notes: note });
+    await submitEdit();
   };
 
   // use a map to render the fields, may require a model update to include a field type and a field label
