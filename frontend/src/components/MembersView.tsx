@@ -7,6 +7,28 @@ import Modal from "./Modal";
 import { InputObjectType } from "../types/InputObjectType";
 import { ENDPOINTS } from "../api";
 
+interface MembersButtonProps {
+  children: React.ReactNode;
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+}
+
+const MembersButton: React.FC<MembersButtonProps> = ({
+  children,
+  type,
+  onClick,
+}) => {
+  return (
+    <button
+      className="text-white pl-1 pr-1 bg-slate-500 rounded-md hover:text-white hover:bg-slate-700"
+      type={type || "button"}
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
+
 interface MemberFormProps {
   formFields: InputObjectType[];
   initialValues: { [key: string]: string | number | boolean };
@@ -38,7 +60,7 @@ const MemberForm: React.FC<MemberFormProps> = ({
   };
 
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex flex-row gap-2 items-center">
       {initialValues &&
         formFields.map((field: any) => (
           <ModelFieldInput
@@ -50,13 +72,21 @@ const MemberForm: React.FC<MemberFormProps> = ({
             onChange={onChange}
           />
         ))}
-      <button onClick={handleSubmit}>Submit</button>
+      <MembersButton onClick={handleSubmit}>Submit</MembersButton>
       {removeMember && (
-        <button onClick={() => removeMember(initialValues.id.toString())}>
+        <button
+          className="text-white pl-1 pr-1 bg-red-500 rounded-md hover:text-white hover:bg-red-700"
+          onClick={() => removeMember(initialValues.id.toString())}
+        >
           Remove
         </button>
       )}
-      <button onClick={handleCancel}>Cancel</button>
+      <button
+        className="text-slate pl-1 pr-1 bg-gray-200 rounded-md hover:text-white hover:bg-gray-400"
+        onClick={handleCancel}
+      >
+        Cancel
+      </button>
     </div>
   );
 };
@@ -133,11 +163,12 @@ const Member: React.FC<MemberProps> = ({
         />
       ) : (
         <div className="flex flex-row gap-2">
+          {newFormData.is_primary && <div className="font-bold">Primary</div>}
           <h1>{newFormData.name}</h1>
           <p>{newFormData.email}</p>
           <p>{newFormData.phone}</p>
-          {newFormData.is_primary && <p>Primary</p>}
-          <button onClick={toggleEditing}>Edit</button>
+
+          <MembersButton onClick={toggleEditing}>Edit</MembersButton>
         </div>
       )}
     </div>
@@ -259,8 +290,10 @@ const MembersView: React.FC<MemberViewProps> = ({
   return (
     <div>
       <div className="flex flex-row space-between">
-        <label className="text-blue-700 font-medium mr-2">{label}:</label>
-        <button onClick={toggleAdding}>Add {label}</button>
+        <label className="text-slate-700 font-medium mr-2">{label}:</label>
+        <div className="flex-end">
+          <MembersButton onClick={toggleAdding}>Add {label}</MembersButton>
+        </div>
       </div>
       {isAdding && (
         <MemberForm
