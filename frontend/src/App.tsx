@@ -57,6 +57,7 @@ function App() {
           <Route path="employers/:id" element={<EmployerView />} />
           <Route path="employers/create" element={<EmployerCreation />} />
           <Route path="employers/upload" element={<EmployerCSVUpload />} />
+          <Route path="*" element={<ErrorPage />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<ErrorPage />} />
