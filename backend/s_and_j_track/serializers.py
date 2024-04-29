@@ -22,9 +22,11 @@ class InstructorSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'address', 'phone', 'email', 'linkedin', 'website', 'instagram', 'tiktok', 'salary', "cohorts"]
 
 class EmployerSerializer(serializers.ModelSerializer): 
+    contacts = ContactSerializer(many=True, read_only=True)
+
     class Meta: 
         model = Employer
-        fields = ['id', 'name', 'address', 'website', 'primary_contact', 'phone', 'email', 'linkedin', 'job_listings', 'company_size', 'speciality']
+        fields = ['id', 'name', 'address', 'website', 'phone', 'email', 'linkedin', 'job_listings', 'company_size', 'speciality', 'contacts']
 
 class ApplicationSerializer(serializers.ModelSerializer): 
     class Meta: 

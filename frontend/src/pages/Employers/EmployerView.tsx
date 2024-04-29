@@ -11,6 +11,7 @@ export const EmployerView = () => {
       updateDetailEndpoint={ENDPOINTS.EMPLOYERS.DETAILS}
       backLink="/admin/employers"
       successMessage="Employer updated"
+      modelType="employer"
     />
   );
 };

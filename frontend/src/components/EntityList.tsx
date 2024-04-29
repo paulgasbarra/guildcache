@@ -28,7 +28,7 @@ const EntityList: React.FC<{
   }, [endpoint, entityType, isAuthenticated]);
 
   const handleDelete = async (id: string) => {
-    const detailEndpoint = `${endpoint}/${id}`; // Assuming a RESTful API
+    const detailEndpoint = `${endpoint}/${id}`;
     await axiosInstance
       .delete(detailEndpoint)
       .then(() => {
