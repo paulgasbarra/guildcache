@@ -35,7 +35,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
         field.error = [];
       }
     });
-  }, [errorMessage]);
+  }, [formData, errorMessage]);
 
   const handleChange = (
     e:
@@ -78,6 +78,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
               type={input.type}
               options={input.options}
               onChange={handleChange}
+              errorMessage={input.error}
             />
           ))}
         </div>

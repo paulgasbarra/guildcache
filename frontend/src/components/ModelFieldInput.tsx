@@ -17,6 +17,7 @@ interface ModelFieldInputProps {
     selected: boolean;
     value: string;
   }[];
+  errorMessage?: string | string[] | undefined;
 }
 
 export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
@@ -26,22 +27,26 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
   type,
   onChange,
   options,
+  errorMessage,
 }) => {
   if (type === "association" || type === "members") return null;
   if (type === "checkbox-group" && options) {
     return (
-      <CheckboxGroupInput
-        id={name}
-        label={labelName}
-        error={[]}
-        handleChange={onChange}
-        value={value}
-        options={options.map((option) => ({
-          value: option.value,
-          label: option.label,
-          selected: option.selected,
-        }))}
-      />
+      <>
+        <CheckboxGroupInput
+          id={name}
+          label={labelName}
+          error={[]}
+          handleChange={onChange}
+          value={value}
+          options={options.map((option) => ({
+            value: option.value,
+            label: option.label,
+            selected: option.selected,
+          }))}
+        />
+        <div className="text-red-500 capitalize">{errorMessage}</div>
+      </>
     );
   }
   if (type === "select") {
@@ -67,6 +72,9 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
               </option>
             ))}
         </select>
+        {errorMessage && errorMessage.length > 0 && (
+          <div className="text-red-500 capitalize">{errorMessage}</div>
+        )}
       </div>
     );
   }
@@ -84,6 +92,9 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
         type={type ? type : "text"}
         value={value}
       />
+      {errorMessage && errorMessage.length > 0 && (
+        <div className="text-red-500 capitalize">{errorMessage}</div>
+      )}
     </div>
   );
 };
