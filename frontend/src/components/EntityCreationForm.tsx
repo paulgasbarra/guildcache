@@ -23,7 +23,7 @@ export const EntityCreationForm: React.FC<EntityCreationFormProps> = ({
   const [modalText, setModalText] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleSubmit = async (formData: {}) => {
+  const handleSubmit = async (formData: object) => {
     try {
       const response = await axiosInstance.post(postEndpoint, formData);
       console.log(`${successMessage}:`, response.data);

@@ -72,7 +72,7 @@ class Student(models.Model):
     lca_cert = models.BooleanField(default=False)
     epa_608_cert = models.BooleanField(default=False)
     s_j_cert = models.BooleanField(default=False)
-    cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, related_name='students')
+    cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE, related_name='students', blank=True, null=True)
     notes = models.TextField(blank=True)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='students')
     hired = models.BooleanField(default=False)

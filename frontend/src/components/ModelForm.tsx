@@ -5,7 +5,7 @@ import GrayButton from "./PrimaryButton";
 
 interface ModelFormProps {
   initialFormData: InputObjectType[];
-  onSubmit: (formData: {}) => Promise<void>;
+  onSubmit: (formData: object) => Promise<void>;
   errorMessage: string;
 }
 
