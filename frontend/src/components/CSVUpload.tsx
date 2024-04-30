@@ -1,15 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import { axiosInstance } from "../api";
+import { InputObjectType } from "../types/InputObjectType";
 
 interface CSVUploadProps {
   endpoint: string;
   modelName?: string;
+  formFields: InputObjectType[];
 }
 
-const CSVUpload: React.FC<CSVUploadProps> = ({ endpoint, modelName }) => {
+const CSVUpload: React.FC<CSVUploadProps> = ({
+  endpoint,
+  modelName,
+  formFields,
+}) => {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [requiredFormData, setRequiredFormData] = useState(formFields);
+
+  useEffect(() => {
+    setRequiredFormData(
+      formFields.filter(
+        (field) => field.type !== "association" && field.type !== "members"
+      )
+    );
+  }, [formFields]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -43,6 +58,12 @@ const CSVUpload: React.FC<CSVUploadProps> = ({ endpoint, modelName }) => {
   return (
     <div className="p-4 flex flex-col ">
       <h2 className="text-2xl font-bold mb-4">Upload a {modelName} CSV</h2>
+      <div className="mb-6">
+        Your {modelName} CSV should have the following column headers: <br />
+        <div className="font-bold">
+          {requiredFormData.map((field) => field.id).join(", ")}
+        </div>
+      </div>
       <input type="file" onChange={handleFileChange} />
       <br />
       <button
