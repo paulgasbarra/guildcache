@@ -59,7 +59,7 @@ const EntityList: React.FC<{
           </div>
         </>
       )}
-      {entities && (
+      {entities.length > 0 && (
         <>
           <ModelTable
             modelList={entities}
