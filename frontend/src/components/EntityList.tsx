@@ -54,10 +54,12 @@ const EntityList: React.FC<{
       {entities.length === 0 && !isLoading && (
         <>
           <div className="h-10 w-full bg-gray-800"></div>
-          <h2 className="text-2xl font-bold m-4">No {entityType}s found</h2>
+          <div className="flex w-full items-center justify-center">
+            <h2 className="font-bold capitalize">No {entityType}s found</h2>
+          </div>
         </>
       )}
-      {entities.length > 0 && (
+      {entities && (
         <>
           <ModelTable
             modelList={entities}
