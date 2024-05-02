@@ -52,6 +52,7 @@ export const EntityView: React.FC<EntityViewProps> = ({
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const value =
       e.target instanceof HTMLInputElement && e.target.type === "checkbox"
