@@ -10,6 +10,7 @@ interface ModelFieldInputProps {
     e:
       | React.ChangeEvent<HTMLSelectElement>
       | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
   options?: {
     id: string | number;
@@ -72,6 +73,25 @@ export const ModelFieldInput: React.FC<ModelFieldInputProps> = ({
               </option>
             ))}
         </select>
+        {errorMessage && errorMessage.length > 0 && (
+          <div className="text-red-500 capitalize">{errorMessage}</div>
+        )}
+      </div>
+    );
+  }
+  if (type === "textarea") {
+    return (
+      <div className="mb-3">
+        <label htmlFor={name} className="block text-grey-700 font-medium">
+          {labelName}
+        </label>
+        <textarea
+          className="mt-1 border p-2 rounded-md focus:ring-gray-500 focus:border-gray-500"
+          id={name}
+          name={name}
+          onChange={onChange}
+          value={value}
+        />
         {errorMessage && errorMessage.length > 0 && (
           <div className="text-red-500 capitalize">{errorMessage}</div>
         )}

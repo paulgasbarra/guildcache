@@ -41,6 +41,7 @@ const ModelForm: React.FC<ModelFormProps> = ({
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const updatedFormData = formData.map((field) => {
       if (field.id === e.target.name) {

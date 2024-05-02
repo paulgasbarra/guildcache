@@ -76,6 +76,8 @@ class Student(models.Model):
     notes = models.TextField(blank=True)
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name='students')
     hired = models.BooleanField(default=False)
+    osha_30_10_cert = models.BooleanField(default=False)
+    drivers_license = models.BooleanField(default=False)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
