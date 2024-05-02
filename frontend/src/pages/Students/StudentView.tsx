@@ -53,6 +53,7 @@ export const StudentView = () => {
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     if (e.target instanceof HTMLInputElement && e.target.type === "checkbox") {
       setFormData({ ...formData, [e.target.name]: e.target.checked });
@@ -130,13 +131,16 @@ export const StudentView = () => {
           <div className="grid grid-cols-2 gap-4 p-4 bg-white rounded-lg">
             {" "}
             {StudentFormFields &&
-              StudentFormFields.map((field) => (
-                <ModelFieldDisplay
-                  key={field.id}
-                  name={field.label}
-                  value={formData[field.id]}
-                />
-              ))}
+              StudentFormFields.map((field) => {
+                if (field.id === "notes") return null;
+                return (
+                  <ModelFieldDisplay
+                    key={field.id}
+                    name={field.label}
+                    value={formData[field.id]}
+                  />
+                );
+              })}
             <ModelFieldDisplay
               name="Cohort"
               value={
