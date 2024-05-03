@@ -22,6 +22,7 @@ export const InstructorView = () => {
       const response = await axiosInstance.get(
         ENDPOINTS.INSTRUCTORS.DETAILS(instructorId)
       );
+      console.log(response.data);
       setFormData(response.data);
     } catch (error) {
       console.error("Error fetching instructor:", error);
@@ -53,6 +54,7 @@ export const InstructorView = () => {
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     if (e.target instanceof HTMLInputElement && e.target.type === "checkbox") {
       setFormData({ ...formData, [e.target.name]: e.target.checked });

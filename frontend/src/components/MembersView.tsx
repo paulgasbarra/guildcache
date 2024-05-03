@@ -37,6 +37,7 @@ interface MemberFormProps {
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => void;
   closeForm: () => void;
   removeMember?: (id: string) => void;
@@ -63,6 +64,7 @@ const MemberForm: React.FC<MemberFormProps> = ({
     <div className="flex flex-row gap-2 items-center">
       {initialValues &&
         formFields.map((field: any) => (
+          // TODO: Refactor to only use field, value, and onChange
           <ModelFieldInput
             key={field.id}
             labelName={field.label}
@@ -130,6 +132,7 @@ const Member: React.FC<MemberProps> = ({
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const value =
       e.target instanceof HTMLInputElement && e.target.type === "checkbox"
@@ -213,6 +216,7 @@ const MembersView: React.FC<MemberViewProps> = ({
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.ChangeEvent<HTMLSelectElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     const value =
       e.target instanceof HTMLInputElement && e.target.type === "checkbox"
