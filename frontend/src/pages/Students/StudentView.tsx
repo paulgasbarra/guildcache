@@ -71,9 +71,10 @@ export const StudentView = () => {
     return cohorts.find((cohort: Cohort) => cohort.id === id).name;
   };
 
-  const submitEdit = async (data = formData) => {
+  const submitEdit = async () => {
+    console.log("submitting edit", formData);
     try {
-      await axiosInstance.put(ENDPOINTS.STUDENTS.DETAILS(studentId), data);
+      await axiosInstance.put(ENDPOINTS.STUDENTS.DETAILS(studentId), formData);
       setModalOpen(true);
       setIsEditing(false);
     } catch (error) {
@@ -83,9 +84,8 @@ export const StudentView = () => {
   };
 
   const updateNote = async (note: string) => {
-    const newFormData = { ...formData, notes: note };
-    setFormData(newFormData);
-    await submitEdit(newFormData);
+    setFormData({ ...formData, notes: note });
+    await submitEdit();
   };
 
   // use a map to render the fields, may require a model update to include a field type and a field label

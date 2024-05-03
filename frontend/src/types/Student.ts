@@ -9,6 +9,8 @@ export interface Student {
   lca_cert: boolean;
   epa_608_cert: boolean;
   s_j_cert: boolean;
+  drivers_license: boolean;
+  osha_30_10_cert: boolean;
   notes: string;
   hired: boolean;
 }
