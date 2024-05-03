@@ -12,6 +12,7 @@ import SecondaryButton from "../../components/SecondaryButton";
 
 export const StudentView = () => {
   const [isEditing, setIsEditing] = useState(false);
+  // massage these two types into obedience. THey should be Student and Cohort
   const [formData, setFormData] = useState({} as any);
   const [cohorts, setCohorts] = useState([] as any);
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,6 +24,7 @@ export const StudentView = () => {
       const response = await axiosInstance.get(
         ENDPOINTS.STUDENTS.DETAILS(studentId)
       );
+      console.log(response.data);
       setFormData(response.data);
     } catch (error) {
       console.error("Error fetching student:", error);
