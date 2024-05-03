@@ -15,6 +15,7 @@ export const StudentView = () => {
   const [formData, setFormData] = useState({} as any);
   const [cohorts, setCohorts] = useState([] as any);
   const [modalOpen, setModalOpen] = useState(false);
+  const [notes, setNotes] = useState("");
   const studentId = window.location.pathname.split("/")[3];
 
   const fetchStudent = async () => {
@@ -72,20 +73,25 @@ export const StudentView = () => {
   };
 
   const submitEdit = async () => {
-    console.log("submitting edit", formData);
     try {
       await axiosInstance.put(ENDPOINTS.STUDENTS.DETAILS(studentId), formData);
       setModalOpen(true);
       setIsEditing(false);
     } catch (error) {
-      console.error("Error updating instructor:", error);
+      console.error("Error updating student:", error);
       // Handle error - maybe display a notification
     }
   };
 
+  useEffect(() => {
+    if (notes.length > 0) {
+      submitEdit();
+    }
+  }, [notes]);
+
   const updateNote = async (note: string) => {
     setFormData({ ...formData, notes: note });
-    await submitEdit();
+    setNotes(note);
   };
 
   // use a map to render the fields, may require a model update to include a field type and a field label
