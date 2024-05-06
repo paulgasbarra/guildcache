@@ -12,7 +12,6 @@ const MockContext = createContext(mockDefautContext);
 
 vi.mock("./AuthContext", () => ({
   useAuth: vi.fn().mockImplementation(() => {
-    console.log("useAuth mock called");
     return useContext(MockContext);
   }),
 }));
