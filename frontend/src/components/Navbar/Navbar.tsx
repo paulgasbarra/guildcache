@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "../NavLink";
 import { useAuth } from "../AuthContext";
-import logo from "../assets/images/guildcache-logo.png";
+import logo from "../../assets/images/guildcache-logo.png";
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, organization } = useAuth();
