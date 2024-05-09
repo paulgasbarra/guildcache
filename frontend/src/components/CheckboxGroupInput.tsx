@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import CheckboxOption from "./CheckboxOption/CheckboxOption";
 
 interface CheckboxGroupInputProps {
   id: string;
@@ -55,20 +56,12 @@ const CheckboxGroupInput: React.FC<CheckboxGroupInputProps> = ({
         {label}
       </label>
       {options.map((option) => (
-        <div className="p-2" key={option.value}>
-          <label>
-            <input
-              className="mr-2 leading-tight"
-              type="checkbox"
-              value={option.value}
-              checked={
-                option.selected || value.includes(parseInt(option.value))
-              }
-              onChange={onCheckboxChange}
-            />
-            {option.label}
-          </label>
-        </div>
+        <CheckboxOption
+          key={option.value}
+          option={option}
+          onChange={onCheckboxChange}
+          checked={option.selected || value.includes(parseInt(option.value))}
+        />
       ))}
       {error.map((e, index) => (
         <div key={index} className="text-red-600">
