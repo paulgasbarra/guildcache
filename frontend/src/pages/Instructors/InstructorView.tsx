@@ -5,7 +5,7 @@ import { ModelFieldInput } from "../../components/ModelFieldInput";
 import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 import { InstructorFormFields } from "../../formFields/InstructorFormFields";
-import CheckboxGroupInput from "../../components/CheckboxGroupInput";
+import CheckboxGroupInput from "../../components/CheckboxGroupInput/CheckboxGroupInput";
 import { Cohort } from "../../types/Cohort";
 import PrimaryButton from "../../components/PrimaryButton";
 import SecondaryButton from "../../components/SecondaryButton";

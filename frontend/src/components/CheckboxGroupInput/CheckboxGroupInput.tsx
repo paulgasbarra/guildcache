@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CheckboxOption from "./CheckboxOption/CheckboxOption";
+import CheckboxOption from "../CheckboxOption/CheckboxOption";
 
 interface CheckboxGroupInputProps {
   id: string;

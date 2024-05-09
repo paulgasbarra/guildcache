@@ -1,5 +1,5 @@
 import React from "react";
-import CheckboxGroupInput from "./CheckboxGroupInput";
+import CheckboxGroupInput from "./CheckboxGroupInput/CheckboxGroupInput";
 
 interface ModelFieldInputProps {
   name: string;

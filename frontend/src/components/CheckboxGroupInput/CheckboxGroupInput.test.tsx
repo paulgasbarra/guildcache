@@ -3,7 +3,6 @@
 import React from "react";
 import CheckboxGroupInput from "./CheckboxGroupInput";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { getDefaultCompilerOptions } from "typescript";
 
 const exampleCheckboxGroupInput = (
   options: { value: string; label: string; selected: boolean }[]
