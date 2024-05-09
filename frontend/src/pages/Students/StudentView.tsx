@@ -6,7 +6,7 @@ import Modal from "../../components/Modal";
 import { Link } from "react-router-dom";
 import { Cohort } from "../../types/Cohort";
 import { StudentFormFields } from "../../formFields/StudentFormFields";
-import NotesField from "../../components/NotesField";
+import NotesField from "../../components/NotesField/NotesField";
 import PrimaryButton from "../../components/PrimaryButton";
 import SecondaryButton from "../../components/SecondaryButton";
 
