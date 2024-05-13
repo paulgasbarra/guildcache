@@ -1,0 +1,85 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Modal > does not render when open is false 1`] = `
+<div>
+  <div
+    class="fixed inset-0 flex justify-center items-center invisible"
+  >
+    <div
+      class="bg-white rounded-xl shadow p-10 transition-all scale-125 opacity-0"
+    >
+      <button
+        class="absolute top-2 right-2 p-1 rounded-lg text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600"
+      >
+        <svg
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line
+            x1="18"
+            x2="6"
+            y1="6"
+            y2="18"
+          />
+          <line
+            x1="6"
+            x2="18"
+            y1="6"
+            y2="18"
+          />
+        </svg>
+      </button>
+      Hello
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Modal > renders 1`] = `
+<div>
+  <div
+    class="fixed inset-0 flex justify-center items-center visible bg-black/20"
+  >
+    <div
+      class="bg-white rounded-xl shadow p-10 transition-all scale-100 opacity-100"
+    >
+      <button
+        class="absolute top-2 right-2 p-1 rounded-lg text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600"
+      >
+        <svg
+          fill="none"
+          height="24"
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <line
+            x1="18"
+            x2="6"
+            y1="6"
+            y2="18"
+          />
+          <line
+            x1="6"
+            x2="18"
+            y1="6"
+            y2="18"
+          />
+        </svg>
+      </button>
+      Hello
+    </div>
+  </div>
+</div>
+`;
