@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
+import CSVVerificationTable from "./CSVVerificationTable/CSVVerificationTable";
 import { axiosInstance } from "../api";
 import { InputObjectType } from "../types/InputObjectType";
 
@@ -64,8 +65,11 @@ const CSVUpload: React.FC<CSVUploadProps> = ({
           {requiredFormData.map((field) => field.id).join(", ")}
         </div>
       </div>
-      <input type="file" onChange={handleFileChange} />
+      <input type="file" accept=".csv" onChange={handleFileChange} />
       <br />
+      {file && (
+        <CSVVerificationTable file={file} requiredFields={requiredFormData} />
+      )}
       <button
         disabled={file === null}
         className="w-1/3 text-white bg-gray-500 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-60 w-full rounded-md p-2 disabled:opacity-50 disabled:cursor-not-allowed"
