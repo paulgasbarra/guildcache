@@ -1,6 +1,6 @@
 import React from "react";
 import CSVVerificationTable from "./CSVVerificationTable";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 
 const mockFile = new File(
   ["id,name\n1,John Doe\n2,Jane Doe\n3,John Smith\n4,Jane Smith\n"],
@@ -40,7 +40,7 @@ describe("CSVVerificationTable Component", () => {
     );
     expect(screen.getByRole("table")).toBeInTheDocument();
   });
-  it("renders a table column for each field in the data", () => {
+  it("renders a table column for each field in the data", async () => {
     render(
       <CSVVerificationTable
         file={mockFile}
@@ -50,9 +50,12 @@ describe("CSVVerificationTable Component", () => {
         }))}
       />
     );
-    expect(screen.getAllByRole("columnheader")).toHaveLength(2);
+    await waitFor(() =>
+      expect(screen.getAllByRole("columnheader")).toHaveLength(2)
+    );
   });
-  it("renders a table row for each record in the data", () => {
+  it("renders a table row for each record in the data", async () => {
+    console.log("mockFile", mockFile);
     render(
       <CSVVerificationTable
         file={mockFile}
@@ -62,6 +65,6 @@ describe("CSVVerificationTable Component", () => {
         }))}
       />
     );
-    expect(screen.getAllByRole("row")).toHaveLength(5);
+    await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(5));
   });
 });

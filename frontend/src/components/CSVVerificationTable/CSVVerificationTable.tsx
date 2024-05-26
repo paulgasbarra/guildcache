@@ -30,14 +30,14 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
         <thead>
           <tr>
             {fileData.length > 0 &&
-              fileData[0].map((field) => <th key={field.id}>{field.label}</th>)}
+              fileData[0].map((field) => <th key={field}>{field}</th>)}
           </tr>
         </thead>
         <tbody>
-          {fileData.slice(0, fileData.length - 1).map((row, index) => (
+          {fileData.slice(1, fileData.length - 1).map((row, index) => (
             <tr key={index}>
-              {row.map((cell, index) => (
-                <td key={index}>{cell}</td>
+              {row.map((item, index) => (
+                <td key={index}>{item}</td>
               ))}
             </tr>
           ))}
