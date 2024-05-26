@@ -18,10 +18,24 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
       const text = e.target?.result as string;
       const rows = text.split("\n");
       const data = rows.map((row) => row.split(","));
+      if (isDataValid(data)) {
+        console.log("Data is valid");
+      } else {
+        console.log("Data is invalid");
+      }
+
       setFileData(data);
     };
     reader.readAsText(file);
   }, [file]);
+
+  const isDataValid = (data) => {
+    if (data.length === 0) {
+      return false;
+    }
+    const headers = data[0];
+    return requiredFields.every((field) => headers.includes(field.id));
+  };
 
   return (
     <div>
