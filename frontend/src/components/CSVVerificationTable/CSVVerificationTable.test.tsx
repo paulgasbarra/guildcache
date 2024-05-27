@@ -5,7 +5,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 const mockFileString =
   "id,name,email\n1,John Doe,jon@mail.com\n2,Jane Doe,jane@mail.com\n3,John Smith\n4,Jane Smith,smith@mail.com\n";
 
-const returnMockFile = (csvString) => {
+const returnMockFile = (csvString: string) => {
   return new File([csvString], "mock_csv.csv", { type: "text/csv" });
 };
 
