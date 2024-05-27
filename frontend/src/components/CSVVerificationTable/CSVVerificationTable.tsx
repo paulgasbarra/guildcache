@@ -11,6 +11,7 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
   requiredFields,
 }) => {
   const [fileData, setFileData] = useState<string[][]>([]);
+  const [missingColumns, setMissingColumns] = useState<string[]>([]);
 
   useEffect(() => {
     const reader = new FileReader();
@@ -29,13 +30,25 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
     reader.readAsText(file);
   }, [file]);
 
-  const isDataValid = (data) => {
-    if (data.length === 0) {
-      return false;
-    }
-    const headers = data[0];
-    return requiredFields.every((field) => headers.includes(field.id));
+  const isDataValid = (data: string[][]) => {
+    const header = data[0];
+    const missingColumns = requiredFields
+      .map((field) => field.id)
+      .filter((field) => !header.includes(field));
+    setMissingColumns(missingColumns);
+    return missingColumns.length === 0;
   };
+
+  if (missingColumns.length > 0) {
+    return (
+      <div>
+        <h3>CSV is invalid:</h3>
+        {missingColumns.map((column) => (
+          <div>Missing column: {column}</div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div>
