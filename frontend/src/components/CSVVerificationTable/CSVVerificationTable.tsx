@@ -10,7 +10,8 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
   file,
   requiredFields,
 }) => {
-  const [fileData, setFileData] = useState<string[][]>([]);
+  const [validData, setValidData] = useState<string[][]>([]);
+  const [invalidData, setInvalidData] = useState<string[][]>([]);
   const [missingColumns, setMissingColumns] = useState<string[]>([]);
 
   useEffect(() => {
@@ -19,24 +20,44 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
       const text = e.target?.result as string;
       const rows = text.split("\n");
       const data = rows.map((row) => row.split(","));
-      if (isDataValid(data)) {
-        console.log("Data is valid");
-      } else {
-        console.log("Data is invalid");
-      }
-
-      setFileData(data);
+      const missingColumns = getMissingColumns(data);
+      setMissingColumns(missingColumns);
+      const sortedData = groupDataByValidity(data);
+      setValidData(sortedData[0]);
+      setInvalidData(sortedData[1]);
     };
     reader.readAsText(file);
   }, [file]);
 
-  const isDataValid = (data: string[][]) => {
-    const header = data[0];
-    const missingColumns = requiredFields
-      .map((field) => field.id)
-      .filter((field) => !header.includes(field));
-    setMissingColumns(missingColumns);
-    return missingColumns.length === 0;
+  const getMissingColumns = (data: string[][]) => {
+    const headerFields = data[0];
+    return requiredFields
+      .map((field) => (!headerFields.includes(field.id) ? field.id : null))
+      .filter((field) => field !== null) as string[];
+  };
+
+  const groupDataByValidity = (data: string[][]) => {
+    const validRows: string[][] = [];
+    const invalidRows: string[][] = [];
+    let headers = data[0];
+
+    data = data.slice(1, data.length - 1);
+    data.forEach((row) => {
+      row.forEach((field, index) => {
+        const requiredField = requiredFields.find(
+          (requiredField) => requiredField.id === headers[index]
+        );
+        // check if data unique
+        if (field === "") {
+          field = "ERROR: Empty field";
+          invalidRows.push(row);
+        } else if (requiredField?.type == "number" && isNaN(Number(field))) {
+          field = "ERROR: Not a number";
+          invalidRows.push(row);
+        }
+      });
+    });
+    return [validRows, invalidRows];
   };
 
   if (missingColumns.length > 0) {
@@ -56,12 +77,12 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
       <table>
         <thead>
           <tr>
-            {fileData.length > 0 &&
-              fileData[0].map((field) => <th key={field}>{field}</th>)}
+            {validData.length > 0 &&
+              validData[0].map((field) => <th key={field}>{field}</th>)}
           </tr>
         </thead>
         <tbody>
-          {fileData.slice(1, fileData.length - 1).map((row, index) => (
+          {validData.slice(1, validData.length - 1).map((row, index) => (
             <tr key={index}>
               {row.map((item, index) => (
                 <td key={index}>{item}</td>

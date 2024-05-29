@@ -96,4 +96,20 @@ describe("CSVVerificationTable Component", () => {
       ).toBeInTheDocument()
     );
   });
+  it("highlights missing cell data", async () => {
+    const invalidData = "id,name,email\n1,John Doe";
+    const missingCell = "email";
+    render(
+      <CSVVerificationTable
+        file={returnMockFile(invalidData)}
+        requiredFields={mockRequiredFormFields.map((field) => ({
+          ...field,
+          error: [],
+        }))}
+      />
+    );
+    await waitFor(() =>
+      expect(screen.getByText(`${missingCell} missing`)).toBeInTheDocument()
+    );
+  });
 });
