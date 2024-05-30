@@ -3,7 +3,7 @@ import CSVVerificationTable from "./CSVVerificationTable";
 import { render, screen, waitFor } from "@testing-library/react";
 
 const mockFileString =
-  "id,name,email\n1,John Doe,jon@mail.com\n2,Jane Doe,jane@mail.com\n3,John Smith\n4,Jane Smith,smith@mail.com\n";
+  "id,name,email\n1,John Doe,jon@mail.com\n2,Jane Doe,jane@mail.com\n3,Jack Smith, jack@email.com\n4,Jane Smith,smith@mail.com\n";
 
 const returnMockFile = (csvString: string) => {
   return new File([csvString], "mock_csv.csv", { type: "text/csv" });
@@ -37,7 +37,7 @@ const mockRequiredFormFields = [
 ];
 
 describe("CSVVerificationTable Component", () => {
-  it("renders a table element", () => {
+  it("renders a table element", async () => {
     render(
       <CSVVerificationTable
         file={returnMockFile(mockFileString)}
@@ -47,7 +47,7 @@ describe("CSVVerificationTable Component", () => {
         }))}
       />
     );
-    expect(screen.getByRole("table")).toBeInTheDocument();
+    await waitFor(() => expect(screen.getByRole("table")).toBeInTheDocument());
   });
   it("renders a table column for each field in the data", async () => {
     render(
@@ -60,10 +60,10 @@ describe("CSVVerificationTable Component", () => {
       />
     );
     await waitFor(() =>
-      expect(screen.getAllByRole("columnheader")).toHaveLength(3)
+      expect(screen.getAllByRole("columnheader")).toHaveLength(4)
     );
   });
-  it("renders a table row for each record in the data", async () => {
+  it("renders a table row for each record in the data, plus 1 for index", async () => {
     render(
       <CSVVerificationTable
         file={returnMockFile(mockFileString)}
@@ -94,6 +94,20 @@ describe("CSVVerificationTable Component", () => {
       expect(
         screen.getByText(`Missing column: ${missingColumn}`)
       ).toBeInTheDocument()
+    );
+  });
+  it("does not render a missing column message if all columns are present", async () => {
+    render(
+      <CSVVerificationTable
+        file={returnMockFile(mockFileString)}
+        requiredFields={mockRequiredFormFields.map((field) => ({
+          ...field,
+          error: [],
+        }))}
+      />
+    );
+    await waitFor(() =>
+      expect(screen.queryByText("CSV is invalid:")).not.toBeInTheDocument()
     );
   });
   it("highlights missing cell data", async () => {

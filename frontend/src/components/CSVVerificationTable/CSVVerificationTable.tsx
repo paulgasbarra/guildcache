@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { InputObjectType } from "../../types/InputObjectType";
+import Papa from "papaparse";
 
 interface CSVVerificationTableProps {
   file: File;
@@ -17,14 +18,15 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
   useEffect(() => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      const text = e.target?.result as string;
-      const rows = text.split("\n");
-      const data = rows.map((row) => row.split(","));
+      const data = Papa.parse(e.target?.result as string).data;
       const missingColumns = getMissingColumns(data);
-      setMissingColumns(missingColumns);
-      const sortedData = groupDataByValidity(data);
-      setValidData(sortedData[0]);
-      setInvalidData(sortedData[1]);
+      if (missingColumns.length > 0) {
+        setMissingColumns(missingColumns);
+      } else {
+        const sortedData = groupDataByValidity(data);
+        setValidData(sortedData[0]);
+        setInvalidData(sortedData[1]);
+      }
     };
     reader.readAsText(file);
   }, [file]);
@@ -39,25 +41,25 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
   const groupDataByValidity = (data: string[][]) => {
     const validRows: string[][] = [];
     const invalidRows: string[][] = [];
-    let headers = data[0];
+
+    const headers = data[0];
 
     data = data.slice(1, data.length - 1);
     data.forEach((row) => {
-      row.forEach((field, index) => {
-        const requiredField = requiredFields.find(
-          (requiredField) => requiredField.id === headers[index]
-        );
-        // check if data unique
-        if (field === "") {
-          field = "ERROR: Empty field";
-          invalidRows.push(row);
-        } else if (requiredField?.type == "number" && isNaN(Number(field))) {
-          field = "ERROR: Not a number";
-          invalidRows.push(row);
-        }
-      });
+      if (rowIsValid(row, headers)) {
+        validRows.push(row);
+      } else {
+        invalidRows.push(row);
+      }
     });
     return [validRows, invalidRows];
+  };
+
+  const rowIsValid = (row: string[], headers: string[]) => {
+    if (row.length !== headers.length) {
+      return false;
+    }
+    return true;
   };
 
   if (missingColumns.length > 0) {
@@ -73,24 +75,57 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
 
   return (
     <div>
-      <h3>These are the records that will be uploaded:</h3>
-      <table>
-        <thead>
-          <tr>
-            {validData.length > 0 &&
-              validData[0].map((field) => <th key={field}>{field}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {validData.slice(1, validData.length - 1).map((row, index) => (
-            <tr key={index}>
-              {row.map((item, index) => (
-                <td key={index}>{item}</td>
+      {validData.length > 0 && (
+        <>
+          <h3>These are the records that will be uploaded:</h3>
+          <table>
+            <thead>
+              <tr>
+                <th></th>
+                {requiredFields.map((field) => (
+                  <th key={field.id}>{field.id}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {validData.map((row, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </>
+      )}
+      {invalidData.length > 0 && (
+        <>
+          <h3>These records are invalid:</h3>
+          <table>
+            <thead>
+              <th></th>
+              <tr>
+                <th></th>
+                {requiredFields.map((field) => (
+                  <th key={field.id}>{field.id}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {invalidData.map((row, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  {row.map((item, index) => (
+                    <td key={index}>{item}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      )}
     </div>
   );
 };
