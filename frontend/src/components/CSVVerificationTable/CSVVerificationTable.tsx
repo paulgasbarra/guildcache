@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { InputObjectType } from "../../types/InputObjectType";
+import IndexedTable from "../IndexedTable";
 import Papa from "papaparse";
 
 interface CSVVerificationTableProps {
@@ -18,7 +19,7 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
   useEffect(() => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      const data = Papa.parse(e.target?.result as string).data;
+      const data = Papa.parse(e.target?.result as string).data as string[][];
       const missingColumns = getMissingColumns(data);
       if (missingColumns.length > 0) {
         setMissingColumns(missingColumns);
@@ -76,55 +77,18 @@ const CSVVerificationTable: React.FC<CSVVerificationTableProps> = ({
   return (
     <div>
       {validData.length > 0 && (
-        <>
-          <h3>These are the records that will be uploaded:</h3>
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                {requiredFields.map((field) => (
-                  <th key={field.id}>{field.id}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {validData.map((row, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
+        <IndexedTable
+          data={validData}
+          title="These are the records that will be uploaded:"
+          headers={requiredFields}
+        />
       )}
       {invalidData.length > 0 && (
-        <>
-          <h3>These records are invalid:</h3>
-          <table>
-            <thead>
-              <th></th>
-              <tr>
-                <th></th>
-                {requiredFields.map((field) => (
-                  <th key={field.id}>{field.id}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {invalidData.map((row, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  {row.map((item, index) => (
-                    <td key={index}>{item}</td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </>
+        <IndexedTable
+          data={invalidData}
+          title="These records are invalid"
+          headers={requiredFields}
+        />
       )}
     </div>
   );
