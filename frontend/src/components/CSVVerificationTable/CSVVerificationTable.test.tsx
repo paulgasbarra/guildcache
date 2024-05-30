@@ -76,7 +76,7 @@ describe("CSVVerificationTable Component", () => {
     await waitFor(() => expect(screen.getAllByRole("row")).toHaveLength(5));
   });
   it("lets the user know if there is a missing column", async () => {
-    const invalidData = "id,name\n1,John Doe";
+    const invalidData = "id,name\n1,John Doe\n";
     const missingColumn = "email";
     render(
       <CSVVerificationTable
@@ -110,9 +110,8 @@ describe("CSVVerificationTable Component", () => {
       expect(screen.queryByText("CSV is invalid:")).not.toBeInTheDocument()
     );
   });
-  it("highlights missing cell data", async () => {
+  it("lets user know if fields are missing", async () => {
     const invalidData = "id,name,email\n1,John Doe";
-    const missingCell = "email";
     render(
       <CSVVerificationTable
         file={returnMockFile(invalidData)}
@@ -123,7 +122,22 @@ describe("CSVVerificationTable Component", () => {
       />
     );
     await waitFor(() =>
-      expect(screen.getByText(`${missingCell} missing`)).toBeInTheDocument()
+      expect(screen.getByText(`Missing field(s)`)).toBeInTheDocument()
+    );
+  });
+  it("lets users know if a field is empty", async () => {
+    const invalidData = "id,name,email\n1,John Doe,''\n";
+    render(
+      <CSVVerificationTable
+        file={returnMockFile(invalidData)}
+        requiredFields={mockRequiredFormFields.map((field) => ({
+          ...field,
+          error: [],
+        }))}
+      />
+    );
+    await waitFor(() =>
+      expect(screen.getByText(`Empty email`)).toBeInTheDocument()
     );
   });
 });
