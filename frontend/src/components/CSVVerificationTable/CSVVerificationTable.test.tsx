@@ -125,7 +125,7 @@ describe("CSVVerificationTable Component", () => {
       expect(screen.getByText(`Missing field(s)`)).toBeInTheDocument()
     );
   });
-  it("lets users know if a field is empty", async () => {
+  it("lets users know if a email is invalid", async () => {
     const invalidData = "id,name,email\n1,John Doe,''\n";
     render(
       <CSVVerificationTable
@@ -137,7 +137,7 @@ describe("CSVVerificationTable Component", () => {
       />
     );
     await waitFor(() =>
-      expect(screen.getByText(`Empty email`)).toBeInTheDocument()
+      expect(screen.getByText(`Invalid email:`)).toBeInTheDocument()
     );
   });
 });

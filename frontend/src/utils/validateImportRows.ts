@@ -1,4 +1,9 @@
-export const validateImportRows = (data: string[][], requiredFields) => {
+import { InputObjectType } from "../types/InputObjectType";
+
+export const validateImportRows = (
+  data: string[][],
+  requiredFields: InputObjectType[]
+) => {
   const validRows: string[][] = [];
   const invalidRows: string[][] = [];
 
@@ -14,11 +19,13 @@ export const validateImportRows = (data: string[][], requiredFields) => {
     row.forEach((field, index) => {
       if (validData && field.length === 0) {
         field = `Empty ${headers[index]}`;
-      } else if (validData && requiredFields[index].id === "email") {
+      } else if (validData && headers[index] === "email") {
         const emailRegex = /\S+@\S+\.\S+/;
         if (!emailRegex.test(field)) {
-          field = `Invalid email: ${field}`;
+          console.log("bad email field", field);
+          row[index] = `Invalid email: ${field}`;
         }
+        console.log("row", row);
       } else if (validData && requiredFields[index].id === "phone") {
         const phoneRegex = /^\d{10}$/;
         if (!phoneRegex.test(field)) {
