@@ -22,10 +22,8 @@ export const validateImportRows = (
       } else if (validData && headers[index] === "email") {
         const emailRegex = /\S+@\S+\.\S+/;
         if (!emailRegex.test(field)) {
-          console.log("bad email field", field);
           row[index] = `Invalid email: ${field}`;
         }
-        console.log("row", row);
       } else if (validData && requiredFields[index].id === "phone") {
         const phoneRegex = /^\d{10}$/;
         if (!phoneRegex.test(field)) {

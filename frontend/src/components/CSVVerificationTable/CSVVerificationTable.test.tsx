@@ -111,7 +111,7 @@ describe("CSVVerificationTable Component", () => {
     );
   });
   it("lets user know if fields are missing", async () => {
-    const invalidData = "id,name,email\n1,John Doe";
+    const invalidData = "id,name,email\n1,John Doe\n";
     render(
       <CSVVerificationTable
         file={returnMockFile(invalidData)}
@@ -137,7 +137,7 @@ describe("CSVVerificationTable Component", () => {
       />
     );
     await waitFor(() =>
-      expect(screen.getByText(`Invalid email:`)).toBeInTheDocument()
+      expect(screen.getByText(/Invalid email:/)).toBeInTheDocument()
     );
   });
 });
