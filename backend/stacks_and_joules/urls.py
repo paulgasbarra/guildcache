@@ -25,5 +25,5 @@ admin.site.site_title = "Stacks & Joules Admin Portal"  # default: "Django site 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('s_and_j_track.urls')),
-    path('', TemplateView.as_view(template_name='index.html')),
+    path('', admin.site.urls),
 ]
